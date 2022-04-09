@@ -1,2 +1,1 @@
-# impakt
-Simple app for storing data about snakes.
+# Simple app for storing data about snakes.
