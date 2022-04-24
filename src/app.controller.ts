@@ -1,5 +1,8 @@
 import { Controller, Get, Render } from '@nestjs/common';
 import { AppService } from './app.service';
+import { AppDataSource } from './db/app.datasource';
+import { Analyzy } from './db/entities/analyzy';
+import { Vzorky } from './db/entities/vzorky';
 
 @Controller()
 export class AppController {
@@ -7,7 +10,10 @@ export class AppController {
 
   @Get()
   @Render('index')
-  root() {
-    return { message: 'Hello world!' };
+  async root() {
+    const res = await AppDataSource.manager.find(Analyzy)
+    console.log('res', res)
+    return { message: 'Hello from the Handlebars :)' };
   }
+
 }
