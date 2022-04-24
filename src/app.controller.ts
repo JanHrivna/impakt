@@ -11,7 +11,7 @@ export class AppController {
   @Get()
   @Render('index')
   async root() {
-    const res = await AppDataSource.manager.find(Analyzy)
+    const res = await AppDataSource.getRepository(Vzorky).find()
     console.log('res', res)
     return { message: 'Hello from the Handlebars :)' };
   }
