@@ -11,48 +11,91 @@
 
 <body>
 
-  <div class="jumbotron text-center">
-    <h1>{{message}}</h1>
-    <p>Resize this responsive page to see the effect!</p>
+  <div class="jumbotron text-center m-4">
+    <h1>Databáze vzorků</h1>
   </div>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-4">
-        <h3>Column 1</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-      </div>
-      <div class="col-sm-4">
-        <h3>Column 2</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-      </div>
-      <div class="col-sm-4">
-        <h3>Column 3</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-      </div>
-    </div>
-  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th class="align-top" scope="col">Druh</th>
+        <th class="align-top" scope="col">Popis / varianta</th>
+        <th class="align-top" scope="col">Dovoz z</th>
+        <th class="align-top" scope="col">Dovoz datum</th>
+        <th class="align-top" scope="col">Označení svlečky</th>
+        <th class="align-top" scope="col">Sběr svlečky datum</th>
+        <th class="align-top" scope="col">Sběr svlečky místo</th>
+        <th class="align-top" scope="col">Číslo kotce</th>
+        <th class="align-top" scope="col">Aktuální místo uložení svlečky</th>
+        <th class="align-top" scope="col">Označení vzorku ze svlečky (A, B, C, D, E…jiné)</th>
+        <th class="align-top" scope="col">Lokalita před posledním svlekem</th>
+        <th class="align-top" scope="col">Původní hmotnost analyzované svlečky, než byla daná do ependorfky</th>
+        <th class="align-top" scope="col">Příprava vzorku mechanická (stříhání/ mletí…)</th>
+        <th class="align-top" scope="col">Příprava vzorku mechanická kdy</th>
+        <th class="align-top" scope="col">Příprava vzorku mechanická kdo</th>
+        <th class="align-top" scope="col">Příprava vzorku mechanická kde</th>
+        <th class="align-top" scope="col">Příprava vzorku (oplach - v čem)</th>
+        <th class="align-top" scope="col">Příprava vzorku oplach kdy</th>
+        <th class="align-top" scope="col">Příprava vzorku - sušení - popis (mám tam zahrnout i specifikaci sušárny?)</th>
+        <th class="align-top" scope="col">Uložení vzorku do doby analýzy</th>
+        <th class="align-top" scope="col">Aktuální uložení vzorku</th>
+        <th class="align-top" scope="col">Do SI laboratoře Albertov dodáno dne</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each vzorky}}
+      <tr class="text-nowrap">
+        <th scope="col">{{this.druh}}</th>
+        <th scope="col">{{this.popis}}</th>
+        <th scope="col">{{this.dovoz}}</th>
+        <th scope="col">{{this.dovoz_datum}}</th>
+        <th scope="col">{{this.oznaceni_svlecky}}</th>
+        <th scope="col">{{this.sber_svlecky_datum}}</th>
+        <th scope="col">{{this.sber_svlecky_misto}}</th>
+        <th scope="col">{{this.cislo_kotce}}</th>
+        <th scope="col">{{this.ulozeni_svlecky_misto.adresa}}</th>
+        <th scope="col">{{this.oznaceni_vzorku_svlecky}}</th>
+        <th scope="col">{{this.pred_posl_svlecenim_misto}}</th>
+        <th scope="col">{{this.puvodni_hmotnost}}</th>
+        <th scope="col">{{this.priprava_vzorku_typ}}</th>
+        <th scope="col">{{this.priprava_vzorku_kdy}}</th>
+        <th scope="col">{{this.priprava_vzorku_kdo}}</th>
+        <th scope="col">{{this.priprava_vzorku_misto.adresa}}</th>
+        <th scope="col">{{this.priprava_vzorku_oplach}}</th>
+        <th scope="col">{{this.priprava_vzorku_oplach_kdy}}</th>
+        <th scope="col">{{this.priprava_vzorku_suseni}}</th>
+        <th scope="col">{{this.ulozeni_vzorku_do_analyzy_misto.adresa}} - {{this.ulozeni_vzorku_do_analyzy_objekt}}</th>
+        <th scope="col">{{this.ulozeni_vzorku_aktualni.adresa}}</th>
+        <th scope="col">{{this.dodani_albertov_datum}}</th>
+      </tr>
+      {{/each}}
 
-  <form>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-        placeholder="Enter email">
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-    </div>
-    <div class="form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-      <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+      {{!-- <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr> --}}
+    </tbody>
+  </table>
 
 </body>
 
