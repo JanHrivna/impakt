@@ -1,21 +1,21 @@
 {
   "projectType": "application",
-  "root": "apps/impakt",
-  "sourceRoot": "apps/impakt/src",
-  "prefix": "impakt",
+  "root": "apps/frontend",
+  "sourceRoot": "apps/frontend/src",
+  "prefix": "frontend",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/impakt",
-        "index": "apps/impakt/src/index.html",
-        "main": "apps/impakt/src/main.ts",
-        "polyfills": "apps/impakt/src/polyfills.ts",
-        "tsConfig": "apps/impakt/tsconfig.app.json",
+        "outputPath": "dist/apps/frontend",
+        "index": "apps/frontend/src/index.html",
+        "main": "apps/frontend/src/main.ts",
+        "polyfills": "apps/frontend/src/polyfills.ts",
+        "tsConfig": "apps/frontend/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/impakt/src/favicon.ico", "apps/impakt/src/assets"],
-        "styles": ["apps/impakt/src/styles.scss"],
+        "assets": ["apps/frontend/src/favicon.ico", "apps/frontend/src/assets"],
+        "styles": ["apps/frontend/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -34,8 +34,8 @@
           ],
           "fileReplacements": [
             {
-              "replace": "apps/impakt/src/environments/environment.ts",
-              "with": "apps/impakt/src/environments/environment.prod.ts"
+              "replace": "apps/frontend/src/environments/environment.ts",
+              "with": "apps/frontend/src/environments/environment.prod.ts"
             }
           ],
           "outputHashing": "all"
@@ -55,34 +55,34 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "impakt:build:production"
+          "browserTarget": "frontend:build:production"
         },
         "development": {
-          "browserTarget": "impakt:build:development"
+          "browserTarget": "frontend:build:development"
         }
       },
       "defaultConfiguration": "development",
       "options": {
-        "proxyConfig": "apps/impakt/proxy.conf.json"
+        "proxyConfig": "apps/frontend/proxy.conf.json"
       }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "impakt:build"
+        "browserTarget": "frontend:build"
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["apps/impakt/**/*.ts", "apps/impakt/**/*.html"]
+        "lintFilePatterns": ["apps/frontend/**/*.ts", "apps/frontend/**/*.html"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/impakt"],
+      "outputs": ["coverage/apps/frontend"],
       "options": {
-        "jestConfig": "apps/impakt/jest.config.ts",
+        "jestConfig": "apps/frontend/jest.config.ts",
         "passWithNoTests": true
       }
     }

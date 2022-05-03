@@ -3,6 +3,6 @@
   "projects": {
     "api": "apps/api",
     "api-interfaces": "libs/api-interfaces",
-    "impakt": "apps/impakt"
+    "frontend": "apps/frontend"
   }
 }
