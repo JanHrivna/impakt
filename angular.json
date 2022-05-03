@@ -1,7 +1,7 @@
 {
   "version": 2,
   "projects": {
-    "api": "apps/api",
+    "backend": "apps/backend",
     "api-interfaces": "libs/api-interfaces",
     "frontend": "apps/frontend"
   }
