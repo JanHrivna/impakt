@@ -103,3 +103,7 @@ Nx Cloud pairs with Nx in order to enable you to build and test code more rapidl
 Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
 
 Visit [Nx Cloud](https://nx.app/) to learn more.
+
+## Generating Backend API
+Install `npm install ng-openapi-gen --save-dev`
+Run `NODE_TLS_REJECT_UNAUTHORIZED=0 ./node_modules/.bin/ng-openapi-gen -c apps/frontend/backend-api-gen-schema.json`
