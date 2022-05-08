@@ -1,7 +1,8 @@
-import { Controller, Get, Render } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AppDataSource } from './db/app.datasource';
 import { Vzorky } from './db/entities/vzorky';
+import { MyEnt } from '@impakt/model';
 
 @Controller()
 export class AppController {
@@ -9,9 +10,10 @@ export class AppController {
 
   @Get()
   async root() {
+    let x: MyEnt
     const vzorky = await AppDataSource.getRepository(Vzorky).find()
     console.log('vzorkya', vzorky.map(v => v.druh))
-    return { vzorky } 
+    return { vzorky }
   }
 
 }

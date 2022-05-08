@@ -1,8 +1,9 @@
 {
   "version": 2,
   "projects": {
+    "models": "libs/model",
     "backend": "apps/backend",
-    "api-interfaces": "libs/api-interfaces",
-    "frontend": "apps/frontend"
+    "frontend": "apps/frontend",
+    "model": "libs/model"
   }
 }
