@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BackendApiApiService } from '../../api/backend-api/services';
+import { CreateVzorekModalComponent } from '../create-vzorek-modal/create-vzorek-modal.component';
 
 @Component({
   selector: 'frontend-overview',
@@ -10,10 +12,16 @@ export class OverviewComponent implements OnInit {
 
   readonly vzorky$
 
-  constructor(api: BackendApiApiService) {
+  constructor(
+    api: BackendApiApiService,
+    private modalService: NgbModal) {
     this.vzorky$ = api.datasourceControllerGetVzorky()
   }
 
   ngOnInit(): void { }
+
+  onCreate() {
+    this.modalService.open(CreateVzorekModalComponent)
+  }
 
 }

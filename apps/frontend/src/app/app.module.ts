@@ -13,4 +13,4 @@ import { OverviewComponent } from './components/overview/overview.component';
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
