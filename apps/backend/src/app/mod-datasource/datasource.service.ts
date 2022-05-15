@@ -4,7 +4,7 @@ import { Analyzy } from "./entities/analyzy";
 import { MistoUlozeni } from "./entities/misto-ulozeni";
 import { PozadovaneAnalyzy } from "./entities/pozadovane-analyzy";
 import { TypyAnalyz } from "./entities/typy-analyz";
-import { Vzorky } from "./entities/vzorky";
+import { Vzorky } from "./entities/vzorky.entity";
 
 @Injectable()
 export class DatasourceService extends DataSource {

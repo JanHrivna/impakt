@@ -1,1 +1,61 @@
-<p>overview works!</p>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th class="align-top" scope="col">Druh</th>
+            <th class="align-top" scope="col">Popis / varianta</th>
+            <th class="align-top" scope="col">Dovoz z</th>
+            <th class="align-top" scope="col">Dovoz datum</th>
+            <th class="align-top" scope="col">Označení svlečky</th>
+            <th class="align-top" scope="col">Sběr svlečky datum</th>
+            <th class="align-top" scope="col">Sběr svlečky místo</th>
+            <th class="align-top" scope="col">Číslo kotce</th>
+            <th class="align-top" scope="col">Aktuální místo uložení svlečky</th>
+            <!--(A, B, C, D, E…jiné)-->
+            <th class="align-top" scope="col">Označení vzorku ze svlečky</th>
+            <th class="align-top" scope="col">Lokalita před posledním svlekem</th>
+            <!-- TODO:  tooltip než byla daná do ependorfky-->
+            <th class="align-top " scope="col">Původní hmotnost analyzované svlečky</th>
+
+            <!-- TODO:  (stříhání/ mletí…)-->
+            <th class="align-top" scope="col">Příprava vzorku mechanická</th>
+            <th class="align-top" scope="col">Příprava vzorku mechanická kdy</th>
+            <th class="align-top" scope="col">Příprava vzorku mechanická kdo</th>
+            <th class="align-top" scope="col">Příprava vzorku mechanická kde</th>
+            <th class="align-top" scope="col">Příprava vzorku (oplach - v čem)</th>
+            <th class="align-top" scope="col">Příprava vzorku oplach kdy</th>
+            <!--TODO: (mám tam zahrnout i specifikaci sušárny?) -->
+            <th class="align-top" scope="col">Příprava vzorku - sušení - popis</th>
+            <th class="align-top" scope="col">Uložení vzorku do doby analýzy</th>
+            <th class="align-top" scope="col">Aktuální uložení vzorku</th>
+            <th class="align-top" scope="col">Do SI laboratoře Albertov dodáno</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let vzorek of vzorky$ | async" class="text-nowrap">
+            <td scope="col">{{vzorek.druh}}</td>
+            <td scope="col">{{vzorek.popis}}</td>
+            <td scope="col">{{vzorek.dovoz}}</td>
+            <td scope="col">{{vzorek.dovoz_datum}}</td>
+            <td scope="col">{{vzorek.oznaceni_svlecky}}</td>
+            <td scope="col">{{vzorek.sber_svlecky_datum}}</td>
+            <td scope="col">{{vzorek.sber_svlecky_misto}}</td>
+            <td scope="col">{{vzorek.cislo_kotce}}</td>
+            <td scope="col">{{vzorek.ulozeni_svlecky_misto.adresa}}</td>
+            <td scope="col">{{vzorek.oznaceni_vzorku_svlecky}}</td>
+            <td scope="col">{{vzorek.pred_posl_svlecenim_misto}}</td>
+            <td scope="col">{{vzorek.puvodni_hmotnost}}</td>
+            <td scope="col">{{vzorek.priprava_vzorku_typ}}</td>
+            <td scope="col">{{vzorek.priprava_vzorku_kdy}}</td>
+            <td scope="col">{{vzorek.priprava_vzorku_kdo}}</td>
+            <td scope="col">{{vzorek.priprava_vzorku_misto.adresa}}</td>
+            <td scope="col">{{vzorek.priprava_vzorku_oplach}}</td>
+            <td scope="col">{{vzorek.priprava_vzorku_oplach_kdy}}</td>
+            <td scope="col">{{vzorek.priprava_vzorku_suseni}}</td>
+            <td scope="col">{{vzorek.ulozeni_vzorku_do_analyzy_misto.adresa}} -
+                {{vzorek.ulozeni_vzorku_do_analyzy_objekt}}
+            </td>
+            <td scope="col">{{vzorek.ulozeni_vzorku_aktualni.adresa}}</td>
+            <td scope="col">{{vzorek.dodani_albertov_datum}}</td>
+        </tr>
+    </tbody>
+</table>

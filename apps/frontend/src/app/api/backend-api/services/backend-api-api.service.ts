@@ -9,6 +9,7 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
+import { Vzorky } from '../models/vzorky';
 
 @Injectable({
   providedIn: 'root',
@@ -22,45 +23,45 @@ export class BackendApiApiService extends BaseService {
   }
 
   /**
-   * Path part for operation appControllerGetVzorky
+   * Path part for operation datasourceControllerGetVzorky
    */
-  static readonly AppControllerGetVzorkyPath = '/api';
+  static readonly DatasourceControllerGetVzorkyPath = '/api/vzorky';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `appControllerGetVzorky()` instead.
+   * To access only the response body, use `datasourceControllerGetVzorky()` instead.
    *
    * This method doesn't expect any request body.
    */
-  appControllerGetVzorky$Response(params?: {
-  }): Observable<StrictHttpResponse<void>> {
+  datasourceControllerGetVzorky$Response(params?: {
+  }): Observable<StrictHttpResponse<Array<Vzorky>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, BackendApiApiService.AppControllerGetVzorkyPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, BackendApiApiService.DatasourceControllerGetVzorkyPath, 'get');
     if (params) {
     }
 
     return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*'
+      responseType: 'json',
+      accept: 'application/json'
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        return r as StrictHttpResponse<Array<Vzorky>>;
       })
     );
   }
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `appControllerGetVzorky$Response()` instead.
+   * To access the full response (for headers, for example), `datasourceControllerGetVzorky$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  appControllerGetVzorky(params?: {
-  }): Observable<void> {
+  datasourceControllerGetVzorky(params?: {
+  }): Observable<Array<Vzorky>> {
 
-    return this.appControllerGetVzorky$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
+    return this.datasourceControllerGetVzorky$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<Vzorky>>) => r.body as Array<Vzorky>)
     );
   }
 

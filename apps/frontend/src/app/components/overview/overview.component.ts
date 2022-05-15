@@ -8,11 +8,12 @@ import { BackendApiApiService } from '../../api/backend-api/services';
 })
 export class OverviewComponent implements OnInit {
 
-  readonly getVzorky$ = this.api.appControllerGetVzorky()
+  readonly vzorky$
 
-  constructor(private api: BackendApiApiService) { }
-
-  ngOnInit(): void {
+  constructor(api: BackendApiApiService) {
+    this.vzorky$ = api.datasourceControllerGetVzorky()
   }
+
+  ngOnInit(): void { }
 
 }

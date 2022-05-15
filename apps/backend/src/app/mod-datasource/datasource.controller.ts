@@ -1,7 +1,7 @@
 import { Controller, Get } from "@nestjs/common";
 import { ApiResponse } from "@nestjs/swagger";
 import { DatasourceService } from "./datasource.service";
-import { Vzorky } from "./entities/vzorky";
+import { Vzorky } from "./entities/vzorky.entity";
 
 @Controller()
 export class DatasourceController {

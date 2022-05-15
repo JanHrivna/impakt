@@ -106,4 +106,4 @@ Visit [Nx Cloud](https://nx.app/) to learn more.
 
 ## Generating Backend API
 Install `npm install ng-openapi-gen --save-dev`
-Run `NODE_TLS_REJECT_UNAUTHORIZED=0 ./node_modules/.bin/ng-openapi-gen -c apps/frontend/backend-api-gen-schema.json`
+From root directory run `NODE_TLS_REJECT_UNAUTHORIZED=0 ./node_modules/.bin/ng-openapi-gen -c apps/frontend/backend-api-gen-schema.json`
