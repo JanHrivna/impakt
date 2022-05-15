@@ -1,17 +1,17 @@
 <div class="modal-header">
-    <h4 class="modal-title">Založit vzorek</h4>
+    <h4 class="modal-title">Nový vzorek</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
 </div>
 
 <div class="modal-body">
 
-    <form>
+    <form [formGroup]="form">
         <div class="form-group">
-            <label for="exampleFormControlInput1">Druh</label>
-            <input type="email" class="form-control" id="exampleFormControlInput1">
+            <label [for]="FormNames.DRUH">Druh</label>
+            <input class="form-control" [formControlName]="FormNames.DRUH" [id]="FormNames.DRUH">
         </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="exampleFormControlSelect1">Example select</label>
             <select class="form-control" id="exampleFormControlSelect1">
                 <option>1</option>
@@ -36,12 +36,12 @@
         <div class="form-group">
             <label for="exampleFormControlTextarea1">Example textarea</label>
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
+        </div> -->
 
     </form>
 
 </div>
 
-<div class="modal-footer">
-    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Zavřít</button>
+<div class="modal-footer d-flex justify-content-between">
+    <button (click)="onSave()" class="btn btn-primary">Uložit</button>
 </div>
