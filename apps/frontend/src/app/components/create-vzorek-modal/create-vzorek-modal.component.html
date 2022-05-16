@@ -6,12 +6,87 @@
 <div class="modal-body">
 
     <form [formGroup]="form">
-        <div class="form-group">
+        <div>
             <label [for]="FormNames.DRUH">Druh</label>
             <input class="form-control" [formControlName]="FormNames.DRUH" [id]="FormNames.DRUH">
         </div>
 
-        <!-- <div class="form-group">
+        <div>
+            <label [for]="FormNames.DRUH">Popis</label>
+            <textarea class="form-control" [formControlName]="FormNames.POPIS" [id]="FormNames.POPIS"
+                rows="3"></textarea>
+        </div>
+
+        <div class="d-flex justify-content-between">
+
+            <div>
+                <label [for]="FormNames.DOVOZ">Dovoz z</label>
+                <input class="form-control" [formControlName]="FormNames.DOVOZ" [id]="FormNames.DOVOZ">
+            </div>
+
+            <div>
+                <div>
+                    <label [for]="FormNames.DOVOZ_DATUM">Dovoz datum</label>
+                    <div class="input-group">
+                        <input class="form-control" [formControlName]="FormNames.DOVOZ_DATUM" placeholder="yyyy-mm-dd"
+                            name="dp" [id]="FormNames.DOVOZ_DATUM" ngbDatepicker #dt="ngbDatepicker">
+                        <button class="btn btn-outline-secondary calendar" (click)="dt.toggle()" type="button">
+                            <bi name="calendar"></bi>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="d-flex justify-content-between">
+
+            <div>
+                <label [for]="FormNames.OZNACENI_SVLECKY">Označení svlečky</label>
+                <input class="form-control" [formControlName]="FormNames.OZNACENI_SVLECKY"
+                    [id]="FormNames.OZNACENI_SVLECKY">
+            </div>
+
+            <div>
+                <div>
+                    <label [for]="FormNames.SBER_SVLECKY_DATUM">Sběr svlečky datum</label>
+                    <div class="input-group">
+                        <input class="form-control" [formControlName]="FormNames.SBER_SVLECKY_DATUM"
+                            placeholder="yyyy-mm-dd" name="dp" [id]="FormNames.SBER_SVLECKY_DATUM" ngbDatepicker
+                            #dt="ngbDatepicker">
+                        <button class="btn btn-outline-secondary calendar" (click)="dt.toggle()" type="button">
+                            <bi name="calendar"></bi>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="d-flex justify-content-between">
+
+            <div>
+                <label [for]="FormNames.SBER_SVLECKY_MISTO">Sběr svlečky místo</label>
+                <input class="form-control" [formControlName]="FormNames.SBER_SVLECKY_MISTO"
+                    [id]="FormNames.SBER_SVLECKY_MISTO">
+            </div>
+
+            <div>
+                <label [for]="FormNames.CISLO_KOTCE">Číslo kotce</label>
+                <input type="number" min="1" class="form-control" [formControlName]="FormNames.CISLO_KOTCE"
+                    [id]="FormNames.CISLO_KOTCE">
+            </div>
+
+            <div>
+                <label [for]="FormNames.ULOZENI_SVLECKY_MISTO">Aktuální místo uložení svlečky</label>
+                <input class="form-control" [formControlName]="FormNames.ULOZENI_SVLECKY_MISTO"
+                    [id]="FormNames.ULOZENI_SVLECKY_MISTO">
+            </div>
+
+        </div>
+
+
+        <!-- <div class=" form-group">
             <label for="exampleFormControlSelect1">Example select</label>
             <select class="form-control" id="exampleFormControlSelect1">
                 <option>1</option>

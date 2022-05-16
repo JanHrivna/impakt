@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CreateVzorekModalComponent } from './components/create-vzorek-modal/create-vzorek-modal.component';
 import { OverviewComponent } from './components/overview/overview.component';
+import { IconsModule } from './modules/icons/icons.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { OverviewComponent } from './components/overview/overview.component';
     HttpClientModule,
     NgbModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    IconsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
