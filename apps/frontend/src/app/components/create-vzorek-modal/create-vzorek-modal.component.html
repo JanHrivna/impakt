@@ -28,7 +28,7 @@
                 <div>
                     <label [for]="FormNames.DOVOZ_DATUM">Dovoz datum</label>
                     <div class="input-group">
-                        <input class="form-control" [formControlName]="FormNames.DOVOZ_DATUM" placeholder="yyyy-mm-dd"
+                        <input class="form-control" [formControlName]="FormNames.DOVOZ_DATUM" placeholder="dd.mm.yyyy"
                             name="dp" [id]="FormNames.DOVOZ_DATUM" ngbDatepicker #dt="ngbDatepicker">
                         <button class="btn btn-outline-secondary calendar" (click)="dt.toggle()" type="button">
                             <bi name="calendar"></bi>
@@ -52,9 +52,9 @@
                     <label [for]="FormNames.SBER_SVLECKY_DATUM">Sběr svlečky datum</label>
                     <div class="input-group">
                         <input class="form-control" [formControlName]="FormNames.SBER_SVLECKY_DATUM"
-                            placeholder="yyyy-mm-dd" name="dp" [id]="FormNames.SBER_SVLECKY_DATUM" ngbDatepicker
-                            #dt="ngbDatepicker">
-                        <button class="btn btn-outline-secondary calendar" (click)="dt.toggle()" type="button">
+                            placeholder="dd.mm.yyyy" name="dp" [id]="FormNames.SBER_SVLECKY_DATUM" ngbDatepicker
+                            #dt2="ngbDatepicker">
+                        <button class="btn btn-outline-secondary calendar" (click)="dt2.toggle()" type="button">
                             <bi name="calendar"></bi>
                         </button>
                     </div>
