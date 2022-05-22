@@ -35,8 +35,8 @@ export class CreateVzorekModalComponent implements OnInit {
   }
 
   onSave() {
-    this.modal.close()
-    console.log("form submit", this.form.getRawValue())
+    this.createVzorek()
+    // this.modal.close()
   }
 
   ngOnInit(): void {
@@ -49,6 +49,14 @@ export class CreateVzorekModalComponent implements OnInit {
     ).subscribe(
       (mistoUlozeniArr) => this.mistoUlozeniArr = mistoUlozeniArr
     )
+  }
+
+  private createVzorek() {
+    this.api.datasourceControllerCreateVzorek({
+      body: this.form.getRawValue()
+    }).pipe(
+      take(1)
+    ).subscribe()
   }
 
 }

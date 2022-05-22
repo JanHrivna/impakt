@@ -31,7 +31,7 @@ export class DatasourceController {
     createVzorek(
         @Body() vzorek: Vzorky
     ) {
-        return this.datasourceService.getRepository(Vzorky).create(vzorek)
+        return this.datasourceService.getRepository(Vzorky).save(vzorek)
     }
 
 }
