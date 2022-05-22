@@ -20,6 +20,10 @@ export class OverviewComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  delete() {
+
+  }
+
   onCreate() {
     this.modalService.open(CreateVzorekModalComponent, {
       size: "lg"

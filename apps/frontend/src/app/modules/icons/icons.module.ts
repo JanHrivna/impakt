@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BootstrapIconsModule } from 'ng-bootstrap-icons';
-import { Calendar } from 'ng-bootstrap-icons/icons';
+import { Calendar, TrashFill } from 'ng-bootstrap-icons/icons';
 
 
 const icons = {
-  Calendar
+  Calendar,
+  TrashFill
 };
 
 @NgModule({

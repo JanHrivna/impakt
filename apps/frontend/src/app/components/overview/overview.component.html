@@ -1,6 +1,7 @@
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
+            <th class="align-top" scope="col"></th>
             <th class="align-top" scope="col">Druh</th>
             <th class="align-top" scope="col">Popis / varianta</th>
             <th class="align-top" scope="col">Dovoz z</th>
@@ -32,6 +33,11 @@
     </thead>
     <tbody>
         <tr *ngFor="let vzorek of vzorky$ | async" class="text-nowrap">
+            <td scope="col">
+                <button class="btn calendar" (click)="delete()" type="button">
+                    <bi name="trash-fill"></bi>
+                </button>
+            </td>
             <td scope="col">{{vzorek.druh}}</td>
             <td scope="col">{{vzorek.popis}}</td>
             <td scope="col">{{vzorek.dovoz}}</td>
