@@ -9,6 +9,7 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
+import { MistoUlozeni } from '../models/misto-ulozeni';
 import { Vzorky } from '../models/vzorky';
 
 @Injectable({
@@ -62,6 +63,49 @@ export class BackendApiApiService extends BaseService {
 
     return this.datasourceControllerGetVzorky$Response(params).pipe(
       map((r: StrictHttpResponse<Array<Vzorky>>) => r.body as Array<Vzorky>)
+    );
+  }
+
+  /**
+   * Path part for operation datasourceControllerGetMistoUlozeni
+   */
+  static readonly DatasourceControllerGetMistoUlozeniPath = '/api/misto-ulozeni';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `datasourceControllerGetMistoUlozeni()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  datasourceControllerGetMistoUlozeni$Response(params?: {
+  }): Observable<StrictHttpResponse<Array<MistoUlozeni>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, BackendApiApiService.DatasourceControllerGetMistoUlozeniPath, 'get');
+    if (params) {
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<MistoUlozeni>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `datasourceControllerGetMistoUlozeni$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  datasourceControllerGetMistoUlozeni(params?: {
+  }): Observable<Array<MistoUlozeni>> {
+
+    return this.datasourceControllerGetMistoUlozeni$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<MistoUlozeni>>) => r.body as Array<MistoUlozeni>)
     );
   }
 
