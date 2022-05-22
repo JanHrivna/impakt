@@ -29,7 +29,7 @@
                     <label [for]="FormNames.DOVOZ_DATUM">Dovoz datum</label>
                     <div class="input-group">
                         <input class="form-control" [formControlName]="FormNames.DOVOZ_DATUM" placeholder="dd.mm.yyyy"
-                            name="dp" [id]="FormNames.DOVOZ_DATUM" ngbDatepicker #dt="ngbDatepicker" required>
+                            name="dp" [id]="FormNames.DOVOZ_DATUM" ngbDatepicker #dt="ngbDatepicker" readonly required>
                         <button class="btn btn-outline-secondary calendar" (click)="dt.toggle()" type="button">
                             <bi name="calendar"></bi>
                         </button>
@@ -52,7 +52,7 @@
                 <div class="input-group">
                     <input class="form-control" [formControlName]="FormNames.SBER_SVLECKY_DATUM"
                         placeholder="dd.mm.yyyy" name="dp" [id]="FormNames.SBER_SVLECKY_DATUM" ngbDatepicker
-                        #dt2="ngbDatepicker" required>
+                        #dt2="ngbDatepicker" readonly required>
                     <button class="btn btn-outline-secondary calendar" (click)="dt2.toggle()" type="button">
                         <bi name="calendar"></bi>
                     </button>
@@ -153,7 +153,7 @@
                 <div class="input-group">
                     <input class="form-control" [formControlName]="FormNames.PRIPRAVA_VZORKU_OPLACH_KDY"
                         placeholder="dd.mm.yyyy" name="dp" [id]="FormNames.PRIPRAVA_VZORKU_OPLACH_KDY" ngbDatepicker
-                        #dt4="ngbDatepicker" required>
+                        #dt4="ngbDatepicker" readonly required>
                     <button class="btn btn-outline-secondary calendar" (click)="dt4.toggle()" type="button">
                         <bi name="calendar"></bi>
                     </button>
@@ -196,11 +196,12 @@
 
         </div>
 
-        <div>
+        <div class="d-inline-block">
             <label [for]="FormNames.DODANI_ALBERTOV_DATUM">Do SI laboratoře Albertov dodáno</label>
             <div class="input-group">
                 <input class="form-control" [formControlName]="FormNames.DODANI_ALBERTOV_DATUM" placeholder="dd.mm.yyyy"
-                    name="dp" [id]="FormNames.DODANI_ALBERTOV_DATUM" ngbDatepicker #dt3="ngbDatepicker" required>
+                    name="dp" [id]="FormNames.DODANI_ALBERTOV_DATUM" ngbDatepicker #dt3="ngbDatepicker" readonly
+                    required>
                 <button class="btn btn-outline-secondary calendar" (click)="dt3.toggle()" type="button">
                     <bi name="calendar"></bi>
                 </button>

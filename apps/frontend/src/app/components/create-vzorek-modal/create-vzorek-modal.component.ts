@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NgbActiveModal, NgbDateAdapter, NgbDateParserFormatter, NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
-import { take } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { MistoUlozeni } from '../../api/backend-api/models/misto-ulozeni';
 import { BackendApiApiService } from '../../api/backend-api/services';
 import { CreateVzorekFormEnum } from './create-vzorek-modal-form.enum';
@@ -35,8 +35,9 @@ export class CreateVzorekModalComponent implements OnInit {
   }
 
   onSave() {
-    this.createVzorek()
-    // this.modal.close()
+    this.createVzorek().subscribe(
+      () => this.modal.close()
+    )
   }
 
   ngOnInit(): void {
@@ -51,12 +52,12 @@ export class CreateVzorekModalComponent implements OnInit {
     )
   }
 
-  private createVzorek() {
-    this.api.datasourceControllerCreateVzorek({
+  private createVzorek(): Observable<any> {
+    return this.api.datasourceControllerCreateVzorek({
       body: this.form.getRawValue()
     }).pipe(
       take(1)
-    ).subscribe()
+    )
   }
 
 }
