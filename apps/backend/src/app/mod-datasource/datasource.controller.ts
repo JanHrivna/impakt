@@ -1,4 +1,4 @@
-import { Controller, Get } from "@nestjs/common";
+import { Body, Controller, Get, Post } from "@nestjs/common";
 import { ApiResponse } from "@nestjs/swagger";
 import { DatasourceService } from "./datasource.service";
 import { MistoUlozeni } from "./entities/misto-ulozeni";
@@ -25,6 +25,13 @@ export class DatasourceController {
     })
     getMistoUlozeni() {
         return this.datasourceService.getRepository(MistoUlozeni).find()
+    }
+
+    @Post('vzorek')
+    createVzorek(
+        @Body() vzorek: Vzorky
+    ) {
+        return this.datasourceService.getRepository(Vzorky).create(vzorek)
     }
 
 }
