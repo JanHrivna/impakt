@@ -35,7 +35,7 @@ export class DatasourceController {
 
     @Delete('vzorek/:id')
     @ApiResponse({ type: ApiResponseDto })
-    deleteVzorek(@Param() id: number) {
+    deleteVzorek(@Param('id') id: number) {
         return this.datasourceService.getRepository(Vzorky).delete(id)
             .then(
                 (defaultObj) => {

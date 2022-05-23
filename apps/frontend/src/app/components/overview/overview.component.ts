@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { take } from 'rxjs';
 import { BackendApiApiService } from '../../api/backend-api/services';
 import { CreateVzorekModalComponent } from '../create-vzorek-modal/create-vzorek-modal.component';
 
@@ -13,15 +14,17 @@ export class OverviewComponent implements OnInit {
   readonly vzorky$
 
   constructor(
-    api: BackendApiApiService,
+    public api: BackendApiApiService,
     private modalService: NgbModal) {
-    this.vzorky$ = api.datasourceControllerGetVzorky()
+    this.vzorky$ = this.api.datasourceControllerGetVzorky()
   }
 
   ngOnInit(): void { }
 
-  delete() {
-
+  delete(id: number) {
+    this.api.datasourceControllerDeleteVzorek({ id }).pipe(
+      take(1)
+    ).subscribe()
   }
 
   onCreate() {

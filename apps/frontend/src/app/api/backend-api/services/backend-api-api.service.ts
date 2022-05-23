@@ -9,6 +9,7 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
+import { ApiResponseDto } from '../models/api-response-dto';
 import { MistoUlozeni } from '../models/misto-ulozeni';
 import { Vzorky } from '../models/vzorky';
 
@@ -152,6 +153,52 @@ export class BackendApiApiService extends BaseService {
 
     return this.datasourceControllerCreateVzorek$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
+    );
+  }
+
+  /**
+   * Path part for operation datasourceControllerDeleteVzorek
+   */
+  static readonly DatasourceControllerDeleteVzorekPath = '/api/vzorek/{id}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `datasourceControllerDeleteVzorek()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  datasourceControllerDeleteVzorek$Response(params: {
+    id: number;
+  }): Observable<StrictHttpResponse<ApiResponseDto>> {
+
+    const rb = new RequestBuilder(this.rootUrl, BackendApiApiService.DatasourceControllerDeleteVzorekPath, 'delete');
+    if (params) {
+      rb.path('id', params.id, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<ApiResponseDto>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `datasourceControllerDeleteVzorek$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  datasourceControllerDeleteVzorek(params: {
+    id: number;
+  }): Observable<ApiResponseDto> {
+
+    return this.datasourceControllerDeleteVzorek$Response(params).pipe(
+      map((r: StrictHttpResponse<ApiResponseDto>) => r.body as ApiResponseDto)
     );
   }
 

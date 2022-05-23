@@ -34,7 +34,7 @@
     <tbody>
         <tr *ngFor="let vzorek of vzorky$ | async" class="text-nowrap">
             <td scope="col">
-                <button class="btn calendar" (click)="delete()" type="button">
+                <button class="btn calendar" (click)="delete(vzorek.id)" type="button">
                     <bi name="trash-fill"></bi>
                 </button>
             </td>
