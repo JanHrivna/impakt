@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { take } from 'rxjs';
 import { BackendApiApiService } from '../../api/backend-api/services';
+import { ConfirmService } from '../../services/confirm.service';
 import { CreateVzorekModalComponent } from '../create-vzorek-modal/create-vzorek-modal.component';
 
 @Component({
@@ -15,21 +16,25 @@ export class OverviewComponent implements OnInit {
 
   constructor(
     public api: BackendApiApiService,
-    private modalService: NgbModal) {
+    private modalService: NgbModal,
+    private confirmService: ConfirmService) {
     this.vzorky$ = this.api.datasourceControllerGetVzorky()
   }
 
   ngOnInit(): void { }
 
   delete(id: number) {
-    this.api.datasourceControllerDeleteVzorek({ id }).pipe(
-      take(1)
-    ).subscribe()
+    this.confirmService.showModal(
+      () => this.api.datasourceControllerDeleteVzorek({ id }).pipe(
+        take(1)
+      ).subscribe()
+    )
   }
 
   onCreate() {
     this.modalService.open(CreateVzorekModalComponent, {
-      size: "lg"
+      size: "lg",
+      backdrop: "static"
     })
   }
 

@@ -8,21 +8,24 @@ import { AppComponent } from './app.component';
 import { CreateVzorekModalComponent } from './components/create-vzorek-modal/create-vzorek-modal.component';
 import { OverviewComponent } from './components/overview/overview.component';
 import { IconsModule } from './modules/icons/icons.module';
+import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     OverviewComponent,
-    CreateVzorekModalComponent],
+    CreateVzorekModalComponent,
+    ConfirmModalComponent,
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
     NgbModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    IconsModule
+    IconsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
