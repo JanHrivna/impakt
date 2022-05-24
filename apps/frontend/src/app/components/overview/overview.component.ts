@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { take } from 'rxjs';
+import { Vzorky } from '../../api/backend-api/models';
 import { BackendApiApiService } from '../../api/backend-api/services';
 import { ConfirmService } from '../../services/confirm.service';
-import { CreateVzorekModalComponent } from '../create-vzorek-modal/create-vzorek-modal.component';
+import { CreateVzorekModalComponent, CreateVzorekModalResult } from '../create-vzorek-modal/create-vzorek-modal.component';
 
 @Component({
   selector: 'frontend-overview',
@@ -12,30 +13,47 @@ import { CreateVzorekModalComponent } from '../create-vzorek-modal/create-vzorek
 })
 export class OverviewComponent implements OnInit {
 
-  readonly vzorky$
+  vzorky: Vzorky[] = []
 
   constructor(
-    public api: BackendApiApiService,
+    private api: BackendApiApiService,
     private modalService: NgbModal,
     private confirmService: ConfirmService) {
-    this.vzorky$ = this.api.datasourceControllerGetVzorky()
   }
 
-  ngOnInit(): void { }
-
-  delete(id: number) {
-    this.confirmService.showModal(
-      () => this.api.datasourceControllerDeleteVzorek({ id }).pipe(
-        take(1)
-      ).subscribe()
-    )
+  ngOnInit(): void {
+    this.loadVzorky()
   }
 
   onCreate() {
     this.modalService.open(CreateVzorekModalComponent, {
       size: "lg",
       backdrop: "static"
-    })
+    }).dismissed.pipe(
+      take(1)
+    ).subscribe(
+      (res: CreateVzorekModalResult) => {
+        if (res.save) this.loadVzorky()
+      }
+    )
+  }
+
+  onDelete(id: number) {
+    this.confirmService.showModal(
+      () => this.api.datasourceControllerDeleteVzorek({ id }).pipe(
+        take(1),
+      ).subscribe(
+        () => this.loadVzorky()
+      )
+    )
+  }
+
+  private loadVzorky() {
+    return this.api.datasourceControllerGetVzorky().pipe(
+      take(1)
+    ).subscribe(
+      (vzorky) => this.vzorky = vzorky
+    )
   }
 
 }

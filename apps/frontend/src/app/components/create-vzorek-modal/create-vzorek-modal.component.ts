@@ -10,6 +10,9 @@ import { CustomDateAdapterService } from './services/custom-date-adapter.service
 import { CustomDateParserFormatterService } from './services/custom-date-parser-formatter.service';
 import { CustomDatepickerI18n, I18n } from './services/custom-datepicker-i18n.service';
 
+export interface CreateVzorekModalResult {
+  save: boolean
+}
 
 @Component({
   selector: 'frontend-create-vzorek-modal',
@@ -29,15 +32,19 @@ export class CreateVzorekModalComponent implements OnInit {
   mistoUlozeniArr: MistoUlozeni[] = []
 
   constructor(
-    public modal: NgbActiveModal,
+    private modal: NgbActiveModal,
     private createVzorekModalService: CreateVzorekModalService,
     private api: BackendApiApiService) {
   }
 
   onSave() {
     this.createVzorek().subscribe(
-      () => this.modal.close()
+      () => this.modal.dismiss(<CreateVzorekModalResult>{ save: true })
     )
+  }
+
+  close() {
+    this.modal.dismiss(<CreateVzorekModalResult>{ save: false })
   }
 
   ngOnInit(): void {
