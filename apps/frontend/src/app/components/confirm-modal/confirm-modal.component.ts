@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 export interface ConfirmModalResult {
@@ -11,6 +11,9 @@ export interface ConfirmModalResult {
   styleUrls: ['./confirm-modal.component.scss'],
 })
 export class ConfirmModalComponent {
+
+  @Input()
+  msg: string | undefined
 
   constructor(private modal: NgbActiveModal) { }
 

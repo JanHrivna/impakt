@@ -44,7 +44,8 @@ export class OverviewComponent implements OnInit {
         take(1),
       ).subscribe(
         () => this.loadVzorky()
-      )
+      ),
+      "Opravdu smazat?"
     )
   }
 

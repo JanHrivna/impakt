@@ -4,6 +4,7 @@ import { NgbActiveModal, NgbDateAdapter, NgbDateParserFormatter, NgbDatepickerI1
 import { Observable, take } from 'rxjs';
 import { MistoUlozeni } from '../../api/backend-api/models/misto-ulozeni';
 import { BackendApiApiService } from '../../api/backend-api/services';
+import { ConfirmService } from '../../services/confirm.service';
 import { CreateVzorekFormEnum } from './create-vzorek-modal-form.enum';
 import { CreateVzorekModalService } from './services/create-vzorek-modal.service';
 import { CustomDateAdapterService } from './services/custom-date-adapter.service';
@@ -34,7 +35,8 @@ export class CreateVzorekModalComponent implements OnInit {
   constructor(
     private modal: NgbActiveModal,
     private createVzorekModalService: CreateVzorekModalService,
-    private api: BackendApiApiService) {
+    private api: BackendApiApiService,
+    private confirmService: ConfirmService) {
   }
 
   onSave() {
@@ -44,7 +46,10 @@ export class CreateVzorekModalComponent implements OnInit {
   }
 
   close() {
-    this.modal.dismiss(<CreateVzorekModalResult>{ save: false })
+    this.confirmService.showModal(
+      () => this.modal.dismiss(<CreateVzorekModalResult>{ save: false }),
+      "Opravdu zavřít?"
+    )
   }
 
   ngOnInit(): void {

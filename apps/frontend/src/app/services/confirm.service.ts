@@ -8,19 +8,23 @@ import { ConfirmModalComponent, ConfirmModalResult } from "../components/confirm
 })
 export class ConfirmService {
 
+    private readonly DEFAULT_MSG = "Chcete potvrdit?"
+
     constructor(private modalService: NgbModal) { }
 
-    showModal(onConfirm: () => any) {
-        this.modalService.open(ConfirmModalComponent, {
+    showModal(onConfirm: () => any, msg = this.DEFAULT_MSG) {
+        const modalRef = this.modalService.open(ConfirmModalComponent, {
             size: "sm",
             backdrop: "static"
-        }).dismissed.pipe(
+        })
+        modalRef.dismissed.pipe(
             take(1)
         ).subscribe(
             (res: ConfirmModalResult) => {
                 if (res.confirmed) onConfirm()
             }
         )
+        modalRef.componentInstance.msg = msg
     }
 
 }
