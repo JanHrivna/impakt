@@ -26,16 +26,11 @@ export class OverviewComponent implements OnInit {
   }
 
   onCreate() {
-    this.modalService.open(CreateVzorekModalComponent, {
-      size: "lg",
-      backdrop: "static"
-    }).dismissed.pipe(
-      take(1)
-    ).subscribe(
-      (res: CreateVzorekModalResult) => {
-        if (res.save) this.loadVzorky()
-      }
-    )
+    this.createOrUpdate()
+  }
+
+  onEdit(vzorek: Vzorky) {
+    this.createOrUpdate(vzorek)
   }
 
   onDelete(id: number) {
@@ -47,6 +42,21 @@ export class OverviewComponent implements OnInit {
       ),
       "Opravdu smazat?"
     )
+  }
+
+  private createOrUpdate(vzorek?: Vzorky) {
+    const modalRef = this.modalService.open(CreateVzorekModalComponent, {
+      size: "lg",
+      backdrop: "static"
+    })
+    modalRef.dismissed.pipe(
+      take(1)
+    ).subscribe(
+      (res: CreateVzorekModalResult) => {
+        if (res.save) this.loadVzorky()
+      }
+    )
+    if (vzorek) modalRef.componentInstance.vzorek = vzorek
   }
 
   private loadVzorky() {

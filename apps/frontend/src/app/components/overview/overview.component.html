@@ -34,8 +34,11 @@
     <tbody>
         <tr *ngFor="let vzorek of vzorky" class="text-nowrap">
             <td scope="col">
-                <button class="btn calendar" (click)="onDelete(vzorek.id)" type="button">
+                <button class="btn" (click)="onDelete(vzorek.id)" ngbTooltip="delete">
                     <bi name="trash-fill"></bi>
+                </button>
+                <button class="btn" (click)="onEdit(vzorek)" ngbTooltip="edit">
+                    <bi name="pencil-fill"></bi>
                 </button>
             </td>
             <td scope="col">{{vzorek.druh}}</td>

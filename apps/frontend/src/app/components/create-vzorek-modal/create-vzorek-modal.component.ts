@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NgbActiveModal, NgbDateAdapter, NgbDateParserFormatter, NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, take } from 'rxjs';
+import { Vzorky } from '../../api/backend-api/models';
 import { MistoUlozeni } from '../../api/backend-api/models/misto-ulozeni';
 import { BackendApiApiService } from '../../api/backend-api/services';
 import { ConfirmService } from '../../services/confirm.service';
@@ -28,8 +29,11 @@ export interface CreateVzorekModalResult {
 })
 export class CreateVzorekModalComponent implements OnInit {
 
+  @Input()
+  vzorek: Vzorky | undefined
+
   readonly form: FormGroup = this.createVzorekModalService.initForm()
-  readonly FormNames = CreateVzorekFormEnum
+  readonly CreateVzorekFormEnum = CreateVzorekFormEnum
   mistoUlozeniArr: MistoUlozeni[] = []
 
   constructor(
@@ -53,7 +57,14 @@ export class CreateVzorekModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.vzorek) this.fillForm(this.vzorek)
     this.loadMistoUlozeni()
+  }
+
+  private fillForm(vzorek: Vzorky) {
+    for (let formName of Object.values(CreateVzorekFormEnum)) {
+      this.form.get(formName)?.setValue(vzorek[formName])
+    }
   }
 
   private loadMistoUlozeni() {

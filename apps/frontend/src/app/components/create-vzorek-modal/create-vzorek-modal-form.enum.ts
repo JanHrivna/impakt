@@ -21,6 +21,5 @@ export enum CreateVzorekFormEnum {
     ULOZENI_VZORKU_DO_ANALYZY_MISTO = "ulozeni_vzorku_do_analyzy_misto",
     ULOZENI_VZORKU_DO_ANALYZY_OBJEKT = "ulozeni_vzorku_do_analyzy_objekt",
     ULOZENI_VZORKU_AKTUALNI = "ulozeni_vzorku_aktualni",
-    DODANI_ALBERTOV_DATUM = "dodani_albertov_datum",
-    POZADOVANE_ANALYZY = "pozadovane_analyzy"
+    DODANI_ALBERTOV_DATUM = "dodani_albertov_datum"
 }

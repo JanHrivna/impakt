@@ -7,29 +7,29 @@
 
     <form [formGroup]="form">
         <div>
-            <label [for]="FormNames.DRUH">Druh</label>
-            <input class="form-control" [formControlName]="FormNames.DRUH" [id]="FormNames.DRUH" required>
+            <label [for]="CreateVzorekFormEnum.DRUH">Druh</label>
+            <input class="form-control" [formControlName]="CreateVzorekFormEnum.DRUH" [id]="CreateVzorekFormEnum.DRUH" required>
         </div>
 
         <div>
-            <label [for]="FormNames.DRUH">Popis</label>
-            <textarea class="form-control" [formControlName]="FormNames.POPIS" [id]="FormNames.POPIS" rows="3"
+            <label [for]="CreateVzorekFormEnum.DRUH">Popis</label>
+            <textarea class="form-control" [formControlName]="CreateVzorekFormEnum.POPIS" [id]="CreateVzorekFormEnum.POPIS" rows="3"
                 required></textarea>
         </div>
 
         <div class="d-flex justify-content-between">
 
             <div>
-                <label [for]="FormNames.DOVOZ">Dovoz z</label>
-                <input class="form-control" [formControlName]="FormNames.DOVOZ" [id]="FormNames.DOVOZ" required>
+                <label [for]="CreateVzorekFormEnum.DOVOZ">Dovoz z</label>
+                <input class="form-control" [formControlName]="CreateVzorekFormEnum.DOVOZ" [id]="CreateVzorekFormEnum.DOVOZ" required>
             </div>
 
             <div>
                 <div>
-                    <label [for]="FormNames.DOVOZ_DATUM">Dovoz datum</label>
+                    <label [for]="CreateVzorekFormEnum.DOVOZ_DATUM">Dovoz datum</label>
                     <div class="input-group">
-                        <input class="form-control" [formControlName]="FormNames.DOVOZ_DATUM" placeholder="dd.mm.yyyy"
-                            name="dp" [id]="FormNames.DOVOZ_DATUM" ngbDatepicker #dt="ngbDatepicker" readonly required>
+                        <input class="form-control" [formControlName]="CreateVzorekFormEnum.DOVOZ_DATUM" placeholder="dd.mm.yyyy"
+                            name="dp" [id]="CreateVzorekFormEnum.DOVOZ_DATUM" ngbDatepicker #dt="ngbDatepicker" readonly required>
                         <button class="btn btn-outline-secondary calendar" (click)="dt.toggle()" type="button">
                             <bi name="calendar"></bi>
                         </button>
@@ -38,9 +38,9 @@
             </div>
 
             <div>
-                <label [for]="FormNames.OZNACENI_SVLECKY">Označení svlečky</label>
-                <input class="form-control" [formControlName]="FormNames.OZNACENI_SVLECKY"
-                    [id]="FormNames.OZNACENI_SVLECKY" required>
+                <label [for]="CreateVzorekFormEnum.OZNACENI_SVLECKY">Označení svlečky</label>
+                <input class="form-control" [formControlName]="CreateVzorekFormEnum.OZNACENI_SVLECKY"
+                    [id]="CreateVzorekFormEnum.OZNACENI_SVLECKY" required>
             </div>
 
         </div>
@@ -48,10 +48,10 @@
         <div class="d-flex justify-content-between">
 
             <div>
-                <label [for]="FormNames.SBER_SVLECKY_DATUM">Sběr svlečky datum</label>
+                <label [for]="CreateVzorekFormEnum.SBER_SVLECKY_DATUM">Sběr svlečky datum</label>
                 <div class="input-group">
-                    <input class="form-control" [formControlName]="FormNames.SBER_SVLECKY_DATUM"
-                        placeholder="dd.mm.yyyy" name="dp" [id]="FormNames.SBER_SVLECKY_DATUM" ngbDatepicker
+                    <input class="form-control" [formControlName]="CreateVzorekFormEnum.SBER_SVLECKY_DATUM"
+                        placeholder="dd.mm.yyyy" name="dp" [id]="CreateVzorekFormEnum.SBER_SVLECKY_DATUM" ngbDatepicker
                         #dt2="ngbDatepicker" readonly required>
                     <button class="btn btn-outline-secondary calendar" (click)="dt2.toggle()" type="button">
                         <bi name="calendar"></bi>
@@ -60,15 +60,15 @@
             </div>
 
             <div>
-                <label [for]="FormNames.SBER_SVLECKY_MISTO">Sběr svlečky místo</label>
-                <input class="form-control" [formControlName]="FormNames.SBER_SVLECKY_MISTO"
-                    [id]="FormNames.SBER_SVLECKY_MISTO" required>
+                <label [for]="CreateVzorekFormEnum.SBER_SVLECKY_MISTO">Sběr svlečky místo</label>
+                <input class="form-control" [formControlName]="CreateVzorekFormEnum.SBER_SVLECKY_MISTO"
+                    [id]="CreateVzorekFormEnum.SBER_SVLECKY_MISTO" required>
             </div>
 
             <div>
-                <label [for]="FormNames.CISLO_KOTCE">Číslo kotce</label>
-                <input type="number" min="1" class="form-control" [formControlName]="FormNames.CISLO_KOTCE"
-                    [id]="FormNames.CISLO_KOTCE" required>
+                <label [for]="CreateVzorekFormEnum.CISLO_KOTCE">Číslo kotce</label>
+                <input type="number" min="1" class="form-control" [formControlName]="CreateVzorekFormEnum.CISLO_KOTCE"
+                    [id]="CreateVzorekFormEnum.CISLO_KOTCE" required>
             </div>
 
         </div>
@@ -76,46 +76,24 @@
         <div class="d-flex justify-content-between">
 
             <div>
-                <label [for]="FormNames.ULOZENI_SVLECKY_MISTO">Aktuální místo uložení svlečky</label>
-                <select class="form-control" [formControlName]="FormNames.ULOZENI_SVLECKY_MISTO"
-                    [id]="FormNames.ULOZENI_SVLECKY_MISTO" required>
+                <label [for]="CreateVzorekFormEnum.ULOZENI_SVLECKY_MISTO">Aktuální místo uložení svlečky</label>
+                <select class="form-control" [formControlName]="CreateVzorekFormEnum.ULOZENI_SVLECKY_MISTO"
+                    [id]="CreateVzorekFormEnum.ULOZENI_SVLECKY_MISTO" required>
                     <option *ngFor="let mistoUlozeni of mistoUlozeniArr" [value]="mistoUlozeni.id">
                         {{mistoUlozeni.adresa}}</option>
                 </select>
             </div>
 
             <div>
-                <label [for]="FormNames.OZNACENI_VZORKU_SVLECKY">Označení vzorku ze svlečky</label>
-                <input class="form-control" [formControlName]="FormNames.OZNACENI_VZORKU_SVLECKY"
-                    [id]="FormNames.OZNACENI_VZORKU_SVLECKY" required>
+                <label [for]="CreateVzorekFormEnum.OZNACENI_VZORKU_SVLECKY">Označení vzorku ze svlečky</label>
+                <input class="form-control" [formControlName]="CreateVzorekFormEnum.OZNACENI_VZORKU_SVLECKY"
+                    [id]="CreateVzorekFormEnum.OZNACENI_VZORKU_SVLECKY" required>
             </div>
 
             <div>
-                <label [for]="FormNames.PRED_POSL_SVLECENIM_MISTO">Lokalita před posl. svlekem</label>
-                <input class="form-control" [formControlName]="FormNames.PRED_POSL_SVLECENIM_MISTO"
-                    [id]="FormNames.PRED_POSL_SVLECENIM_MISTO" required>
-            </div>
-
-        </div>
-
-        <div class="d-flex justify-content-between">
-
-            <div>
-                <label [for]="FormNames.PUVODNI_HMOTNOST">Původní hm. analyz. svlečky</label>
-                <input class="form-control" [formControlName]="FormNames.PUVODNI_HMOTNOST"
-                    [id]="FormNames.PUVODNI_HMOTNOST" required>
-            </div>
-
-            <div>
-                <label [for]="FormNames.PRIPRAVA_VZORKU_TYP">Příprava vzorku mechanická typ</label>
-                <input class="form-control" [formControlName]="FormNames.PRIPRAVA_VZORKU_TYP"
-                    [id]="FormNames.PRIPRAVA_VZORKU_TYP" required>
-            </div>
-
-            <div>
-                <label [for]="FormNames.PRIPRAVA_VZORKU_KDY">Příprava vzorku mechanická kdy</label>
-                <input class="form-control" [formControlName]="FormNames.PRIPRAVA_VZORKU_KDY"
-                    [id]="FormNames.PRIPRAVA_VZORKU_KDY" required>
+                <label [for]="CreateVzorekFormEnum.PRED_POSL_SVLECENIM_MISTO">Lokalita před posl. svlekem</label>
+                <input class="form-control" [formControlName]="CreateVzorekFormEnum.PRED_POSL_SVLECENIM_MISTO"
+                    [id]="CreateVzorekFormEnum.PRED_POSL_SVLECENIM_MISTO" required>
             </div>
 
         </div>
@@ -123,25 +101,47 @@
         <div class="d-flex justify-content-between">
 
             <div>
-                <label [for]="FormNames.PRIPRAVA_VZORKU_KDO">Příprava vzorku mechanická kdo</label>
-                <input class="form-control" [formControlName]="FormNames.PRIPRAVA_VZORKU_KDO"
-                    [id]="FormNames.PRIPRAVA_VZORKU_KDO" required>
+                <label [for]="CreateVzorekFormEnum.PUVODNI_HMOTNOST">Původní hm. analyz. svlečky</label>
+                <input class="form-control" [formControlName]="CreateVzorekFormEnum.PUVODNI_HMOTNOST"
+                    [id]="CreateVzorekFormEnum.PUVODNI_HMOTNOST" required>
+            </div>
+
+            <div>
+                <label [for]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_TYP">Příprava vzorku mechanická typ</label>
+                <input class="form-control" [formControlName]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_TYP"
+                    [id]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_TYP" required>
+            </div>
+
+            <div>
+                <label [for]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_KDY">Příprava vzorku mechanická kdy</label>
+                <input class="form-control" [formControlName]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_KDY"
+                    [id]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_KDY" required>
+            </div>
+
+        </div>
+
+        <div class="d-flex justify-content-between">
+
+            <div>
+                <label [for]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_KDO">Příprava vzorku mechanická kdo</label>
+                <input class="form-control" [formControlName]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_KDO"
+                    [id]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_KDO" required>
             </div>
 
 
             <div>
-                <label [for]="FormNames.PRIPRAVA_VZORKU_MISTO">Příprava vzorku mechanická kde</label>
-                <select class="form-control" [formControlName]="FormNames.PRIPRAVA_VZORKU_MISTO"
-                    [id]="FormNames.PRIPRAVA_VZORKU_MISTO" required>
+                <label [for]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_MISTO">Příprava vzorku mechanická kde</label>
+                <select class="form-control" [formControlName]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_MISTO"
+                    [id]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_MISTO" required>
                     <option *ngFor="let mistoUlozeni of mistoUlozeniArr" [value]="mistoUlozeni.id">
                         {{mistoUlozeni.adresa}}</option>
                 </select>
             </div>
 
             <div>
-                <label [for]="FormNames.PRIPRAVA_VZORKU_OPLACH">Příprava vzorku (oplach - v čem)</label>
-                <input class="form-control" [formControlName]="FormNames.PRIPRAVA_VZORKU_OPLACH"
-                    [id]="FormNames.PRIPRAVA_VZORKU_OPLACH" required>
+                <label [for]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_OPLACH">Příprava vzorku (oplach - v čem)</label>
+                <input class="form-control" [formControlName]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_OPLACH"
+                    [id]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_OPLACH" required>
             </div>
 
         </div>
@@ -149,10 +149,10 @@
         <div class="d-flex justify-content-between">
 
             <div>
-                <label [for]="FormNames.PRIPRAVA_VZORKU_OPLACH_KDY">Příprava vzorku oplach kdy</label>
+                <label [for]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_OPLACH_KDY">Příprava vzorku oplach kdy</label>
                 <div class="input-group">
-                    <input class="form-control" [formControlName]="FormNames.PRIPRAVA_VZORKU_OPLACH_KDY"
-                        placeholder="dd.mm.yyyy" name="dp" [id]="FormNames.PRIPRAVA_VZORKU_OPLACH_KDY" ngbDatepicker
+                    <input class="form-control" [formControlName]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_OPLACH_KDY"
+                        placeholder="dd.mm.yyyy" name="dp" [id]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_OPLACH_KDY" ngbDatepicker
                         #dt4="ngbDatepicker" readonly required>
                     <button class="btn btn-outline-secondary calendar" (click)="dt4.toggle()" type="button">
                         <bi name="calendar"></bi>
@@ -161,9 +161,9 @@
             </div>
 
             <div>
-                <label [for]=" FormNames.PRIPRAVA_VZORKU_SUSENI">Příprava vzorku - sušení - popis</label>
-                <textarea class="form-control" [formControlName]="FormNames.PRIPRAVA_VZORKU_SUSENI"
-                    [id]="FormNames.PRIPRAVA_VZORKU_SUSENI" rows="3" required></textarea>
+                <label [for]=" CreateVzorekFormEnum.PRIPRAVA_VZORKU_SUSENI">Příprava vzorku - sušení - popis</label>
+                <textarea class="form-control" [formControlName]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_SUSENI"
+                    [id]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_SUSENI" rows="3" required></textarea>
             </div>
 
         </div>
@@ -171,24 +171,24 @@
         <div class="d-flex justify-content-between">
 
             <div>
-                <label [for]="FormNames.ULOZENI_VZORKU_DO_ANALYZY_MISTO">Uložení vzorku do analýzy (místo)</label>
-                <select class="form-control" [formControlName]="FormNames.ULOZENI_VZORKU_DO_ANALYZY_MISTO"
-                    [id]="FormNames.ULOZENI_VZORKU_DO_ANALYZY_MISTO" required>
+                <label [for]="CreateVzorekFormEnum.ULOZENI_VZORKU_DO_ANALYZY_MISTO">Uložení vzorku do analýzy (místo)</label>
+                <select class="form-control" [formControlName]="CreateVzorekFormEnum.ULOZENI_VZORKU_DO_ANALYZY_MISTO"
+                    [id]="CreateVzorekFormEnum.ULOZENI_VZORKU_DO_ANALYZY_MISTO" required>
                     <option *ngFor="let mistoUlozeni of mistoUlozeniArr" [value]="mistoUlozeni.id">
                         {{mistoUlozeni.adresa}}</option>
                 </select>
             </div>
 
             <div>
-                <label [for]="FormNames.ULOZENI_VZORKU_DO_ANALYZY_OBJEKT">Uložení vzorku do analýzy (v čem)</label>
-                <input class="form-control" [formControlName]="FormNames.ULOZENI_VZORKU_DO_ANALYZY_OBJEKT"
-                    [id]="FormNames.ULOZENI_VZORKU_DO_ANALYZY_OBJEKT" required>
+                <label [for]="CreateVzorekFormEnum.ULOZENI_VZORKU_DO_ANALYZY_OBJEKT">Uložení vzorku do analýzy (v čem)</label>
+                <input class="form-control" [formControlName]="CreateVzorekFormEnum.ULOZENI_VZORKU_DO_ANALYZY_OBJEKT"
+                    [id]="CreateVzorekFormEnum.ULOZENI_VZORKU_DO_ANALYZY_OBJEKT" required>
             </div>
 
             <div>
-                <label [for]="FormNames.ULOZENI_VZORKU_AKTUALNI">Aktuální uložení vzorku</label>
-                <select class="form-control" [formControlName]="FormNames.ULOZENI_VZORKU_AKTUALNI"
-                    [id]="FormNames.ULOZENI_VZORKU_AKTUALNI" required>
+                <label [for]="CreateVzorekFormEnum.ULOZENI_VZORKU_AKTUALNI">Aktuální uložení vzorku</label>
+                <select class="form-control" [formControlName]="CreateVzorekFormEnum.ULOZENI_VZORKU_AKTUALNI"
+                    [id]="CreateVzorekFormEnum.ULOZENI_VZORKU_AKTUALNI" required>
                     <option *ngFor="let mistoUlozeni of mistoUlozeniArr" [value]="mistoUlozeni.id">
                         {{mistoUlozeni.adresa}}</option>
                 </select>
@@ -197,10 +197,10 @@
         </div>
 
         <div class="d-inline-block">
-            <label [for]="FormNames.DODANI_ALBERTOV_DATUM">Do SI laboratoře Albertov dodáno</label>
+            <label [for]="CreateVzorekFormEnum.DODANI_ALBERTOV_DATUM">Do SI laboratoře Albertov dodáno</label>
             <div class="input-group">
-                <input class="form-control" [formControlName]="FormNames.DODANI_ALBERTOV_DATUM" placeholder="dd.mm.yyyy"
-                    name="dp" [id]="FormNames.DODANI_ALBERTOV_DATUM" ngbDatepicker #dt3="ngbDatepicker" readonly
+                <input class="form-control" [formControlName]="CreateVzorekFormEnum.DODANI_ALBERTOV_DATUM" placeholder="dd.mm.yyyy"
+                    name="dp" [id]="CreateVzorekFormEnum.DODANI_ALBERTOV_DATUM" ngbDatepicker #dt3="ngbDatepicker" readonly
                     required>
                 <button class="btn btn-outline-secondary calendar" (click)="dt3.toggle()" type="button">
                     <bi name="calendar"></bi>
