@@ -51,15 +51,23 @@ export class CreateVzorekModalComponent implements OnInit {
 
   onSave() {
     this.createVzorek().subscribe(
-      () => this.modal.dismiss(<CreateVzorekModalResult>{ save: true })
+      () => this.dismissModal(true)
     )
   }
 
   close() {
-    this.confirmService.showModal(
-      () => this.modal.dismiss(<CreateVzorekModalResult>{ save: false }),
-      "Opravdu zavřít?"
-    )
+    const dismiss = () => this.dismissModal(false)
+    if (this.form.pristine) dismiss()
+    else {
+      this.confirmService.showModal(
+        () => dismiss(),
+        "Opravdu zavřít?"
+      )
+    }
+  }
+
+  private dismissModal(save: boolean) {
+    this.modal.dismiss(<CreateVzorekModalResult>{ save })
   }
 
   private fillForm(vzorek: Vzorky) {
