@@ -49,21 +49,21 @@
             <td scope="col">{{vzorek.sber_svlecky_datum}}</td>
             <td scope="col">{{vzorek.sber_svlecky_misto}}</td>
             <td scope="col">{{vzorek.cislo_kotce}}</td>
-            <td scope="col">{{vzorek.ulozeni_svlecky_misto.adresa}}</td>
+            <td scope="col">{{getAdresa(vzorek.ulozeni_svlecky_misto)}}</td>
             <td scope="col">{{vzorek.oznaceni_vzorku_svlecky}}</td>
             <td scope="col">{{vzorek.pred_posl_svlecenim_misto}}</td>
             <td scope="col">{{vzorek.puvodni_hmotnost}}</td>
             <td scope="col">{{vzorek.priprava_vzorku_typ}}</td>
             <td scope="col">{{vzorek.priprava_vzorku_kdy}}</td>
             <td scope="col">{{vzorek.priprava_vzorku_kdo}}</td>
-            <td scope="col">{{vzorek.priprava_vzorku_misto.adresa}}</td>
+            <td scope="col">{{getAdresa(vzorek.priprava_vzorku_misto)}}</td>
             <td scope="col">{{vzorek.priprava_vzorku_oplach}}</td>
             <td scope="col">{{vzorek.priprava_vzorku_oplach_kdy}}</td>
             <td scope="col">{{vzorek.priprava_vzorku_suseni}}</td>
-            <td scope="col">{{vzorek.ulozeni_vzorku_do_analyzy_misto.adresa}} -
+            <td scope="col">{{getAdresa(vzorek.ulozeni_vzorku_do_analyzy_misto)}} -
                 {{vzorek.ulozeni_vzorku_do_analyzy_objekt}}
             </td>
-            <td scope="col">{{vzorek.ulozeni_vzorku_aktualni.adresa}}</td>
+            <td scope="col">{{getAdresa(vzorek.ulozeni_vzorku_aktualni)}}</td>
             <td scope="col">{{vzorek.dodani_albertov_datum}}</td>
         </tr>
     </tbody>

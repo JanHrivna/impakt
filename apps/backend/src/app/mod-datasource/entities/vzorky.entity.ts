@@ -1,7 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { MistoUlozeni } from "./misto-ulozeni";
-import { IsNotEmpty } from "class-validator"
+import { IsNotEmpty } from "class-validator";
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Vzorky extends BaseEntity {
@@ -50,14 +49,10 @@ export class Vzorky extends BaseEntity {
     @IsNotEmpty()
     cislo_kotce: number
 
-    @ManyToOne(type => MistoUlozeni, { eager: true })
-    @JoinColumn({
-        name: "ulozeni_svlecky_misto",
-        referencedColumnName: "id"
-    })
+    @Column()
     @ApiProperty()
     @IsNotEmpty()
-    ulozeni_svlecky_misto: MistoUlozeni
+    ulozeni_svlecky_misto: number
 
     @Column()
     @ApiProperty()
@@ -89,14 +84,10 @@ export class Vzorky extends BaseEntity {
     @IsNotEmpty()
     priprava_vzorku_kdo: string
 
-    @ManyToOne(type => MistoUlozeni, { eager: true })
-    @JoinColumn({
-        name: "priprava_vzorku_misto",
-        referencedColumnName: "id"
-    })
+    @Column()
     @ApiProperty()
     @IsNotEmpty()
-    priprava_vzorku_misto: MistoUlozeni
+    priprava_vzorku_misto: number
 
     @Column()
     @ApiProperty()
@@ -113,28 +104,20 @@ export class Vzorky extends BaseEntity {
     @IsNotEmpty()
     priprava_vzorku_suseni: string
 
-    @ManyToOne(type => MistoUlozeni, { eager: true })
-    @JoinColumn({
-        name: "ulozeni_vzorku_do_analyzy_misto",
-        referencedColumnName: "id"
-    })
+    @Column()
     @ApiProperty()
     @IsNotEmpty()
-    ulozeni_vzorku_do_analyzy_misto: MistoUlozeni
+    ulozeni_vzorku_do_analyzy_misto: number
 
     @Column()
     @ApiProperty()
     @IsNotEmpty()
     ulozeni_vzorku_do_analyzy_objekt: string
 
-    @ManyToOne(type => MistoUlozeni, { eager: true })
-    @JoinColumn({
-        name: "ulozeni_vzorku_aktualni",
-        referencedColumnName: "id"
-    })
+    @Column()
     @ApiProperty()
     @IsNotEmpty()
-    ulozeni_vzorku_aktualni: MistoUlozeni
+    ulozeni_vzorku_aktualni: number
 
     @Column()
     @ApiProperty()

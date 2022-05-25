@@ -32,15 +32,21 @@ export class CreateVzorekModalComponent implements OnInit {
   @Input()
   vzorek: Vzorky | undefined
 
+  @Input()
+  mistaUlozeni: MistoUlozeni[] = []
+
   readonly form: FormGroup = this.createVzorekModalService.initForm()
   readonly CreateVzorekFormEnum = CreateVzorekFormEnum
-  mistoUlozeniArr: MistoUlozeni[] = []
 
   constructor(
     private modal: NgbActiveModal,
     private createVzorekModalService: CreateVzorekModalService,
     private api: BackendApiApiService,
     private confirmService: ConfirmService) {
+  }
+
+  ngOnInit(): void {
+    if (this.vzorek) this.fillForm(this.vzorek)
   }
 
   onSave() {
@@ -56,23 +62,10 @@ export class CreateVzorekModalComponent implements OnInit {
     )
   }
 
-  ngOnInit(): void {
-    if (this.vzorek) this.fillForm(this.vzorek)
-    this.loadMistoUlozeni()
-  }
-
   private fillForm(vzorek: Vzorky) {
     for (let formName of Object.values(CreateVzorekFormEnum)) {
       this.form.get(formName)?.setValue(vzorek[formName])
     }
-  }
-
-  private loadMistoUlozeni() {
-    this.api.datasourceControllerGetMistoUlozeni().pipe(
-      take(1)
-    ).subscribe(
-      (mistoUlozeniArr) => this.mistoUlozeniArr = mistoUlozeniArr
-    )
   }
 
   private createVzorek(): Observable<any> {

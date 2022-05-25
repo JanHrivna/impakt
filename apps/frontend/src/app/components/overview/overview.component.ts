@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { take } from 'rxjs';
-import { Vzorky } from '../../api/backend-api/models';
+import { MistoUlozeni, Vzorky } from '../../api/backend-api/models';
 import { BackendApiApiService } from '../../api/backend-api/services';
 import { ConfirmService } from '../../services/confirm.service';
 import { CreateVzorekModalComponent, CreateVzorekModalResult } from '../create-vzorek-modal/create-vzorek-modal.component';
@@ -14,6 +14,7 @@ import { CreateVzorekModalComponent, CreateVzorekModalResult } from '../create-v
 export class OverviewComponent implements OnInit {
 
   vzorky: Vzorky[] = []
+  mistaUlozeni: MistoUlozeni[] = []
 
   constructor(
     private api: BackendApiApiService,
@@ -23,6 +24,7 @@ export class OverviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadVzorky()
+    this.loadMistaUlozeni()
   }
 
   onCreate() {
@@ -44,6 +46,10 @@ export class OverviewComponent implements OnInit {
     )
   }
 
+  getAdresa(id: number): string | undefined {
+    return this.mistaUlozeni.find(a => a.id === id)?.adresa
+  }
+
   private createOrUpdate(vzorek?: Vzorky) {
     const modalRef = this.modalService.open(CreateVzorekModalComponent, {
       size: "lg",
@@ -56,14 +62,23 @@ export class OverviewComponent implements OnInit {
         if (res.save) this.loadVzorky()
       }
     )
+    modalRef.componentInstance.mistaUlozeni = this.mistaUlozeni
     if (vzorek) modalRef.componentInstance.vzorek = vzorek
   }
 
   private loadVzorky() {
-    return this.api.datasourceControllerGetVzorky().pipe(
+    this.api.datasourceControllerGetVzorky().pipe(
       take(1)
     ).subscribe(
       (vzorky) => this.vzorky = vzorky
+    )
+  }
+
+  private loadMistaUlozeni() {
+    this.api.datasourceControllerGetMistoUlozeni().pipe(
+      take(1)
+    ).subscribe(
+      (mistaUlozeni) => this.mistaUlozeni = mistaUlozeni
     )
   }
 
