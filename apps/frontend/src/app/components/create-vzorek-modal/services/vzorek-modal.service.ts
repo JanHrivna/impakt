@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 @Injectable()
-export class CreateVzorekModalService {
+export class VzorekModalService {
 
     initForm(): FormGroup {
         return new FormGroup({

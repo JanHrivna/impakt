@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CreateVzorekModalComponent } from './components/create-vzorek-modal/create-vzorek-modal.component';
+import { VzorekModalComponent } from './components/create-vzorek-modal/vzorek-modal.component';
 import { OverviewComponent } from './components/overview/overview.component';
 import { IconsModule } from './modules/icons/icons.module';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
@@ -14,7 +14,7 @@ import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.
   declarations: [
     AppComponent,
     OverviewComponent,
-    CreateVzorekModalComponent,
+    VzorekModalComponent,
     ConfirmModalComponent,
   ],
   imports: [

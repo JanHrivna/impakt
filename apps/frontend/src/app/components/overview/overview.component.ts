@@ -4,7 +4,7 @@ import { take } from 'rxjs';
 import { MistoUlozeni, Vzorky } from '../../api/backend-api/models';
 import { BackendApiApiService } from '../../api/backend-api/services';
 import { ConfirmService } from '../../services/confirm.service';
-import { CreateVzorekModalComponent, CreateVzorekModalResult } from '../create-vzorek-modal/create-vzorek-modal.component';
+import { VzorekModalComponent, CreateVzorekModalResult } from '../create-vzorek-modal/vzorek-modal.component';
 
 @Component({
   selector: 'frontend-overview',
@@ -51,7 +51,7 @@ export class OverviewComponent implements OnInit {
   }
 
   private createOrUpdate(vzorek?: Vzorky) {
-    const modalRef = this.modalService.open(CreateVzorekModalComponent, {
+    const modalRef = this.modalService.open(VzorekModalComponent, {
       size: "lg",
       backdrop: "static"
     })

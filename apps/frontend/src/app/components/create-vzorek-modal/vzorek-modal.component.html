@@ -1,0 +1,269 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{vzorek ? 'Editace vzorku' : 'Nový vzorek' }}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+</div>
+
+<div class="modal-body">
+
+    <ul ngbNav #nav="ngbNav" [(activeId)]="activeTab" class="nav-pills">
+        <li [ngbNavItem]="1">
+            <a ngbNavLink>Vzorek</a>
+            <ng-template ngbNavContent>
+                <form [formGroup]="form">
+                    <div>
+                        <label [for]="CreateVzorekFormEnum.DRUH">Druh</label>
+                        <input class="form-control" [formControlName]="CreateVzorekFormEnum.DRUH"
+                            [id]="CreateVzorekFormEnum.DRUH" required>
+                    </div>
+
+                    <div>
+                        <label [for]="CreateVzorekFormEnum.DRUH">Popis</label>
+                        <textarea class="form-control" [formControlName]="CreateVzorekFormEnum.POPIS"
+                            [id]="CreateVzorekFormEnum.POPIS" rows="3" required></textarea>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+                            <label [for]="CreateVzorekFormEnum.DOVOZ">Dovoz z</label>
+                            <input class="form-control" [formControlName]="CreateVzorekFormEnum.DOVOZ"
+                                [id]="CreateVzorekFormEnum.DOVOZ" required>
+                        </div>
+
+                        <div>
+                            <div>
+                                <label [for]="CreateVzorekFormEnum.DOVOZ_DATUM">Dovoz datum</label>
+                                <div class="input-group">
+                                    <input class="form-control" [formControlName]="CreateVzorekFormEnum.DOVOZ_DATUM"
+                                        placeholder="dd.mm.yyyy" name="dp" [id]="CreateVzorekFormEnum.DOVOZ_DATUM"
+                                        ngbDatepicker #dt="ngbDatepicker" readonly required>
+                                    <button class="btn btn-outline-secondary calendar" (click)="dt.toggle()"
+                                        type="button">
+                                        <bi name="calendar"></bi>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label [for]="CreateVzorekFormEnum.OZNACENI_SVLECKY">Označení svlečky</label>
+                            <input class="form-control" [formControlName]="CreateVzorekFormEnum.OZNACENI_SVLECKY"
+                                [id]="CreateVzorekFormEnum.OZNACENI_SVLECKY" required>
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+                            <label [for]="CreateVzorekFormEnum.SBER_SVLECKY_DATUM">Sběr svlečky datum</label>
+                            <div class="input-group">
+                                <input class="form-control" [formControlName]="CreateVzorekFormEnum.SBER_SVLECKY_DATUM"
+                                    placeholder="dd.mm.yyyy" name="dp" [id]="CreateVzorekFormEnum.SBER_SVLECKY_DATUM"
+                                    ngbDatepicker #dt2="ngbDatepicker" readonly required>
+                                <button class="btn btn-outline-secondary calendar" (click)="dt2.toggle()" type="button">
+                                    <bi name="calendar"></bi>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label [for]="CreateVzorekFormEnum.SBER_SVLECKY_MISTO">Sběr svlečky místo</label>
+                            <input class="form-control" [formControlName]="CreateVzorekFormEnum.SBER_SVLECKY_MISTO"
+                                [id]="CreateVzorekFormEnum.SBER_SVLECKY_MISTO" required>
+                        </div>
+
+                        <div>
+                            <label [for]="CreateVzorekFormEnum.CISLO_KOTCE">Číslo kotce</label>
+                            <input type="number" min="1" class="form-control"
+                                [formControlName]="CreateVzorekFormEnum.CISLO_KOTCE"
+                                [id]="CreateVzorekFormEnum.CISLO_KOTCE" required>
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+                            <label [for]="CreateVzorekFormEnum.ULOZENI_SVLECKY_MISTO">Aktuální místo uložení
+                                svlečky</label>
+                            <select class="form-control" [formControlName]="CreateVzorekFormEnum.ULOZENI_SVLECKY_MISTO"
+                                [id]="CreateVzorekFormEnum.ULOZENI_SVLECKY_MISTO" required>
+                                <option *ngFor="let mistoUlozeni of mistaUlozeni" [value]="mistoUlozeni.id">
+                                    {{mistoUlozeni.adresa}}</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label [for]="CreateVzorekFormEnum.OZNACENI_VZORKU_SVLECKY">Označení vzorku ze
+                                svlečky</label>
+                            <input class="form-control" [formControlName]="CreateVzorekFormEnum.OZNACENI_VZORKU_SVLECKY"
+                                [id]="CreateVzorekFormEnum.OZNACENI_VZORKU_SVLECKY" required>
+                        </div>
+
+                        <div>
+                            <label [for]="CreateVzorekFormEnum.PRED_POSL_SVLECENIM_MISTO">Lokalita před posl.
+                                svlekem</label>
+                            <input class="form-control"
+                                [formControlName]="CreateVzorekFormEnum.PRED_POSL_SVLECENIM_MISTO"
+                                [id]="CreateVzorekFormEnum.PRED_POSL_SVLECENIM_MISTO" required>
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+                            <label [for]="CreateVzorekFormEnum.PUVODNI_HMOTNOST">Původní hm. analyz. svlečky</label>
+                            <input class="form-control" [formControlName]="CreateVzorekFormEnum.PUVODNI_HMOTNOST"
+                                [id]="CreateVzorekFormEnum.PUVODNI_HMOTNOST" required>
+                        </div>
+
+                        <div>
+                            <label [for]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_TYP">Příprava vzorku mechanická
+                                typ</label>
+                            <input class="form-control" [formControlName]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_TYP"
+                                [id]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_TYP" required>
+                        </div>
+
+                        <div>
+                            <label [for]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_KDY">Příprava vzorku mechanická
+                                kdy</label>
+                            <input class="form-control" [formControlName]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_KDY"
+                                [id]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_KDY" required>
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+                            <label [for]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_KDO">Příprava vzorku mechanická
+                                kdo</label>
+                            <input class="form-control" [formControlName]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_KDO"
+                                [id]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_KDO" required>
+                        </div>
+
+
+                        <div>
+                            <label [for]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_MISTO">Příprava vzorku mechanická
+                                kde</label>
+                            <select class="form-control" [formControlName]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_MISTO"
+                                [id]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_MISTO" required>
+                                <option *ngFor="let mistoUlozeni of mistaUlozeni" [value]="mistoUlozeni.id">
+                                    {{mistoUlozeni.adresa}}</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label [for]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_OPLACH">Příprava vzorku (oplach - v
+                                čem)</label>
+                            <input class="form-control" [formControlName]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_OPLACH"
+                                [id]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_OPLACH" required>
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+                            <label [for]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_OPLACH_KDY">Příprava vzorku oplach
+                                kdy</label>
+                            <div class="input-group">
+                                <input class="form-control"
+                                    [formControlName]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_OPLACH_KDY"
+                                    placeholder="dd.mm.yyyy" name="dp"
+                                    [id]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_OPLACH_KDY" ngbDatepicker
+                                    #dt4="ngbDatepicker" readonly required>
+                                <button class="btn btn-outline-secondary calendar" (click)="dt4.toggle()" type="button">
+                                    <bi name="calendar"></bi>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label [for]=" CreateVzorekFormEnum.PRIPRAVA_VZORKU_SUSENI">Příprava vzorku - sušení -
+                                popis</label>
+                            <textarea class="form-control"
+                                [formControlName]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_SUSENI"
+                                [id]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_SUSENI" rows="3" required></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+                            <label [for]="CreateVzorekFormEnum.ULOZENI_VZORKU_DO_ANALYZY_MISTO">Uložení vzorku do
+                                analýzy
+                                (místo)</label>
+                            <select class="form-control"
+                                [formControlName]="CreateVzorekFormEnum.ULOZENI_VZORKU_DO_ANALYZY_MISTO"
+                                [id]="CreateVzorekFormEnum.ULOZENI_VZORKU_DO_ANALYZY_MISTO" required>
+                                <option *ngFor="let mistoUlozeni of mistaUlozeni" [value]="mistoUlozeni.id">
+                                    {{mistoUlozeni.adresa}}</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label [for]="CreateVzorekFormEnum.ULOZENI_VZORKU_DO_ANALYZY_OBJEKT">Uložení vzorku do
+                                analýzy (v
+                                čem)</label>
+                            <input class="form-control"
+                                [formControlName]="CreateVzorekFormEnum.ULOZENI_VZORKU_DO_ANALYZY_OBJEKT"
+                                [id]="CreateVzorekFormEnum.ULOZENI_VZORKU_DO_ANALYZY_OBJEKT" required>
+                        </div>
+
+                        <div>
+                            <label [for]="CreateVzorekFormEnum.ULOZENI_VZORKU_AKTUALNI">Aktuální uložení vzorku</label>
+                            <select class="form-control"
+                                [formControlName]="CreateVzorekFormEnum.ULOZENI_VZORKU_AKTUALNI"
+                                [id]="CreateVzorekFormEnum.ULOZENI_VZORKU_AKTUALNI" required>
+                                <option *ngFor="let mistoUlozeni of mistaUlozeni" [value]="mistoUlozeni.id">
+                                    {{mistoUlozeni.adresa}}</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="d-inline-block">
+                        <label [for]="CreateVzorekFormEnum.DODANI_ALBERTOV_DATUM">Do SI laboratoře Albertov
+                            dodáno</label>
+                        <div class="input-group">
+                            <input class="form-control" [formControlName]="CreateVzorekFormEnum.DODANI_ALBERTOV_DATUM"
+                                placeholder="dd.mm.yyyy" name="dp" [id]="CreateVzorekFormEnum.DODANI_ALBERTOV_DATUM"
+                                ngbDatepicker #dt3="ngbDatepicker" readonly required>
+                            <button class="btn btn-outline-secondary calendar" (click)="dt3.toggle()" type="button">
+                                <bi name="calendar"></bi>
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </ng-template>
+        </li>
+        <li [ngbNavItem]="2">
+            <a ngbNavLink>Analýzy</a>
+            <ng-template ngbNavContent>
+                <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko
+                    farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip
+                    jean shorts
+                    ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.
+                    Keytar
+                    helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum
+                    wes anderson
+                    8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party
+                    scenester
+                    stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+            </ng-template>
+        </li>
+    </ul>
+
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+</div>
+
+<div class="modal-footer d-flex justify-content-between">
+    <button (click)="onSave()" class="btn" [class.btn-primary]="form.valid" [class.btn-secondary]="!form.valid"
+        [disabled]="!form.valid">Uložit</button>
+</div>

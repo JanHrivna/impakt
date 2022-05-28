@@ -6,8 +6,8 @@ import { Vzorky } from '../../api/backend-api/models';
 import { MistoUlozeni } from '../../api/backend-api/models/misto-ulozeni';
 import { BackendApiApiService } from '../../api/backend-api/services';
 import { ConfirmService } from '../../services/confirm.service';
-import { CreateVzorekFormEnum } from './create-vzorek-modal-form.enum';
-import { CreateVzorekModalService } from './services/create-vzorek-modal.service';
+import { CreateVzorekFormEnum } from './vzorek-modal-form.enum';
+import { VzorekModalService } from './services/vzorek-modal.service';
 import { CustomDateAdapterService } from './services/custom-date-adapter.service';
 import { CustomDateParserFormatterService } from './services/custom-date-parser-formatter.service';
 import { CustomDatepickerI18n, I18n } from './services/custom-datepicker-i18n.service';
@@ -17,17 +17,17 @@ export interface CreateVzorekModalResult {
 }
 
 @Component({
-  selector: 'frontend-create-vzorek-modal',
-  templateUrl: './create-vzorek-modal.component.html',
-  styleUrls: ['./create-vzorek-modal.component.scss'],
-  providers: [CreateVzorekModalService,
+  selector: 'app-vzorek-modal',
+  templateUrl: './vzorek-modal.component.html',
+  styleUrls: ['./vzorek-modal.component.scss'],
+  providers: [VzorekModalService,
     I18n,
     { provide: NgbDateAdapter, useClass: CustomDateAdapterService },
     { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatterService },
     { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n }
   ]
 })
-export class CreateVzorekModalComponent implements OnInit {
+export class VzorekModalComponent implements OnInit {
 
   @Input()
   vzorek: Vzorky | undefined
@@ -38,9 +38,11 @@ export class CreateVzorekModalComponent implements OnInit {
   readonly form: FormGroup = this.createVzorekModalService.initForm()
   readonly CreateVzorekFormEnum = CreateVzorekFormEnum
 
+  activeTab = 1
+
   constructor(
     private modal: NgbActiveModal,
-    private createVzorekModalService: CreateVzorekModalService,
+    private createVzorekModalService: VzorekModalService,
     private api: BackendApiApiService,
     private confirmService: ConfirmService) {
   }
