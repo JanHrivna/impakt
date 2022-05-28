@@ -77,7 +77,7 @@ export class CreateVzorekModalComponent implements OnInit {
   }
 
   private createVzorek(): Observable<any> {
-    return this.api.datasourceControllerCreateVzorek({
+    return this.api.vzorekControllerCreateVzorek({
       body: this.form.getRawValue()
     }).pipe(
       take(1)

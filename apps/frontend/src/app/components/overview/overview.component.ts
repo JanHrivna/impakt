@@ -37,7 +37,7 @@ export class OverviewComponent implements OnInit {
 
   onDelete(id: number) {
     this.confirmService.showModal(
-      () => this.api.datasourceControllerDeleteVzorek({ id }).pipe(
+      () => this.api.vzorekControllerDeleteVzorek({ id }).pipe(
         take(1),
       ).subscribe(
         () => this.loadVzorky()
@@ -67,7 +67,7 @@ export class OverviewComponent implements OnInit {
   }
 
   private loadVzorky() {
-    this.api.datasourceControllerGetVzorky().pipe(
+    this.api.vzorekControllerGetVzorky().pipe(
       take(1)
     ).subscribe(
       (vzorky) => this.vzorky = vzorky
@@ -75,7 +75,7 @@ export class OverviewComponent implements OnInit {
   }
 
   private loadMistaUlozeni() {
-    this.api.datasourceControllerGetMistoUlozeni().pipe(
+    this.api.lokaceControllerGetLokace().pipe(
       take(1)
     ).subscribe(
       (mistaUlozeni) => this.mistaUlozeni = mistaUlozeni

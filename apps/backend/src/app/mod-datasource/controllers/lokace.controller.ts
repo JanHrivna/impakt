@@ -13,7 +13,7 @@ export class LokaceController {
         type: MistoUlozeni,
         isArray: true
     })
-    getMistoUlozeni() {
+    getLokace() {
         return this.datasourceService.getRepository(MistoUlozeni).find()
     }
 

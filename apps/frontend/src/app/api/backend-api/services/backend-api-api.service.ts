@@ -25,20 +25,20 @@ export class BackendApiApiService extends BaseService {
   }
 
   /**
-   * Path part for operation datasourceControllerGetVzorky
+   * Path part for operation vzorekControllerGetVzorky
    */
-  static readonly DatasourceControllerGetVzorkyPath = '/api/vzorky';
+  static readonly VzorekControllerGetVzorkyPath = '/api/vzorek';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `datasourceControllerGetVzorky()` instead.
+   * To access only the response body, use `vzorekControllerGetVzorky()` instead.
    *
    * This method doesn't expect any request body.
    */
-  datasourceControllerGetVzorky$Response(params?: {
+  vzorekControllerGetVzorky$Response(params?: {
   }): Observable<StrictHttpResponse<Array<Vzorky>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, BackendApiApiService.DatasourceControllerGetVzorkyPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, BackendApiApiService.VzorekControllerGetVzorkyPath, 'get');
     if (params) {
     }
 
@@ -55,77 +55,34 @@ export class BackendApiApiService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `datasourceControllerGetVzorky$Response()` instead.
+   * To access the full response (for headers, for example), `vzorekControllerGetVzorky$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  datasourceControllerGetVzorky(params?: {
+  vzorekControllerGetVzorky(params?: {
   }): Observable<Array<Vzorky>> {
 
-    return this.datasourceControllerGetVzorky$Response(params).pipe(
+    return this.vzorekControllerGetVzorky$Response(params).pipe(
       map((r: StrictHttpResponse<Array<Vzorky>>) => r.body as Array<Vzorky>)
     );
   }
 
   /**
-   * Path part for operation datasourceControllerGetMistoUlozeni
+   * Path part for operation vzorekControllerCreateVzorek
    */
-  static readonly DatasourceControllerGetMistoUlozeniPath = '/api/misto-ulozeni';
+  static readonly VzorekControllerCreateVzorekPath = '/api/vzorek';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `datasourceControllerGetMistoUlozeni()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  datasourceControllerGetMistoUlozeni$Response(params?: {
-  }): Observable<StrictHttpResponse<Array<MistoUlozeni>>> {
-
-    const rb = new RequestBuilder(this.rootUrl, BackendApiApiService.DatasourceControllerGetMistoUlozeniPath, 'get');
-    if (params) {
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<MistoUlozeni>>;
-      })
-    );
-  }
-
-  /**
-   * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `datasourceControllerGetMistoUlozeni$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  datasourceControllerGetMistoUlozeni(params?: {
-  }): Observable<Array<MistoUlozeni>> {
-
-    return this.datasourceControllerGetMistoUlozeni$Response(params).pipe(
-      map((r: StrictHttpResponse<Array<MistoUlozeni>>) => r.body as Array<MistoUlozeni>)
-    );
-  }
-
-  /**
-   * Path part for operation datasourceControllerCreateVzorek
-   */
-  static readonly DatasourceControllerCreateVzorekPath = '/api/vzorek';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `datasourceControllerCreateVzorek()` instead.
+   * To access only the response body, use `vzorekControllerCreateVzorek()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  datasourceControllerCreateVzorek$Response(params: {
+  vzorekControllerCreateVzorek$Response(params: {
     body: Vzorky
   }): Observable<StrictHttpResponse<void>> {
 
-    const rb = new RequestBuilder(this.rootUrl, BackendApiApiService.DatasourceControllerCreateVzorekPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, BackendApiApiService.VzorekControllerCreateVzorekPath, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
@@ -143,35 +100,35 @@ export class BackendApiApiService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `datasourceControllerCreateVzorek$Response()` instead.
+   * To access the full response (for headers, for example), `vzorekControllerCreateVzorek$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  datasourceControllerCreateVzorek(params: {
+  vzorekControllerCreateVzorek(params: {
     body: Vzorky
   }): Observable<void> {
 
-    return this.datasourceControllerCreateVzorek$Response(params).pipe(
+    return this.vzorekControllerCreateVzorek$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }
 
   /**
-   * Path part for operation datasourceControllerDeleteVzorek
+   * Path part for operation vzorekControllerDeleteVzorek
    */
-  static readonly DatasourceControllerDeleteVzorekPath = '/api/vzorek/{id}';
+  static readonly VzorekControllerDeleteVzorekPath = '/api/vzorek/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `datasourceControllerDeleteVzorek()` instead.
+   * To access only the response body, use `vzorekControllerDeleteVzorek()` instead.
    *
    * This method doesn't expect any request body.
    */
-  datasourceControllerDeleteVzorek$Response(params: {
+  vzorekControllerDeleteVzorek$Response(params: {
     id: number;
   }): Observable<StrictHttpResponse<ApiResponseDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, BackendApiApiService.DatasourceControllerDeleteVzorekPath, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, BackendApiApiService.VzorekControllerDeleteVzorekPath, 'delete');
     if (params) {
       rb.path('id', params.id, {});
     }
@@ -189,16 +146,59 @@ export class BackendApiApiService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `datasourceControllerDeleteVzorek$Response()` instead.
+   * To access the full response (for headers, for example), `vzorekControllerDeleteVzorek$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  datasourceControllerDeleteVzorek(params: {
+  vzorekControllerDeleteVzorek(params: {
     id: number;
   }): Observable<ApiResponseDto> {
 
-    return this.datasourceControllerDeleteVzorek$Response(params).pipe(
+    return this.vzorekControllerDeleteVzorek$Response(params).pipe(
       map((r: StrictHttpResponse<ApiResponseDto>) => r.body as ApiResponseDto)
+    );
+  }
+
+  /**
+   * Path part for operation lokaceControllerGetLokace
+   */
+  static readonly LokaceControllerGetLokacePath = '/api/lokace';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `lokaceControllerGetLokace()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  lokaceControllerGetLokace$Response(params?: {
+  }): Observable<StrictHttpResponse<Array<MistoUlozeni>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, BackendApiApiService.LokaceControllerGetLokacePath, 'get');
+    if (params) {
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<MistoUlozeni>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `lokaceControllerGetLokace$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  lokaceControllerGetLokace(params?: {
+  }): Observable<Array<MistoUlozeni>> {
+
+    return this.lokaceControllerGetLokace$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<MistoUlozeni>>) => r.body as Array<MistoUlozeni>)
     );
   }
 
