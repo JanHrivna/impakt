@@ -12,7 +12,7 @@ import { CustomDateAdapterService } from './services/custom-date-adapter.service
 import { CustomDateParserFormatterService } from './services/custom-date-parser-formatter.service';
 import { CustomDatepickerI18n, I18n } from './services/custom-datepicker-i18n.service';
 
-export interface CreateVzorekModalResult {
+export interface VzorekModalResult {
   save: boolean
 }
 
@@ -69,7 +69,7 @@ export class VzorekModalComponent implements OnInit {
   }
 
   private dismissModal(save: boolean) {
-    this.modal.dismiss(<CreateVzorekModalResult>{ save })
+    this.modal.dismiss(<VzorekModalResult>{ save })
   }
 
   private fillForm(vzorek: Vzorky) {

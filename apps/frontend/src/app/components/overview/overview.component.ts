@@ -4,7 +4,7 @@ import { take } from 'rxjs';
 import { MistoUlozeni, Vzorky } from '../../api/backend-api/models';
 import { BackendApiApiService } from '../../api/backend-api/services';
 import { ConfirmService } from '../../services/confirm.service';
-import { VzorekModalComponent, CreateVzorekModalResult } from '../create-vzorek-modal/vzorek-modal.component';
+import { VzorekModalResult, VzorekModalComponent } from '../vzorek-modal/vzorek-modal.component';
 
 @Component({
   selector: 'frontend-overview',
@@ -58,7 +58,7 @@ export class OverviewComponent implements OnInit {
     modalRef.dismissed.pipe(
       take(1)
     ).subscribe(
-      (res: CreateVzorekModalResult) => {
+      (res: VzorekModalResult) => {
         if (res.save) this.loadVzorky()
       }
     )
