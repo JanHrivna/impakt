@@ -9,6 +9,8 @@ import { OverviewComponent } from './components/overview/overview.component';
 import { IconsModule } from './modules/icons/icons.module';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 import { VzorekModalComponent } from './components/vzorek-modal/vzorek-modal.component';
+import { VzorekFormComponent } from './components/vzorek-form/vzorek-form.component';
+import { AnalyzyFormComponent } from './components/analyzy-form/analyzy-form.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { VzorekModalComponent } from './components/vzorek-modal/vzorek-modal.com
     OverviewComponent,
     VzorekModalComponent,
     ConfirmModalComponent,
+    VzorekFormComponent,
+    AnalyzyFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,4 +32,4 @@ import { VzorekModalComponent } from './components/vzorek-modal/vzorek-modal.com
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
