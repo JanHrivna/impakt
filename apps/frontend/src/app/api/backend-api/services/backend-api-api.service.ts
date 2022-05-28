@@ -68,21 +68,21 @@ export class BackendApiApiService extends BaseService {
   }
 
   /**
-   * Path part for operation vzorekControllerCreateVzorek
+   * Path part for operation vzorekControllerUpsertVzorek
    */
-  static readonly VzorekControllerCreateVzorekPath = '/api/vzorek';
+  static readonly VzorekControllerUpsertVzorekPath = '/api/vzorek';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `vzorekControllerCreateVzorek()` instead.
+   * To access only the response body, use `vzorekControllerUpsertVzorek()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  vzorekControllerCreateVzorek$Response(params: {
+  vzorekControllerUpsertVzorek$Response(params: {
     body: Vzorky
   }): Observable<StrictHttpResponse<void>> {
 
-    const rb = new RequestBuilder(this.rootUrl, BackendApiApiService.VzorekControllerCreateVzorekPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, BackendApiApiService.VzorekControllerUpsertVzorekPath, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
@@ -100,15 +100,15 @@ export class BackendApiApiService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `vzorekControllerCreateVzorek$Response()` instead.
+   * To access the full response (for headers, for example), `vzorekControllerUpsertVzorek$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  vzorekControllerCreateVzorek(params: {
+  vzorekControllerUpsertVzorek(params: {
     body: Vzorky
   }): Observable<void> {
 
-    return this.vzorekControllerCreateVzorek$Response(params).pipe(
+    return this.vzorekControllerUpsertVzorek$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { NgbActiveModal, NgbDateAdapter, NgbDateParserFormatter, NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, take } from 'rxjs';
 import { Vzorky } from '../../api/backend-api/models';
@@ -74,10 +74,11 @@ export class CreateVzorekModalComponent implements OnInit {
     for (let formName of Object.values(CreateVzorekFormEnum)) {
       this.form.get(formName)?.setValue(vzorek[formName])
     }
+    if (vzorek) this.form.addControl("id", new FormControl(vzorek.id))
   }
 
   private createVzorek(): Observable<any> {
-    return this.api.vzorekControllerCreateVzorek({
+    return this.api.vzorekControllerUpsertVzorek({
       body: this.form.getRawValue()
     }).pipe(
       take(1)

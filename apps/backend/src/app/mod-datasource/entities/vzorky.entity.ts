@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty } from "class-validator";
+import { IsNotEmpty, IsOptional } from "class-validator";
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -7,6 +7,7 @@ export class Vzorky extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     @ApiProperty()
+    @IsOptional()
     id: number
 
     @Column()

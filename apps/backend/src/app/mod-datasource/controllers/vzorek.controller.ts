@@ -19,8 +19,8 @@ export class VzorekController {
     }
 
     @Post()
-    createVzorek(@Body() vzorek: Vzorky) {
-        return this.datasourceService.getRepository(Vzorky).save(vzorek)
+    upsertVzorek(@Body() vzorek: Vzorky) {
+        return this.datasourceService.getRepository(Vzorky).upsert(vzorek, ['id'])
     }
 
     @Delete(':id')
