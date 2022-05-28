@@ -1,16 +1,15 @@
 import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
 import { ApiResponse } from "@nestjs/swagger";
-import { DatasourceService } from "./datasource.service";
-import { MistoUlozeni } from "./entities/misto-ulozeni";
-import { Vzorky } from "./entities/vzorky.entity";
-import { ApiResponseDto } from "./models/api-response.dto";
+import { DatasourceService } from "../datasource.service";
+import { Vzorky } from "../entities/vzorky.entity";
+import { ApiResponseDto } from "../models/api-response.dto";
 
-@Controller()
-export class DatasourceController {
+@Controller('vzorek')
+export class VzorekController {
 
     constructor(private datasourceService: DatasourceService) { }
 
-    @Get('vzorky')
+    @Get()
     @ApiResponse({
         type: Vzorky,
         isArray: true
@@ -19,21 +18,12 @@ export class DatasourceController {
         return this.datasourceService.getRepository(Vzorky).find()
     }
 
-    @Get('misto-ulozeni')
-    @ApiResponse({
-        type: MistoUlozeni,
-        isArray: true
-    })
-    getMistoUlozeni() {
-        return this.datasourceService.getRepository(MistoUlozeni).find()
-    }
-
-    @Post('vzorek')
+    @Post()
     createVzorek(@Body() vzorek: Vzorky) {
         return this.datasourceService.getRepository(Vzorky).save(vzorek)
     }
 
-    @Delete('vzorek/:id')
+    @Delete(':id')
     @ApiResponse({ type: ApiResponseDto })
     deleteVzorek(@Param('id') id: number) {
         return this.datasourceService.getRepository(Vzorky).delete(id)

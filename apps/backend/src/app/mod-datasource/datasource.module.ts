@@ -1,10 +1,11 @@
 import { Module } from "@nestjs/common";
-import { DatasourceController } from "./datasource.controller";
+import { LokaceController } from "./controllers/lokace.controller";
+import { VzorekController } from "./controllers/vzorek.controller";
 import { DatasourceService } from "./datasource.service";
 
 @Module({
     imports: [],
-    controllers: [DatasourceController],
+    controllers: [VzorekController, LokaceController],
     providers: [DatasourceService],
     exports: []
 })
