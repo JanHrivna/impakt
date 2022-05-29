@@ -44,6 +44,10 @@ export class AnalyzaController {
     }
 
     @Delete()
+    @ApiBody({
+        type: Number,
+        isArray: true
+    })
     @ApiResponse({ type: ApiResponseDto })
     deleteAnalyzy(
         @Body(new ParseArrayPipe({ items: Number, whitelist: true, forbidNonWhitelisted: true })) ids: number[]
