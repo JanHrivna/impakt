@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, Param, Post } from "@nestjs/common";
 import { ApiResponse } from "@nestjs/swagger";
 import { DatasourceService } from "../datasource.service";
 import { Vzorky } from "../entities/vzorky.entity";
@@ -19,8 +19,18 @@ export class VzorekController {
     }
 
     @Post()
-    upsertVzorek(@Body() vzorek: Vzorky) {
+    @HttpCode(200)
+    @ApiResponse({
+        type: Vzorky
+    })
+    upsertVzorek(@Body() vzorek: Vzorky): Promise<Vzorky> {
         return this.datasourceService.getRepository(Vzorky).upsert(vzorek, ['id'])
+            .then(
+                (res) => ({
+                    ...vzorek,
+                    id: res.identifiers[0].id
+                }) as Vzorky
+            )
     }
 
     @Delete(':id')

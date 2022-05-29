@@ -2,7 +2,6 @@ import { Injectable } from "@nestjs/common";
 import { DataSource } from "typeorm";
 import { Analyzy } from "./entities/analyzy";
 import { MistoUlozeni } from "./entities/misto-ulozeni";
-import { PozadovaneAnalyzy } from "./entities/pozadovane-analyzy";
 import { TypyAnalyz } from "./entities/typy-analyz";
 import { Vzorky } from "./entities/vzorky.entity";
 
@@ -20,7 +19,6 @@ export class DatasourceService extends DataSource {
             entities: [
                 Analyzy,
                 MistoUlozeni,
-                PozadovaneAnalyzy,
                 TypyAnalyz,
                 Vzorky
             ]

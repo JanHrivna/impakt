@@ -127,18 +127,27 @@ export class Vzorky extends BaseEntity {
 
     @Column()
     @ApiProperty()
+    @IsOptional()
+    pozadovane_analyzy: string
+
+    @Column()
+    @ApiProperty()
+    @IsOptional()
     cislo_vzorku: string
 
     @Column()
     @ApiProperty()
+    @IsOptional()
     navazka_g: string
 
     @Column()
     @ApiProperty()
+    @IsOptional()
     navazeno_kdy: string
 
     @Column()
     @ApiProperty()
+    @IsOptional()
     navazeno_kdo: string
 
 }

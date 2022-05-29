@@ -1,24 +1,31 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { ApiProperty } from "@nestjs/swagger";
+import { IsNotEmpty, IsOptional } from "class-validator";
+import { BaseEntity, Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Analyzy extends BaseEntity {
 
-    @PrimaryGeneratedColumn()
-    id: number
+    @PrimaryColumn()
+    id_vzorek: number
 
-    @Column()
-    den: string
-
-    @Column()
-    vysledek: string
-
-    @Column()
-    provedl: string
-
-    @Column()
+    @PrimaryColumn()
+    @ApiProperty()
+    @IsNotEmpty()
     id_typ: number
 
     @Column()
-    id_vzorek: number
+    @ApiProperty()
+    @IsNotEmpty()
+    den: string
+
+    @Column()
+    @ApiProperty()
+    @IsNotEmpty()
+    vysledek: string
+
+    @Column()
+    @ApiProperty()
+    @IsNotEmpty()
+    provedl: string
 
 }
