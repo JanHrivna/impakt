@@ -1,8 +1,9 @@
-import { Body, Controller, Get, Param, ParseArrayPipe, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, ParseArrayPipe, Put } from "@nestjs/common";
 import { ApiBody, ApiResponse } from "@nestjs/swagger";
 import { DatasourceService } from "../datasource.service";
 import { Analyzy } from "../entities/analyzy";
 import { TypyAnalyz } from "../entities/typy-analyz";
+import { ApiResponseDto } from "../models/api-response.dto";
 import { AnalyzyValidationPipe } from "../pipes/analyzy-validation.pipe";
 
 @Controller('analyza')
@@ -39,7 +40,28 @@ export class AnalyzaController {
             new ParseArrayPipe({ items: Analyzy, whitelist: true, forbidNonWhitelisted: true, }),
             new AnalyzyValidationPipe('id_typ')) analyzy: Analyzy[]) {
         analyzy.forEach(a => a.id_vzorek = idVzorek)
-        return this.datasourceService.getRepository(Analyzy).upsert(analyzy, ['id_typ'])
+        return this.datasourceService.getRepository(Analyzy).upsert(analyzy, ['id_vzorek'])
+    }
+
+    @Delete()
+    @ApiResponse({ type: ApiResponseDto })
+    deleteAnalyzy(
+        @Body(new ParseArrayPipe({ items: Number, whitelist: true, forbidNonWhitelisted: true })) ids: number[]
+    ) {
+        return this.datasourceService.manager
+            .createQueryBuilder()
+            .delete()
+            .from(Analyzy)
+            .whereInIds(ids)
+            .execute()
+            .then(
+                (res) => {
+                    const cnt = res.affected
+                    if (cnt === 1) return { message: `Smazána 1 analýza.` }
+                    else if ([2, 3, 4].includes(cnt)) return { message: `Smazány ${cnt} analýzy.` }
+                    else return { message: `Smazáno ${cnt} analýz.` }
+                }
+            )
     }
 
 }

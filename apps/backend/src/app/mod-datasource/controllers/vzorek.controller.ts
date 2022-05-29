@@ -38,15 +38,11 @@ export class VzorekController {
     deleteVzorek(@Param('id') id: number) {
         return this.datasourceService.getRepository(Vzorky).delete(id)
             .then(
-                (defaultObj) => {
-                    if (defaultObj.raw > 0) {
-                        return {
-                            message: "Vzorek smazán."
-                        }
+                (res) => {
+                    if (res.affected > 0) {
+                        return { message: "Vzorek smazán." }
                     }
-                    return {
-                        message: "Vzorek nenalezen."
-                    }
+                    return { message: "Vzorek nenalezen." }
                 }
             )
     }

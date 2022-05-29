@@ -1,14 +1,17 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty } from "class-validator";
-import { BaseEntity, Column, Entity, PrimaryColumn } from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryColumn, PrimaryGeneratedColumn, Unique } from "typeorm";
 
 @Entity()
 export class Analyzy extends BaseEntity {
 
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn()
+    id: number
+
+    @Column()
     id_vzorek: number
 
-    @PrimaryColumn()
+    @Column()
     @ApiProperty()
     @IsNotEmpty()
     id_typ: number
