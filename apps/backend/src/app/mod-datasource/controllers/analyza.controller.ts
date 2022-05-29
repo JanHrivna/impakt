@@ -3,6 +3,7 @@ import { ApiBody, ApiResponse } from "@nestjs/swagger";
 import { DatasourceService } from "../datasource.service";
 import { Analyzy } from "../entities/analyzy";
 import { TypyAnalyz } from "../entities/typy-analyz";
+import { AnalyzyValidationPipe } from "../pipes/analyzy-validation.pipe";
 
 @Controller('analyza')
 export class AnalyzaController {
@@ -34,7 +35,9 @@ export class AnalyzaController {
     })
     upsertAnalyzy(
         @Param('idVzorek') idVzorek: number,
-        @Body(new ParseArrayPipe({ items: Analyzy, whitelist: true, forbidNonWhitelisted: true })) analyzy: Analyzy[]) {
+        @Body(
+            new ParseArrayPipe({ items: Analyzy, whitelist: true, forbidNonWhitelisted: true, }),
+            new AnalyzyValidationPipe('id_typ')) analyzy: Analyzy[]) {
         analyzy.forEach(a => a.id_vzorek = idVzorek)
         return this.datasourceService.getRepository(Analyzy).upsert(analyzy, ['id_typ'])
     }
