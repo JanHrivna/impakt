@@ -1,8 +1,11 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Post } from "@nestjs/common";
 import { ApiResponse } from "@nestjs/swagger";
 import { DatasourceService } from "../datasource.service";
+import { Analyzy } from "../entities/analyzy.entity";
 import { Vzorky } from "../entities/vzorky.entity";
 import { ApiResponseDto } from "../models/api-response.dto";
+import { VzorekDto } from "../models/vzorek.dto";
+import { AnalyzyValidationPipe } from "../pipes/analyzy-validation.pipe";
 
 @Controller('vzorek')
 export class VzorekController {
@@ -10,28 +13,47 @@ export class VzorekController {
     constructor(private datasourceService: DatasourceService) { }
 
     @Get()
-    @ApiResponse({
-        type: Vzorky,
-        isArray: true
-    })
     getVzorky() {
-        return this.datasourceService.getRepository(Vzorky).find()
+        return this.datasourceService.createQueryBuilder(Vzorky, 'vzorky')
+            .leftJoinAndMapMany('vzorky.analyzy', Analyzy, 'analyzy', `analyzy.id_vzorek = vzorky.id`)
+            .getMany()
     }
 
     @Post()
     @HttpCode(200)
-    @ApiResponse({
-        type: Vzorky
-    })
-    upsertVzorek(@Body() vzorek: Vzorky): Promise<Vzorky> {
-        return this.datasourceService.getRepository(Vzorky).upsert(vzorek, ['id'])
-            .then(
-                (res) => ({
-                    ...vzorek,
-                    id: res.identifiers[0].id
-                }) as Vzorky
-            )
+    @ApiResponse({ type: ApiResponseDto })
+    async upsertVzorek(
+        @Body(new AnalyzyValidationPipe('id_typ')) dto: VzorekDto
+    ) {
+        const queryRunner = this.datasourceService.createQueryRunner()
+        await queryRunner.connect()
+        await queryRunner.startTransaction()
+
+        try {
+            const newVzorek = await queryRunner.manager.upsert(Vzorky, dto.vzorek, ['id'])
+                .then(
+                    (res) => ({
+                        ...dto.vzorek,
+                        id: res.identifiers[0].id
+                    }) as Vzorky
+                )
+
+            if (dto.analyzy) {
+                dto.analyzy.forEach(a => a.id_vzorek = newVzorek.id)
+                await queryRunner.manager.upsert(Analyzy, dto.analyzy, ['id_vzorek'])
+            }
+
+            await queryRunner.commitTransaction()
+        } catch (err) {
+            await queryRunner.rollbackTransaction()
+            throw err
+        } finally {
+            await queryRunner.release()
+        }
+
+        return { message: "Vzorek založen/editován." }
     }
+
 
     @Delete(':id')
     @ApiResponse({ type: ApiResponseDto })
