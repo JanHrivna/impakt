@@ -1,10 +1,11 @@
 import { BadRequestException, PipeTransform } from "@nestjs/common";
+import { VzorekDto } from "../models/vzorek.dto";
 
 export class AnalyzyValidationPipe implements PipeTransform {
     constructor(private uniqueAttr: string) { }
 
-    transform(value: any[]) {
-        const arr = value.map(v => v[this.uniqueAttr])
+    transform(value: VzorekDto) {
+        const arr = value.analyzy.map(v => v[this.uniqueAttr])
         const arrSize = arr.length
         const uniqueSize = new Set(arr).size
 

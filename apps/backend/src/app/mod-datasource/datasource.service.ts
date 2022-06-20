@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { DataSource } from "typeorm";
-import { Analyzy } from "./entities/analyzy";
+import { Analyzy } from "./entities/analyzy.entity";
 import { MistoUlozeni } from "./entities/misto-ulozeni";
 import { TypyAnalyz } from "./entities/typy-analyz";
 import { Vzorky } from "./entities/vzorky.entity";

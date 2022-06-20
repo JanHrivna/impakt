@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, ParseArrayPipe, Put } from "@nestjs/common";
 import { ApiBody, ApiResponse } from "@nestjs/swagger";
 import { DatasourceService } from "../datasource.service";
-import { Analyzy } from "../entities/analyzy";
+import { Analyzy } from "../entities/analyzy.entity";
 import { TypyAnalyz } from "../entities/typy-analyz";
 import { ApiResponseDto } from "../models/api-response.dto";
 import { AnalyzyValidationPipe } from "../pipes/analyzy-validation.pipe";
