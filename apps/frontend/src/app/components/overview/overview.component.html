@@ -34,37 +34,37 @@
     <tbody>
         <tr *ngFor="let vzorek of vzorky" class="text-nowrap">
             <td scope="col">
-                <button class="btn" (click)="onDelete(vzorek.id)" ngbTooltip="delete">
+                <button class="btn" (click)="onDelete(vzorek.vzorek.id)" ngbTooltip="delete">
                     <bi name="trash-fill"></bi>
                 </button>
-                <button class="btn" (click)="onEdit(vzorek)" ngbTooltip="edit">
+                <button class="btn" (click)="onEdit(vzorek.vzorek)" ngbTooltip="edit">
                     <bi name="pencil-fill"></bi>
                 </button>
             </td>
-            <td scope="col">{{vzorek.druh}}</td>
-            <td scope="col">{{vzorek.popis}}</td>
-            <td scope="col">{{vzorek.dovoz}}</td>
-            <td scope="col">{{vzorek.dovoz_datum}}</td>
-            <td scope="col">{{vzorek.oznaceni_svlecky}}</td>
-            <td scope="col">{{vzorek.sber_svlecky_datum}}</td>
-            <td scope="col">{{vzorek.sber_svlecky_misto}}</td>
-            <td scope="col">{{vzorek.cislo_kotce}}</td>
-            <td scope="col">{{getAdresa(vzorek.ulozeni_svlecky_misto)}}</td>
-            <td scope="col">{{vzorek.oznaceni_vzorku_svlecky}}</td>
-            <td scope="col">{{vzorek.pred_posl_svlecenim_misto}}</td>
-            <td scope="col">{{vzorek.puvodni_hmotnost}}</td>
-            <td scope="col">{{vzorek.priprava_vzorku_typ}}</td>
-            <td scope="col">{{vzorek.priprava_vzorku_kdy}}</td>
-            <td scope="col">{{vzorek.priprava_vzorku_kdo}}</td>
-            <td scope="col">{{getAdresa(vzorek.priprava_vzorku_misto)}}</td>
-            <td scope="col">{{vzorek.priprava_vzorku_oplach}}</td>
-            <td scope="col">{{vzorek.priprava_vzorku_oplach_kdy}}</td>
-            <td scope="col">{{vzorek.priprava_vzorku_suseni}}</td>
-            <td scope="col">{{getAdresa(vzorek.ulozeni_vzorku_do_analyzy_misto)}} -
-                {{vzorek.ulozeni_vzorku_do_analyzy_objekt}}
+            <td scope="col">{{vzorek.vzorek.druh}}</td>
+            <td scope="col">{{vzorek.vzorek.popis}}</td>
+            <td scope="col">{{vzorek.vzorek.dovoz}}</td>
+            <td scope="col">{{vzorek.vzorek.dovoz_datum}}</td>
+            <td scope="col">{{vzorek.vzorek.oznaceni_svlecky}}</td>
+            <td scope="col">{{vzorek.vzorek.sber_svlecky_datum}}</td>
+            <td scope="col">{{vzorek.vzorek.sber_svlecky_misto}}</td>
+            <td scope="col">{{vzorek.vzorek.cislo_kotce}}</td>
+            <td scope="col">{{getAdresa(vzorek.vzorek.ulozeni_svlecky_misto)}}</td>
+            <td scope="col">{{vzorek.vzorek.oznaceni_vzorku_svlecky}}</td>
+            <td scope="col">{{vzorek.vzorek.pred_posl_svlecenim_misto}}</td>
+            <td scope="col">{{vzorek.vzorek.puvodni_hmotnost}}</td>
+            <td scope="col">{{vzorek.vzorek.priprava_vzorku_typ}}</td>
+            <td scope="col">{{vzorek.vzorek.priprava_vzorku_kdy}}</td>
+            <td scope="col">{{vzorek.vzorek.priprava_vzorku_kdo}}</td>
+            <td scope="col">{{getAdresa(vzorek.vzorek.priprava_vzorku_misto)}}</td>
+            <td scope="col">{{vzorek.vzorek.priprava_vzorku_oplach}}</td>
+            <td scope="col">{{vzorek.vzorek.priprava_vzorku_oplach_kdy}}</td>
+            <td scope="col">{{vzorek.vzorek.priprava_vzorku_suseni}}</td>
+            <td scope="col">{{getAdresa(vzorek.vzorek.ulozeni_vzorku_do_analyzy_misto)}} -
+                {{vzorek.vzorek.ulozeni_vzorku_do_analyzy_objekt}}
             </td>
-            <td scope="col">{{getAdresa(vzorek.ulozeni_vzorku_aktualni)}}</td>
-            <td scope="col">{{vzorek.dodani_albertov_datum}}</td>
+            <td scope="col">{{getAdresa(vzorek.vzorek.ulozeni_vzorku_aktualni)}}</td>
+            <td scope="col">{{vzorek.vzorek.dodani_albertov_datum}}</td>
         </tr>
     </tbody>
 </table>

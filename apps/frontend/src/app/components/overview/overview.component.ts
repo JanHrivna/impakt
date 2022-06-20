@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { take } from 'rxjs';
-import { MistoUlozeni, Vzorky } from '../../api/backend-api/models';
+import { MistoUlozeni, VzorekDto, Vzorky } from '../../api/backend-api/models';
 import { BackendApiApiService } from '../../api/backend-api/services';
 import { ConfirmService } from '../../services/confirm.service';
 import { VzorekModalResult, VzorekModalComponent } from '../vzorek-modal/vzorek-modal.component';
@@ -13,7 +13,7 @@ import { VzorekModalResult, VzorekModalComponent } from '../vzorek-modal/vzorek-
 })
 export class OverviewComponent implements OnInit {
 
-  vzorky: Vzorky[] = []
+  vzorky: VzorekDto[] = []
   mistaUlozeni: MistoUlozeni[] = []
 
   constructor(

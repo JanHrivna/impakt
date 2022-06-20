@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Res } from "@nestjs/common";
 import { ApiResponse } from "@nestjs/swagger";
 import { DatasourceService } from "../datasource.service";
 import { Analyzy } from "../entities/analyzy.entity";
@@ -13,10 +13,19 @@ export class VzorekController {
     constructor(private datasourceService: DatasourceService) { }
 
     @Get()
-    getVzorky() {
+    @ApiResponse({ type: VzorekDto, isArray: true })
+    getVzorky(): Promise<VzorekDto[]> {
         return this.datasourceService.createQueryBuilder(Vzorky, 'vzorky')
             .leftJoinAndMapMany('vzorky.analyzy', Analyzy, 'analyzy', `analyzy.id_vzorek = vzorky.id`)
             .getMany()
+            .then(
+                (res: any) => res.map(r => {
+                    const analyzy = r.analyzy
+                    const vzorek = { ...r }
+                    delete vzorek.analyzy
+                    return { vzorek, analyzy }
+                })
+            )
     }
 
     @Post()

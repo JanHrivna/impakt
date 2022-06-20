@@ -14,6 +14,7 @@ export interface Vzorky {
   oznaceni_svlecky: string;
   oznaceni_vzorku_svlecky: string;
   popis: string;
+  pozadovane_analyzy: string;
   pred_posl_svlecenim_misto: string;
   priprava_vzorku_kdo: string;
   priprava_vzorku_kdy: string;
