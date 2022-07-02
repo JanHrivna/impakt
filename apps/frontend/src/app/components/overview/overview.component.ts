@@ -1,20 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { take } from 'rxjs';
-import { MistoUlozeni, VzorekDto, Vzorky } from '../../api/backend-api/models';
+import { BehaviorSubject, combineLatest, map, switchMap, take } from 'rxjs';
+import { MistoUlozeni, TypyAnalyz, Vzorky } from '../../api/backend-api/models';
 import { BackendApiApiService } from '../../api/backend-api/services';
 import { ConfirmService } from '../../services/confirm.service';
-import { VzorekModalResult, VzorekModalComponent } from '../vzorek-modal/vzorek-modal.component';
+import { VzorekModalComponent, VzorekModalResult } from '../vzorek-modal/vzorek-modal.component';
 
 @Component({
   selector: 'frontend-overview',
   templateUrl: './overview.component.html',
-  styleUrls: ['./overview.component.scss'],
+  styleUrls: ['./overview.component.scss']
 })
 export class OverviewComponent implements OnInit {
 
-  vzorky: VzorekDto[] = []
+  readonly vzorkySubject = new BehaviorSubject(null)
+  readonly vzorky$ = this.getVzorky$()
+
   mistaUlozeni: MistoUlozeni[] = []
+  typyAnalyz: TypyAnalyz[] = []
 
   constructor(
     private api: BackendApiApiService,
@@ -23,8 +26,6 @@ export class OverviewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadVzorky()
-    this.loadMistaUlozeni()
   }
 
   onCreate() {
@@ -40,14 +41,10 @@ export class OverviewComponent implements OnInit {
       () => this.api.vzorekControllerDeleteVzorek({ id }).pipe(
         take(1),
       ).subscribe(
-        () => this.loadVzorky()
+        () => this.vzorkySubject.next(null)
       ),
       "Opravdu smazat?"
     )
-  }
-
-  getAdresa(id: number): string | undefined {
-    return this.mistaUlozeni.find(a => a.id === id)?.adresa
   }
 
   private createOrUpdate(vzorek?: Vzorky) {
@@ -59,26 +56,42 @@ export class OverviewComponent implements OnInit {
       take(1)
     ).subscribe(
       (res: VzorekModalResult) => {
-        if (res.save) this.loadVzorky()
+        if (res.save) this.vzorkySubject.next(null)
       }
     )
     modalRef.componentInstance.mistaUlozeni = this.mistaUlozeni
     if (vzorek) modalRef.componentInstance.vzorek = vzorek
   }
 
-  private loadVzorky() {
-    this.api.vzorekControllerGetVzorky().pipe(
-      take(1)
-    ).subscribe(
-      (vzorky) => this.vzorky = vzorky
-    )
-  }
+  private getVzorky$() {
+    const getAdresa = (id: number) => this.mistaUlozeni.find(a => a.id === id)?.adresa
 
-  private loadMistaUlozeni() {
-    this.api.lokaceControllerGetLokace().pipe(
-      take(1)
-    ).subscribe(
-      (mistaUlozeni) => this.mistaUlozeni = mistaUlozeni
+    return combineLatest({
+      vzorky: this.vzorkySubject.pipe(switchMap(() => this.api.vzorekControllerGetVzorky())),
+      mistaUlozeni: this.api.lokaceControllerGetLokace(),
+      typyAnalyz: this.api.analyzaControllerGetTypyAnalyz()
+    }).pipe(
+      map(
+        (res) => {
+          this.typyAnalyz = res.typyAnalyz.sort((a, b) => a.id - b.id)
+          this.mistaUlozeni = res.mistaUlozeni
+          const result = res.vzorky.map(v => (
+            {
+              ...v,
+              vzorek: {
+                ...v.vzorek,
+                ulozeni_svlecky_misto: getAdresa(v.vzorek.ulozeni_svlecky_misto),
+                priprava_vzorku_misto: getAdresa(v.vzorek.priprava_vzorku_misto),
+                ulozeni_vzorku_do_analyzy_misto: getAdresa(v.vzorek.ulozeni_vzorku_do_analyzy_misto),
+                ulozeni_vzorku_aktualni: getAdresa(v.vzorek.ulozeni_vzorku_aktualni)
+              },
+              analyzy: this.typyAnalyz.map(t => ({
+                ...v.analyzy.find(a => t.id === a.id_typ)
+              }))
+            }))
+          return result
+        }
+      )
     )
   }
 
