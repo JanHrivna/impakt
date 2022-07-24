@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h4 class="modal-title">{{vzorek ? 'Editace vzorku' : 'Nový vzorek' }}</h4>
+    <h4 class="modal-title">{{vzorekDto ? 'Editace vzorku' : 'Nový vzorek' }}</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
 </div>
 
@@ -245,7 +245,7 @@
         <li [ngbNavItem]="2">
             <a ngbNavLink>Analýzy</a>
             <ng-template ngbNavContent>
-                <frontend-analyzy-form></frontend-analyzy-form>
+                <app-analyzy-form [analyzy]="vzorekDto?.analyzy"></app-analyzy-form>
             </ng-template>
         </li>
     </ul>

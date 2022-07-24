@@ -2,22 +2,21 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NgbActiveModal, NgbDateAdapter, NgbDateParserFormatter, NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, take } from 'rxjs';
-import { Vzorky } from '../../api/backend-api/models';
+import { VzorekDto, Vzorky } from '../../api/backend-api/models';
 import { MistoUlozeni } from '../../api/backend-api/models/misto-ulozeni';
 import { BackendApiApiService } from '../../api/backend-api/services';
 import { ConfirmService } from '../../services/confirm.service';
-import { CreateVzorekFormEnum } from './vzorek-modal-form.enum';
-import { VzorekModalService } from './services/vzorek-modal.service';
 import { CustomDateAdapterService } from './services/custom-date-adapter.service';
 import { CustomDateParserFormatterService } from './services/custom-date-parser-formatter.service';
 import { CustomDatepickerI18n, I18n } from './services/custom-datepicker-i18n.service';
+import { VzorekModalService } from './services/vzorek-modal.service';
+import { CreateVzorekFormEnum } from './vzorek-modal-form.enum';
 
 export interface VzorekModalResult {
   save: boolean
 }
 
 @Component({
-  selector: 'app-vzorek-modal',
   templateUrl: './vzorek-modal.component.html',
   styleUrls: ['./vzorek-modal.component.scss'],
   providers: [VzorekModalService,
@@ -30,7 +29,7 @@ export interface VzorekModalResult {
 export class VzorekModalComponent implements OnInit {
 
   @Input()
-  vzorek: Vzorky | undefined
+  vzorekDto: VzorekDto | undefined
 
   @Input()
   mistaUlozeni: MistoUlozeni[] = []
@@ -48,7 +47,7 @@ export class VzorekModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.vzorek) this.fillForm(this.vzorek)
+    if (this.vzorekDto) this.fillForm(this.vzorekDto.vzorek)
   }
 
   onSave() {

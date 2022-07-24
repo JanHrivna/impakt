@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BehaviorSubject, combineLatest, map, switchMap, take } from 'rxjs';
-import { MistoUlozeni, TypyAnalyz, Vzorky } from '../../api/backend-api/models';
+import { MistoUlozeni, TypyAnalyz, VzorekDto } from '../../api/backend-api/models';
 import { BackendApiApiService } from '../../api/backend-api/services';
 import { ConfirmService } from '../../services/confirm.service';
 import { VzorekModalComponent, VzorekModalResult } from '../vzorek-modal/vzorek-modal.component';
@@ -29,11 +29,11 @@ export class OverviewComponent implements OnInit {
   }
 
   onCreate() {
-    this.createOrUpdate()
+    this.openCreateOrUpdateModal()
   }
 
-  onEdit(vzorek: Vzorky) {
-    this.createOrUpdate(vzorek)
+  onEdit(vzorek: any) {
+    this.openCreateOrUpdateModal(vzorek)
   }
 
   onDelete(id: number) {
@@ -47,7 +47,7 @@ export class OverviewComponent implements OnInit {
     )
   }
 
-  private createOrUpdate(vzorek?: Vzorky) {
+  private openCreateOrUpdateModal(vzorekDto?: VzorekDto) {
     const modalRef = this.modalService.open(VzorekModalComponent, {
       size: "lg",
       backdrop: "static"
@@ -60,7 +60,9 @@ export class OverviewComponent implements OnInit {
       }
     )
     modalRef.componentInstance.mistaUlozeni = this.mistaUlozeni
-    if (vzorek) modalRef.componentInstance.vzorek = vzorek
+    if (vzorekDto) {
+      modalRef.componentInstance.vzorekDto = vzorekDto
+    }
   }
 
   private getVzorky$() {

@@ -1,1 +1,24 @@
-<p>analyzy-form works!</p>
+<form [formGroup]="$any(form)">
+    <ng-container *ngFor="let analyza of analyzy; let i = index">
+
+        <div [formGroupName]="i" class="d-flex justify-content-start">
+
+            <div>
+                <label for="{{FormName.DEN}}--{{i}}">Den</label>
+                <input class="form-control" [formControlName]="FormName.DEN" id="{{FormName.DEN}}--{{i}}">
+            </div>
+
+            <div>
+                <label for="{{FormName.PROVEDL}}--{{i}}">Provedl</label>
+                <input class="form-control" [formControlName]="FormName.PROVEDL" id="{{FormName.PROVEDL}}--{{i}}">
+            </div>
+
+            <div>
+                <label for="{{FormName.VYSLEDEK}}--{{i}}">Výsledek</label>
+                <input class="form-control" [formControlName]="FormName.VYSLEDEK" id="{{FormName.VYSLEDEK}}--{{i}}">
+            </div>
+
+        </div>
+
+    </ng-container>
+</form>
