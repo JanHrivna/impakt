@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NgbActiveModal, NgbDateAdapter, NgbDateParserFormatter, NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, take } from 'rxjs';
-import { VzorekDto, Vzorky } from '../../api/backend-api/models';
+import { TypyAnalyz, VzorekDto, Vzorky } from '../../api/backend-api/models';
 import { MistoUlozeni } from '../../api/backend-api/models/misto-ulozeni';
 import { BackendApiApiService } from '../../api/backend-api/services';
 import { ConfirmService } from '../../services/confirm.service';
@@ -33,6 +33,9 @@ export class VzorekModalComponent implements OnInit {
 
   @Input()
   mistaUlozeni: MistoUlozeni[] = []
+
+  @Input()
+  typyAnalyz: TypyAnalyz[] = []
 
   readonly form: FormGroup = this.createVzorekModalService.initForm()
   readonly CreateVzorekFormEnum = CreateVzorekFormEnum

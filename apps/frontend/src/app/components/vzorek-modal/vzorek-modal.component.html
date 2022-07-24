@@ -245,7 +245,7 @@
         <li [ngbNavItem]="2">
             <a ngbNavLink>Analýzy</a>
             <ng-template ngbNavContent>
-                <app-analyzy-form [analyzy]="vzorekDto?.analyzy"></app-analyzy-form>
+                <app-analyzy-form [analyzy]="$any(vzorekDto?.analyzy)" [typyAnalyz]="typyAnalyz"></app-analyzy-form>
             </ng-template>
         </li>
     </ul>

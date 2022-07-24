@@ -10,7 +10,7 @@ import { IconsModule } from './modules/icons/icons.module';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 import { VzorekModalComponent } from './components/vzorek-modal/vzorek-modal.component';
 import { VzorekFormComponent } from './components/vzorek-form/vzorek-form.component';
-import { AnalyzyFormComponent } from './components/analyzy-form/analyzy-form.component';
+import { AnalyzyFormComponent } from './components/vzorek-modal/analyzy-form/analyzy-form.component';
 
 @NgModule({
   declarations: [

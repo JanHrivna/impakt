@@ -5,3 +5,7 @@ form > div:not(:last-child) {
 .ng-invalid.ng-touched {
     border-color: red;
 }
+
+label {
+    font-weight: 500;
+}

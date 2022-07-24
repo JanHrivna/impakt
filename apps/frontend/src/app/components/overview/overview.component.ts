@@ -60,6 +60,7 @@ export class OverviewComponent implements OnInit {
       }
     )
     modalRef.componentInstance.mistaUlozeni = this.mistaUlozeni
+    modalRef.componentInstance.typyAnalyz = this.typyAnalyz
     if (vzorekDto) {
       modalRef.componentInstance.vzorekDto = vzorekDto
     }
@@ -88,6 +89,7 @@ export class OverviewComponent implements OnInit {
                 ulozeni_vzorku_aktualni: getAdresa(v.vzorek.ulozeni_vzorku_aktualni)
               },
               analyzy: this.typyAnalyz.map(t => ({
+                kod: t.kod,
                 ...v.analyzy.find(a => t.id === a.id_typ)
               }))
             }))
