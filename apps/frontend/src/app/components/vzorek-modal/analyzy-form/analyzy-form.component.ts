@@ -3,6 +3,7 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Analyzy, TypyAnalyz } from '../../../api/backend-api/models';
 
 enum FormName {
+  KOD = "kod",
   DEN = "den",
   PROVEDL = "provedl",
   VYSLEDEK = "vysledek"
@@ -31,14 +32,19 @@ export class AnalyzyFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    for (let analyza of this.analyzy ?? []) {
+    this.initForm()
+  }
+
+  private initForm() {
+    const analyzy: any[] = this.analyzy ?? this.typyAnalyz
+    for (let analyza of analyzy) {
       this.form.push(new FormGroup({
-        [FormName.DEN]: new FormControl(analyza.den),
-        [FormName.PROVEDL]: new FormControl(analyza.provedl),
-        [FormName.VYSLEDEK]: new FormControl(analyza.vysledek),
+        [FormName.KOD]: new FormControl(analyza.kod),
+        [FormName.DEN]: new FormControl(analyza?.den),
+        [FormName.PROVEDL]: new FormControl(analyza?.provedl),
+        [FormName.VYSLEDEK]: new FormControl(analyza?.vysledek),
       }))
     }
-
   }
 
 }

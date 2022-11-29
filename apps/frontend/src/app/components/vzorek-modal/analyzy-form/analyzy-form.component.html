@@ -1,11 +1,11 @@
 <form [formGroup]="$any(form)">
-    <ng-container *ngFor="let analyza of analyzy; let i = index">
+    <ng-container *ngFor="let fg of $any(form.controls); let i = index">
 
         <div [formGroupName]="i" class="start row">
 
             <div class="col-1">
                 <label for="{{FormName.DEN}}--{{i}}">Typ</label>
-                <div>{{analyza.kod}}</div>
+                <div class="kod-padding">{{fg.get(FormName.KOD).value}}</div>
             </div>
 
             <div class="col-3">
