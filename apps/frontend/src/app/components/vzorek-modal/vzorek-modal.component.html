@@ -5,7 +5,7 @@
 
 <div class="modal-body">
 
-    <ul ngbNav #nav="ngbNav" [(activeId)]="activeTab" class="nav-pills">
+    <ul ngbNav [destroyOnHide]="false" #nav="ngbNav" [(activeId)]="activeTab" class="nav-pills">
         <li [ngbNavItem]="1">
             <a ngbNavLink>Vzorek</a>
             <ng-template ngbNavContent>

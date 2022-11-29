@@ -90,6 +90,7 @@ export class OverviewComponent implements OnInit {
               },
               analyzy: this.typyAnalyz.map(t => ({
                 kod: t.kod,
+                id_typ: t.id,
                 ...v.analyzy.find(a => t.id === a.id_typ)
               }))
             }))
