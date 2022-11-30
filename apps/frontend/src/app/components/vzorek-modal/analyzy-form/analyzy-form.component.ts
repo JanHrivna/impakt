@@ -7,7 +7,8 @@ enum FormName {
   KOD = "kod",
   DEN = "den",
   PROVEDL = "provedl",
-  VYSLEDEK = "vysledek"
+  VYSLEDEK = "vysledek",
+  USED = "used"
 }
 
 
@@ -16,7 +17,8 @@ interface FormValue {
   [FormName.KOD]: string,
   [FormName.DEN]: string,
   [FormName.PROVEDL]: string,
-  [FormName.VYSLEDEK]: string
+  [FormName.VYSLEDEK]: string,
+  [FormName.USED]: boolean
 }
 
 interface AnalyzyExtended extends Analyzy {
@@ -51,20 +53,35 @@ export class AnalyzyFormComponent implements OnInit {
       this.form.push(new FormGroup({
         [FormName.ID_TYP]: new FormControl(analyza.id_typ ?? analyza.id),
         [FormName.KOD]: new FormControl(analyza.kod),
-        [FormName.DEN]: new FormControl(analyza?.den),
-        [FormName.PROVEDL]: new FormControl(analyza?.provedl),
-        [FormName.VYSLEDEK]: new FormControl(analyza?.vysledek),
-      }),)
+        [FormName.DEN]: new FormControl({ value: analyza?.den, disabled: !analyza?.den }),
+        [FormName.PROVEDL]: new FormControl({ value: analyza?.provedl, disabled: !analyza?.provedl }),
+        [FormName.VYSLEDEK]: new FormControl({ value: analyza?.vysledek, disabled: !analyza?.vysledek }),
+        [FormName.USED]: new FormControl(!!analyza?.den)
+      }))
     }
   }
 
-  onToggle() {
-
+  onToggle(i: number) {
+    const fg = this.form.get(i.toString())
+    const used: boolean = !fg?.get(FormName.USED)?.value
+    const denFc = fg?.get(FormName.DEN)
+    const provedlFc = fg?.get(FormName.PROVEDL)
+    const vyslFc = fg?.get(FormName.VYSLEDEK)
+    if (used) {
+      denFc?.enable()
+      provedlFc?.enable()
+      vyslFc?.enable()
+    }
+    else {
+      denFc?.disable()
+      provedlFc?.disable()
+      vyslFc?.disable()
+    }
   }
 
   getFormValues(): Analyzy[] {
     const formValues: FormValue[] = this.form.getRawValue()
-    return formValues.map(v => ({
+    return formValues.filter(v => v.used).map(v => ({
       id_typ: v.id_typ,
       den: v.den,
       provedl: v.provedl,

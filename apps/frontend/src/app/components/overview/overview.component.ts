@@ -49,8 +49,9 @@ export class OverviewComponent implements OnInit {
 
   private openCreateOrUpdateModal(vzorekDto?: VzorekDto) {
     const modalRef = this.modalService.open(VzorekModalComponent, {
-      size: "lg",
-      backdrop: "static"
+      backdrop: "static",
+      scrollable: true,
+      fullscreen: true
     })
     modalRef.dismissed.pipe(
       take(1)
