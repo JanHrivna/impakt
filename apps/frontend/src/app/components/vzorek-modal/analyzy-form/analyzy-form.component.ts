@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Analyzy, TypyAnalyz } from '../../../api/backend-api/models';
 
 enum FormName {
@@ -53,9 +53,9 @@ export class AnalyzyFormComponent implements OnInit {
       this.form.push(new FormGroup({
         [FormName.ID_TYP]: new FormControl(analyza.id_typ ?? analyza.id),
         [FormName.KOD]: new FormControl(analyza.kod),
-        [FormName.DEN]: new FormControl({ value: analyza?.den, disabled: !analyza?.den }),
-        [FormName.PROVEDL]: new FormControl({ value: analyza?.provedl, disabled: !analyza?.provedl }),
-        [FormName.VYSLEDEK]: new FormControl({ value: analyza?.vysledek, disabled: !analyza?.vysledek }),
+        [FormName.DEN]: new FormControl({ value: analyza?.den, disabled: !analyza?.den }, Validators.required),
+        [FormName.PROVEDL]: new FormControl({ value: analyza?.provedl, disabled: !analyza?.provedl }, Validators.required),
+        [FormName.VYSLEDEK]: new FormControl({ value: analyza?.vysledek, disabled: !analyza?.vysledek }, Validators.required),
         [FormName.USED]: new FormControl(!!analyza?.den)
       }))
     }
@@ -64,19 +64,24 @@ export class AnalyzyFormComponent implements OnInit {
   onToggle(i: number) {
     const fg = this.form.get(i.toString())
     const used: boolean = !fg?.get(FormName.USED)?.value
-    const denFc = fg?.get(FormName.DEN)
-    const provedlFc = fg?.get(FormName.PROVEDL)
-    const vyslFc = fg?.get(FormName.VYSLEDEK)
+    const fieldNames = [FormName.DEN, FormName.PROVEDL, FormName.VYSLEDEK]
     if (used) {
-      denFc?.enable()
-      provedlFc?.enable()
-      vyslFc?.enable()
+      fieldNames.forEach(f => {
+        const fc = fg?.get(f)
+        fc?.enable()
+        fc?.setValidators(Validators.required)
+        fc?.updateValueAndValidity()
+      })
     }
     else {
-      denFc?.disable()
-      provedlFc?.disable()
-      vyslFc?.disable()
+      fieldNames.forEach(f => {
+        const fc = fg?.get(f)
+        fc?.disable()
+        fc?.setValidators(null)
+        fc?.updateValueAndValidity()
+      })
     }
+    fg?.markAllAsTouched()
   }
 
   getFormValues(): Analyzy[] {
