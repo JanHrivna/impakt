@@ -1,11 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NgbActiveModal, NgbDateAdapter, NgbDateParserFormatter, NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
-import { Observable, take } from 'rxjs';
-import { TypyAnalyz, VzorekDto, Vzorky } from '../../api/backend-api/models';
+import { of, take } from 'rxjs';
+import { Analyzy, TypyAnalyz, VzorekDto, Vzorky } from '../../api/backend-api/models';
 import { MistoUlozeni } from '../../api/backend-api/models/misto-ulozeni';
 import { BackendApiApiService } from '../../api/backend-api/services';
+import { ERR_REQ_FIELDS } from '../../constants';
 import { ConfirmService } from '../../services/confirm.service';
+import { AnalyzyFormComponent } from './analyzy-form/analyzy-form.component';
 import { CustomDateAdapterService } from './services/custom-date-adapter.service';
 import { CustomDateParserFormatterService } from './services/custom-date-parser-formatter.service';
 import { CustomDatepickerI18n, I18n } from './services/custom-datepicker-i18n.service';
@@ -38,9 +40,12 @@ export class VzorekModalComponent implements OnInit {
   typyAnalyz: TypyAnalyz[] = []
 
   readonly form: FormGroup = this.createVzorekModalService.initForm()
+  readonly ERR_REQ_FIELDS = ERR_REQ_FIELDS
   readonly CreateVzorekFormEnum = CreateVzorekFormEnum
 
   activeTab = 1
+
+  @ViewChild(AnalyzyFormComponent) private analyzyFormCmp: AnalyzyFormComponent | null = null
 
   constructor(
     private modal: NgbActiveModal,
@@ -55,7 +60,9 @@ export class VzorekModalComponent implements OnInit {
 
   onSave() {
     this.createVzorek().subscribe(
-      () => this.dismissModal(true)
+      () => {
+        this.dismissModal(true)
+      }
     )
   }
 
@@ -81,12 +88,18 @@ export class VzorekModalComponent implements OnInit {
     if (vzorek) this.form.addControl("id", new FormControl(vzorek.id))
   }
 
-  private createVzorek(): Observable<any> {
-    return this.api.vzorekControllerUpsertVzorek({
-      body: this.form.getRawValue()
-    }).pipe(
+  private createVzorek() {
+    const body: VzorekDto = {
+      vzorek: this.form.getRawValue(),
+      analyzy: this.analyzyFormCmp?.getFormValues() as Analyzy[]
+    }
+    return this.api.vzorekControllerUpsertVzorek({ body }).pipe(
       take(1)
     )
+  }
+
+  isDisabled() {
+    return !this.form.valid || !this.analyzyFormCmp?.form?.valid
   }
 
 }
