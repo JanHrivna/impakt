@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Analyzy, TypyAnalyz } from '../../../api/backend-api/models';
+import { ERR_REQ_FIELDS } from '../../../constants';
 
 enum FormName {
   ID_TYP = "id_typ",
@@ -39,6 +40,7 @@ export class AnalyzyFormComponent implements OnInit {
   typyAnalyz: TypyAnalyz[] = []
 
   readonly FormName = FormName
+  readonly ERR_REQ_FIELDS = ERR_REQ_FIELDS
   form: FormArray = new FormArray([])
 
   constructor() { }

@@ -1,6 +1,6 @@
 <form [formGroup]="$any(form)">
 
-    <div *ngIf="!form.valid" class="color-warn">Vyplňte povinná pole.</div>
+    <div *ngIf="!form.valid" class="color-warn">{{ERR_REQ_FIELDS}}</div>
 
     <ng-container *ngFor="let fg of $any(form.controls); let i = index">
 
@@ -13,7 +13,19 @@
 
             <div class="col-3">
                 <label for="{{FormName.DEN}}--{{i}}">Den</label>
-                <input class="form-control" [formControlName]="FormName.DEN" id="{{FormName.DEN}}--{{i}}">
+                <div *ngIf="fg.get(FormName.DEN).enabled; else disabledDayPicker" class="input-group">
+                    <input class="form-control" [formControlName]="FormName.DEN" id="{{FormName.DEN}}--{{i}}"
+                        placeholder="dd.mm.yyyy" name="day-picker-{{i}}" [id]="FormName.DEN" ngbDatepicker
+                        #dt="ngbDatepicker" readonly>
+                    <button class="btn btn-outline-secondary calendar" (click)="dt.toggle()" type="button">
+                        <bi name="calendar"></bi>
+                    </button>
+                </div>
+
+                <ng-template #disabledDayPicker>
+                    <input class="form-control" [formControlName]="FormName.DEN" id="{{FormName.DEN}}--{{i}}">
+                </ng-template>
+
             </div>
 
             <div class="col-4">

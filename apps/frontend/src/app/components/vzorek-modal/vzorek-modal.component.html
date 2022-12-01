@@ -9,6 +9,9 @@
         <li [ngbNavItem]="1">
             <a ngbNavLink>Vzorek</a>
             <ng-template ngbNavContent>
+
+                <div *ngIf="!form.valid" class="color-warn">{{ERR_REQ_FIELDS}}</div>
+
                 <form [formGroup]="form">
                     <div>
                         <label [for]="CreateVzorekFormEnum.DRUH">Druh</label>
@@ -255,6 +258,6 @@
 </div>
 
 <div class="modal-footer d-flex justify-content-between">
-    <button (click)="onSave()" class="btn" [class.btn-primary]="form.valid" [class.btn-secondary]="!form.valid"
-        [disabled]="!form.valid">Uložit</button>
+    <button (click)="onSave()" class="btn" [class.btn-primary]="!isDisabled()" [class.btn-secondary]="isDisabled()"
+        [disabled]="isDisabled()">Uložit</button>
 </div>
