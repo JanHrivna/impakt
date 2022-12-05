@@ -49,6 +49,7 @@ export class VzorekController {
 
             if (dto.analyzy) {
                 dto.analyzy.forEach(a => a.id_vzorek = newVzorek.id)
+                await queryRunner.manager.createQueryBuilder().delete().from(Analyzy).where('analyzy.id_vzorek = :id', { id: newVzorek.id }).execute()
                 await queryRunner.manager.upsert(Analyzy, dto.analyzy, ['id_vzorek'])
             }
 
