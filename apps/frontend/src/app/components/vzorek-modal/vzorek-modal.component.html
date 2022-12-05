@@ -92,8 +92,8 @@
                                 svlečky</label>
                             <select class="form-control" [formControlName]="CreateVzorekFormEnum.ULOZENI_SVLECKY_MISTO"
                                 [id]="CreateVzorekFormEnum.ULOZENI_SVLECKY_MISTO" required>
-                                <option *ngFor="let mistoUlozeni of mistaUlozeni" [value]="mistoUlozeni.id">
-                                    {{mistoUlozeni.adresa}}</option>
+                                <option *ngFor="let mistoUlozeni of mistaUlozeni" [value]="mistoUlozeni">
+                                    {{mistoUlozeni}}</option>
                             </select>
                         </div>
 
@@ -153,8 +153,8 @@
                                 kde</label>
                             <select class="form-control" [formControlName]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_MISTO"
                                 [id]="CreateVzorekFormEnum.PRIPRAVA_VZORKU_MISTO" required>
-                                <option *ngFor="let mistoUlozeni of mistaUlozeni" [value]="mistoUlozeni.id">
-                                    {{mistoUlozeni.adresa}}</option>
+                                <option *ngFor="let mistoUlozeni of mistaUlozeni" [value]="mistoUlozeni">
+                                    {{mistoUlozeni}}</option>
                             </select>
                         </div>
 
@@ -203,8 +203,8 @@
                             <select class="form-control"
                                 [formControlName]="CreateVzorekFormEnum.ULOZENI_VZORKU_DO_ANALYZY_MISTO"
                                 [id]="CreateVzorekFormEnum.ULOZENI_VZORKU_DO_ANALYZY_MISTO" required>
-                                <option *ngFor="let mistoUlozeni of mistaUlozeni" [value]="mistoUlozeni.id">
-                                    {{mistoUlozeni.adresa}}</option>
+                                <option *ngFor="let mistoUlozeni of mistaUlozeni" [value]="mistoUlozeni">
+                                    {{mistoUlozeni}}</option>
                             </select>
                         </div>
 
@@ -222,8 +222,8 @@
                             <select class="form-control"
                                 [formControlName]="CreateVzorekFormEnum.ULOZENI_VZORKU_AKTUALNI"
                                 [id]="CreateVzorekFormEnum.ULOZENI_VZORKU_AKTUALNI" required>
-                                <option *ngFor="let mistoUlozeni of mistaUlozeni" [value]="mistoUlozeni.id">
-                                    {{mistoUlozeni.adresa}}</option>
+                                <option *ngFor="let mistoUlozeni of mistaUlozeni" [value]="mistoUlozeni">
+                                    {{mistoUlozeni}}</option>
                             </select>
                         </div>
 

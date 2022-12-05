@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NgbActiveModal, NgbDateAdapter, NgbDateParserFormatter, NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
-import { of, take } from 'rxjs';
+import { take } from 'rxjs';
 import { Analyzy, TypyAnalyz, VzorekDto, Vzorky } from '../../api/backend-api/models';
 import { MistoUlozeni } from '../../api/backend-api/models/misto-ulozeni';
 import { BackendApiApiService } from '../../api/backend-api/services';
@@ -34,7 +34,7 @@ export class VzorekModalComponent implements OnInit {
   vzorekDto: VzorekDto | undefined
 
   @Input()
-  mistaUlozeni: MistoUlozeni[] = []
+  mistaUlozeni: string[] = []
 
   @Input()
   typyAnalyz: TypyAnalyz[] = []

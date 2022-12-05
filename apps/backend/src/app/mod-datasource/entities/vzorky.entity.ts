@@ -53,7 +53,7 @@ export class Vzorky extends BaseEntity {
     @Column()
     @ApiProperty()
     @IsNotEmpty()
-    ulozeni_svlecky_misto: number
+    ulozeni_svlecky_misto: string
 
     @Column()
     @ApiProperty()
@@ -88,7 +88,7 @@ export class Vzorky extends BaseEntity {
     @Column()
     @ApiProperty()
     @IsNotEmpty()
-    priprava_vzorku_misto: number
+    priprava_vzorku_misto: string
 
     @Column()
     @ApiProperty()
@@ -108,7 +108,7 @@ export class Vzorky extends BaseEntity {
     @Column()
     @ApiProperty()
     @IsNotEmpty()
-    ulozeni_vzorku_do_analyzy_misto: number
+    ulozeni_vzorku_do_analyzy_misto: string
 
     @Column()
     @ApiProperty()
@@ -118,7 +118,7 @@ export class Vzorky extends BaseEntity {
     @Column()
     @ApiProperty()
     @IsNotEmpty()
-    ulozeni_vzorku_aktualni: number
+    ulozeni_vzorku_aktualni: string
 
     @Column()
     @ApiProperty()

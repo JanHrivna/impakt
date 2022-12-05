@@ -60,7 +60,7 @@ export class OverviewComponent implements OnInit {
         if (res.save) this.vzorkySubject.next(null)
       }
     )
-    modalRef.componentInstance.mistaUlozeni = this.mistaUlozeni
+    modalRef.componentInstance.mistaUlozeni = this.mistaUlozeni.map(m => m.adresa)
     modalRef.componentInstance.typyAnalyz = this.typyAnalyz
     if (vzorekDto) {
       modalRef.componentInstance.vzorekDto = vzorekDto
@@ -68,7 +68,6 @@ export class OverviewComponent implements OnInit {
   }
 
   private getVzorky$() {
-    const getAdresa = (id: number) => this.mistaUlozeni.find(a => a.id === id)?.adresa
 
     return combineLatest({
       vzorky: this.vzorkySubject.pipe(switchMap(() => this.api.vzorekControllerGetVzorky())),
@@ -83,11 +82,7 @@ export class OverviewComponent implements OnInit {
             {
               ...v,
               vzorek: {
-                ...v.vzorek,
-                ulozeni_svlecky_misto: getAdresa(v.vzorek.ulozeni_svlecky_misto),
-                priprava_vzorku_misto: getAdresa(v.vzorek.priprava_vzorku_misto),
-                ulozeni_vzorku_do_analyzy_misto: getAdresa(v.vzorek.ulozeni_vzorku_do_analyzy_misto),
-                ulozeni_vzorku_aktualni: getAdresa(v.vzorek.ulozeni_vzorku_aktualni)
+                ...v.vzorek
               },
               analyzy: this.typyAnalyz.map(t => ({
                 kod: t.kod,

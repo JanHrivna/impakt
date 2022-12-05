@@ -18,7 +18,7 @@ export interface Vzorky {
   pred_posl_svlecenim_misto: string;
   priprava_vzorku_kdo: string;
   priprava_vzorku_kdy: string;
-  priprava_vzorku_misto: number;
+  priprava_vzorku_misto: string;
   priprava_vzorku_oplach: string;
   priprava_vzorku_oplach_kdy: string;
   priprava_vzorku_suseni: string;
@@ -26,8 +26,8 @@ export interface Vzorky {
   puvodni_hmotnost: string;
   sber_svlecky_datum: string;
   sber_svlecky_misto: string;
-  ulozeni_svlecky_misto: number;
-  ulozeni_vzorku_aktualni: number;
-  ulozeni_vzorku_do_analyzy_misto: number;
+  ulozeni_svlecky_misto: string;
+  ulozeni_vzorku_aktualni: string;
+  ulozeni_vzorku_do_analyzy_misto: string;
   ulozeni_vzorku_do_analyzy_objekt: string;
 }
