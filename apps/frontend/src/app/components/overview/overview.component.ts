@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { BehaviorSubject, combineLatest, map, switchMap, take } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, switchMap, take, tap } from 'rxjs';
 import { MistoUlozeni, TypyAnalyz, VzorekDto } from '../../api/backend-api/models';
 import { BackendApiApiService } from '../../api/backend-api/services';
 import { ConfirmService } from '../../services/confirm.service';
@@ -18,6 +18,10 @@ export class OverviewComponent implements OnInit {
 
   mistaUlozeni: MistoUlozeni[] = []
   typyAnalyz: TypyAnalyz[] = []
+
+  page = 1
+  pageSize = 30
+  vzorkyCnt: number = 0
 
   constructor(
     private api: BackendApiApiService,
@@ -92,6 +96,9 @@ export class OverviewComponent implements OnInit {
             }))
           return result
         }
+      ),
+      tap(
+        (res) => this.vzorkyCnt = res.length
       )
     )
   }
