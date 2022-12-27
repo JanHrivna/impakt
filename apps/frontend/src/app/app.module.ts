@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 import { OverviewComponent } from './components/overview/overview.component';
-import { VzorekFormComponent } from './components/vzorek-form/vzorek-form.component';
 import { AnalyzyFormComponent } from './components/vzorek-modal/analyzy-form/analyzy-form.component';
 import { VzorekModalComponent } from './components/vzorek-modal/vzorek-modal.component';
 import { IconsModule } from './modules/icons/icons.module';
@@ -18,7 +17,6 @@ import { IconsModule } from './modules/icons/icons.module';
     OverviewComponent,
     VzorekModalComponent,
     ConfirmModalComponent,
-    VzorekFormComponent,
     AnalyzyFormComponent,
   ],
   imports: [
