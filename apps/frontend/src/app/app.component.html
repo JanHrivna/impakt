@@ -1,7 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid justify-content-center">
     <div class="navbar-brand w-100">
-      <input class="form-control" placeholder="Hledej dle názvu druhu">
+      <input class="form-control" placeholder="Hledej dle druhu" list="datalistOptions" id="exampleDataList">
+      <datalist id="datalistOptions">
+        <option *ngFor="let druh of druhy$ | async" [value]="druh"></option>
+      </datalist>
       <h2>Impakt</h2>
     </div>
   </div>
