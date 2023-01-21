@@ -10,6 +10,9 @@ import { OverviewComponent } from './components/overview/overview.component';
 import { AnalyzyFormComponent } from './components/vzorek-modal/analyzy-form/analyzy-form.component';
 import { VzorekModalComponent } from './components/vzorek-modal/vzorek-modal.component';
 import { IconsModule } from './modules/icons/icons.module';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { reducers } from './store';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,8 @@ import { IconsModule } from './modules/icons/icons.module';
     AppRoutingModule,
     ReactiveFormsModule,
     IconsModule,
+    StoreModule.forRoot({ ...reducers }),
+    StoreDevtoolsModule.instrument(),
   ],
   providers: [],
   bootstrap: [AppComponent],

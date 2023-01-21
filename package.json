@@ -26,6 +26,8 @@
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/swagger": "^5.2.1",
     "@ng-bootstrap/ng-bootstrap": "^12.1.1",
+    "@ngrx/store": "^13.2.0",
+    "@ngrx/store-devtools": "^13.2.0",
     "@nrwl/angular": "14.0.5",
     "@popperjs/core": "^2.10.2",
     "bootstrap": "^5.1.3",
