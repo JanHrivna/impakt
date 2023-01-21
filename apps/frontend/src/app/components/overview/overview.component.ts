@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { BehaviorSubject, combineLatest, map, switchMap, take, tap } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { BehaviorSubject, combineLatest, map, Observable, switchMap, take, tap } from 'rxjs';
 import { MistoUlozeni, TypyAnalyz, VzorekDto } from '../../api/backend-api/models';
 import { BackendApiApiService } from '../../api/backend-api/services';
 import { ConfirmService } from '../../services/confirm.service';
+import { selectVzorkyFilterDruh } from '../../store/vzorky';
 import { VzorekModalComponent, VzorekModalResult } from '../vzorek-modal/vzorek-modal.component';
 
 @Component({
@@ -26,7 +28,8 @@ export class OverviewComponent implements OnInit {
   constructor(
     private api: BackendApiApiService,
     private modalService: NgbModal,
-    private confirmService: ConfirmService) {
+    private confirmService: ConfirmService,
+    private store: Store) {
   }
 
   ngOnInit(): void {
@@ -76,13 +79,15 @@ export class OverviewComponent implements OnInit {
     return combineLatest({
       vzorky: this.vzorkySubject.pipe(switchMap(() => this.api.vzorekControllerGetVzorky())),
       mistaUlozeni: this.api.lokaceControllerGetLokace(),
-      typyAnalyz: this.api.analyzaControllerGetTypyAnalyz()
+      typyAnalyz: this.api.analyzaControllerGetTypyAnalyz(),
+      filter: this.store.select(selectVzorkyFilterDruh as any) as Observable<string>
     }).pipe(
       map(
         (res) => {
           this.typyAnalyz = res.typyAnalyz.sort((a, b) => a.id - b.id)
           this.mistaUlozeni = res.mistaUlozeni
-          const result = res.vzorky.map(v => (
+          const vzorkyFiltered = res.filter ? res.vzorky.filter(v => v.vzorek.druh.toLocaleLowerCase().includes(res.filter.toLocaleLowerCase())) : res.vzorky
+          const result = vzorkyFiltered.map(v => (
             {
               ...v,
               vzorek: {

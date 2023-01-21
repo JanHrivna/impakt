@@ -3,7 +3,9 @@ import { AppState } from "."
 
 // state
 export interface State {
-    druh: string | null
+    filters: {
+        druh: string | null
+    }
 }
 
 // actions
@@ -12,11 +14,14 @@ export const setFilterValues = createAction('[Vzorky] Set filter values', props<
 // reducers
 export const reducers = createReducer<State>(
     {
-        druh: null
+        filters: {
+            druh: null
+        }
     },
-    on(setFilterValues, (state, action) => ({ ...state, druh: action.druh })),
+    on(setFilterValues, (state, action) => ({ ...state, filters: { ...state.filters, druh: action.druh } })),
 )
 
 // selectors
 const selectVzorky = (state: AppState) => state.vzorky
-export const selectVzorkyFilterValues = createSelector(selectVzorky, (state) => state.druh)
+const selectVzorkyFilterValues = createSelector(selectVzorky, (state) => state.filters)
+export const selectVzorkyFilterDruh = createSelector(selectVzorkyFilterValues, (state) => state.druh)
