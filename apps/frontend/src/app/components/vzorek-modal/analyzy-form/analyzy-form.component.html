@@ -1,0 +1,50 @@
+<form [formGroup]="$any(form)">
+
+    <div *ngIf="!form.valid" class="color-warn">{{ERR_REQ_FIELDS}}</div>
+
+    <ng-container *ngFor="let fg of $any(form.controls); let i = index">
+
+        <div [formGroupName]="i" class="start row">
+
+            <div class="col-1">
+                <label for="{{FormName.DEN}}--{{i}}">Typ</label>
+                <div class="kod-padding">{{fg.get(FormName.KOD).value}}</div>
+            </div>
+
+            <div class="col-3">
+                <label for="{{FormName.DEN}}--{{i}}">Den</label>
+                <div *ngIf="fg.get(FormName.DEN).enabled; else disabledDayPicker" class="input-group">
+                    <input class="form-control" [formControlName]="FormName.DEN" id="{{FormName.DEN}}--{{i}}"
+                        placeholder="dd.mm.yyyy" name="day-picker-{{i}}" [id]="FormName.DEN" ngbDatepicker
+                        #dt="ngbDatepicker" readonly>
+                    <button class="btn btn-outline-secondary calendar" (click)="dt.toggle()" type="button">
+                        <bi name="calendar"></bi>
+                    </button>
+                </div>
+
+                <ng-template #disabledDayPicker>
+                    <input class="form-control" [formControlName]="FormName.DEN" id="{{FormName.DEN}}--{{i}}">
+                </ng-template>
+
+            </div>
+
+            <div class="col-4">
+                <label for="{{FormName.PROVEDL}}--{{i}}">Provedl</label>
+                <input class="form-control" [formControlName]="FormName.PROVEDL" id="{{FormName.PROVEDL}}--{{i}}">
+            </div>
+
+            <div class="col-3">
+                <label for="{{FormName.VYSLEDEK}}--{{i}}">Výsledek</label>
+                <input class="form-control" [formControlName]="FormName.VYSLEDEK" id="{{FormName.VYSLEDEK}}--{{i}}">
+            </div>
+
+            <div class="col-1">
+                <label class="d-block" for="{{FormName.USED}}--{{i}}">Použít</label>
+                <input [formControlName]="FormName.USED" class="u-pointer form-check-input" type="checkbox"
+                    (click)="onToggle(i)">
+            </div>
+
+        </div>
+
+    </ng-container>
+</form>

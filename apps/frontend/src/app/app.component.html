@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid justify-content-center">
+    <div class="navbar-brand w-100">
+      <div class="searchbox d-flex align-items-center">
+        <input class="form-control" [formControl]="searchCtrl" placeholder="Filtruj dle druhu" list="datalistOptions"
+          id="exampleDataList" (keyup.enter)="onSearch()">
+        <datalist id="datalistOptions">
+          <option *ngFor="let druh of druhy$ | async" [value]="druh"></option>
+        </datalist>
+        <button *ngIf="filterUsed; else filterNotUsed" class="btn" ngbTooltip="zruš filtr" (click)="onClearFilter()">
+          <bi name="funnel-fill"></bi>
+        </button>
+        <ng-template #filterNotUsed>
+          <button class="btn" ngbTooltip="filter" (click)="onSearch()">
+            <bi name="funnel"></bi>
+          </button>
+        </ng-template>
+      </div>
+      <h2>Impakt</h2>
+    </div>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>

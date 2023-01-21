@@ -1,0 +1,11 @@
+form > div:not(:last-child) {
+    margin-bottom: 0.75rem;
+}
+
+.ng-invalid.ng-touched {
+    border-color: red;
+}
+
+label {
+    font-weight: 500;
+}

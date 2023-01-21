@@ -1,0 +1,99 @@
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th class="align-top" scope="col"></th>
+            <th class="align-top" scope="col">Druh</th>
+            <th class="align-top" scope="col">Popis / varianta</th>
+            <th class="align-top" scope="col">Dovoz z</th>
+            <th class="align-top" scope="col">Dovoz datum</th>
+            <th class="align-top" scope="col">Označení svlečky</th>
+            <th class="align-top" scope="col">Sběr svlečky datum</th>
+            <th class="align-top" scope="col">Sběr svlečky místo</th>
+            <th class="align-top" scope="col">Číslo kotce</th>
+            <th class="align-top" scope="col">Aktuální místo uložení svlečky</th>
+            <!--(A, B, C, D, E…jiné)-->
+            <th class="align-top" scope="col">Označení vzorku ze svlečky</th>
+            <th class="align-top" scope="col">Lokalita před posledním svlekem</th>
+            <!-- TODO:  tooltip než byla daná do ependorfky-->
+            <th class="align-top " scope="col">Původní hmotnost analyzované svlečky</th>
+
+            <!-- TODO:  (stříhání/ mletí…)-->
+            <th class="align-top" scope="col">Příprava vzorku mechanická typ</th>
+            <th class="align-top" scope="col">Příprava vzorku mechanická kdy</th>
+            <th class="align-top" scope="col">Příprava vzorku mechanická kdo</th>
+            <th class="align-top" scope="col">Příprava vzorku mechanická kde</th>
+            <th class="align-top" scope="col">Příprava vzorku (oplach - v čem)</th>
+            <th class="align-top" scope="col">Příprava vzorku oplach kdy</th>
+            <!--TODO: (mám tam zahrnout i specifikaci sušárny?) -->
+            <th class="align-top" scope="col">Příprava vzorku - sušení - popis</th>
+            <th class="align-top" scope="col">Uložení vzorku do doby analýzy</th>
+            <th class="align-top" scope="col">Aktuální uložení vzorku</th>
+            <th class="align-top" scope="col">Do SI laboratoře Albertov dodáno</th>
+            <th class="align-top" scope="col">Požadované analýzy</th>
+            <th class="align-top" scope="col">Laboratorní č. vzorku</th>
+            <th class="align-top" scope="col">Navážka g</th>
+            <th class="align-top" scope="col">Naváženo datum</th>
+            <th class="align-top" scope="col">Naváženo kdo</th>
+            <ng-container *ngFor="let typ of typyAnalyz">
+                <th class="align-top" scope="col">Analýza {{typ.kod}} datum</th>
+                <th class="align-top" scope="col">Analýza {{typ.kod}} provedl</th>
+                <th class="align-top" scope="col">Analýza {{typ.kod}} výsledek</th>
+            </ng-container>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let vzorek of (vzorky$ | async) | slice: (page-1) * pageSize : page * pageSize" class="text-nowrap">
+            <td scope="col">
+                <button class="btn" (click)="onDelete(vzorek.vzorek.id)" ngbTooltip="smazat">
+                    <bi name="trash-fill"></bi>
+                </button>
+                <button class="btn" (click)="onEdit($any(vzorek))" ngbTooltip="editovat">
+                    <bi name="pencil-fill"></bi>
+                </button>
+            </td>
+            <td scope="col">{{vzorek.vzorek.druh}}</td>
+            <td scope="col">{{vzorek.vzorek.popis}}</td>
+            <td scope="col">{{vzorek.vzorek.dovoz}}</td>
+            <td scope="col">{{vzorek.vzorek.dovoz_datum}}</td>
+            <td scope="col">{{vzorek.vzorek.oznaceni_svlecky}}</td>
+            <td scope="col">{{vzorek.vzorek.sber_svlecky_datum}}</td>
+            <td scope="col">{{vzorek.vzorek.sber_svlecky_misto}}</td>
+            <td scope="col">{{vzorek.vzorek.cislo_kotce}}</td>
+            <td scope="col">{{vzorek.vzorek.ulozeni_svlecky_misto}}</td>
+            <td scope="col">{{vzorek.vzorek.oznaceni_vzorku_svlecky}}</td>
+            <td scope="col">{{vzorek.vzorek.pred_posl_svlecenim_misto}}</td>
+            <td scope="col">{{vzorek.vzorek.puvodni_hmotnost}}</td>
+            <td scope="col">{{vzorek.vzorek.priprava_vzorku_typ}}</td>
+            <td scope="col">{{vzorek.vzorek.priprava_vzorku_kdy}}</td>
+            <td scope="col">{{vzorek.vzorek.priprava_vzorku_kdo}}</td>
+            <td scope="col">{{vzorek.vzorek.priprava_vzorku_misto}}</td>
+            <td scope="col">{{vzorek.vzorek.priprava_vzorku_oplach}}</td>
+            <td scope="col">{{vzorek.vzorek.priprava_vzorku_oplach_kdy}}</td>
+            <td scope="col">{{vzorek.vzorek.priprava_vzorku_suseni}}</td>
+            <td scope="col">{{vzorek.vzorek.ulozeni_vzorku_do_analyzy_misto}} -
+                {{vzorek.vzorek.ulozeni_vzorku_do_analyzy_objekt}}
+            </td>
+            <td scope="col">{{vzorek.vzorek.ulozeni_vzorku_aktualni}}</td>
+            <td scope="col">{{vzorek.vzorek.dodani_albertov_datum}}</td>
+            <td scope="col">{{vzorek.vzorek.pozadovane_analyzy}}</td>
+            <td scope="col">{{vzorek.vzorek.cislo_vzorku}}</td>
+            <td scope="col">{{vzorek.vzorek.navazka_g}}</td>
+            <td scope="col">{{vzorek.vzorek.navazeno_kdo}}</td>
+            <td scope="col">{{vzorek.vzorek.navazeno_kdy}}</td>
+            <ng-container *ngFor="let analyza of vzorek.analyzy">
+                <td scope="col">{{analyza.den}}</td>
+                <td scope="col">{{analyza.provedl}}</td>
+                <td scope="col">{{analyza.vysledek}}</td>
+            </ng-container>
+        </tr>
+    </tbody>
+</table>
+
+<div class="u-ml-2">
+    <button class="btn btn btn-primary" (click)="onCreate()">Nový vzorek</button>
+
+    <div class="u-mt-3">
+        <ngb-pagination [collectionSize]="vzorkyCnt" [pageSize]="pageSize" [(page)]="page"
+            [boundaryLinks]="true"></ngb-pagination>
+    </div>
+</div>
