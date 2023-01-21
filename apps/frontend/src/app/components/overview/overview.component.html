@@ -44,10 +44,10 @@
     <tbody>
         <tr *ngFor="let vzorek of (vzorky$ | async) | slice: (page-1) * pageSize : page * pageSize" class="text-nowrap">
             <td scope="col">
-                <button class="btn" (click)="onDelete(vzorek.vzorek.id)" ngbTooltip="delete">
+                <button class="btn" (click)="onDelete(vzorek.vzorek.id)" ngbTooltip="smazat">
                     <bi name="trash-fill"></bi>
                 </button>
-                <button class="btn" (click)="onEdit($any(vzorek))" ngbTooltip="edit">
+                <button class="btn" (click)="onEdit($any(vzorek))" ngbTooltip="editovat">
                     <bi name="pencil-fill"></bi>
                 </button>
             </td>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { map, Observable } from 'rxjs';
 import { BackendApiApiService } from './api/backend-api/services';
 
@@ -9,6 +10,9 @@ import { BackendApiApiService } from './api/backend-api/services';
 })
 export class AppComponent {
 
+  filterUsed = false
+  readonly searchCtrl = new FormControl()
+
   readonly druhy$: Observable<string[]> = this.be.vzorekControllerGetVzorky().pipe(
     map(
       (vzorky) => {
@@ -17,6 +21,17 @@ export class AppComponent {
       }
     )
   )
+
+  onSearch() {
+    this.filterUsed = true
+    this.searchCtrl.disable()
+  }
+
+  onClearFilter() {
+    this.filterUsed = false
+    this.searchCtrl.reset()
+    this.searchCtrl.enable()
+  }
 
   constructor(private be: BackendApiApiService) { }
 
