@@ -37,6 +37,7 @@
     "ng-bootstrap-icons": "^13.1.2-canary.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~7.4.0",
+    "simple-ldap-search": "^3.1.2",
     "swagger-ui-express": "^4.3.0",
     "tslib": "^2.0.0",
     "typeorm": "^0.3.6",
