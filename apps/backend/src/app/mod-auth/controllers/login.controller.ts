@@ -1,7 +1,6 @@
-import { Body, Controller, HttpCode, InternalServerErrorException, Post, UnauthorizedException } from "@nestjs/common";
+import { Body, Controller, HttpCode, Post, UnauthorizedException } from "@nestjs/common";
 import { CredentialsDto } from "../models/credentials.dto";
 import SimpleLDAP from 'simple-ldap-search';
-
 
 @Controller('login')
 export class LoginController {
