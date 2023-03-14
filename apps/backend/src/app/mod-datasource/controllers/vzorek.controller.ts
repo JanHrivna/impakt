@@ -1,5 +1,6 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post, Res } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Res, UseGuards } from "@nestjs/common";
 import { ApiResponse } from "@nestjs/swagger";
+import { JwtAuthGuard } from "../../mod-auth/services/guards/jwt-auth.guard";
 import { DatasourceService } from "../datasource.service";
 import { Analyzy } from "../entities/analyzy.entity";
 import { Vzorky } from "../entities/vzorky.entity";
@@ -12,6 +13,7 @@ export class VzorekController {
 
     constructor(private datasourceService: DatasourceService) { }
 
+    @UseGuards(JwtAuthGuard)
     @Get()
     @ApiResponse({ type: VzorekDto, isArray: true })
     getVzorky(): Promise<VzorekDto[]> {
@@ -28,6 +30,7 @@ export class VzorekController {
             )
     }
 
+    @UseGuards(JwtAuthGuard)
     @Post()
     @HttpCode(200)
     @ApiResponse({ type: ApiResponseDto })
@@ -64,7 +67,7 @@ export class VzorekController {
         return { message: "Vzorek založen/editován." }
     }
 
-
+    @UseGuards(JwtAuthGuard)
     @Delete(':id')
     @ApiResponse({ type: ApiResponseDto })
     deleteVzorek(@Param('id') id: number) {

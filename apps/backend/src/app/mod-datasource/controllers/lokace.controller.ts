@@ -1,5 +1,6 @@
-import { Controller, Get } from "@nestjs/common";
+import { Controller, Get, UseGuards } from "@nestjs/common";
 import { ApiResponse } from "@nestjs/swagger";
+import { JwtAuthGuard } from "../../mod-auth/services/guards/jwt-auth.guard";
 import { DatasourceService } from "../datasource.service";
 import { MistoUlozeni } from "../entities/misto-ulozeni";
 
@@ -8,6 +9,7 @@ export class LokaceController {
 
     constructor(private datasourceService: DatasourceService) { }
 
+    @UseGuards(JwtAuthGuard)
     @Get()
     @ApiResponse({
         type: MistoUlozeni,

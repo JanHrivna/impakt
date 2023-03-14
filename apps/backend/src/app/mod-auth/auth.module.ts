@@ -16,7 +16,7 @@ import { LocalStrategy } from "./services/strategies/local.strategy";
     ],
     controllers: [LoginController],
     providers: [LdapAuthService, LocalStrategy, JwtStrategy],
-    exports: [LdapAuthService]
+    exports: []
 })
 export class AuthModule {
 }

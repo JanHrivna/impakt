@@ -1,5 +1,6 @@
-import { Body, Controller, Delete, Get, Param, ParseArrayPipe, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, ParseArrayPipe, Put, UseGuards } from "@nestjs/common";
 import { ApiBody, ApiResponse } from "@nestjs/swagger";
+import { JwtAuthGuard } from "../../mod-auth/services/guards/jwt-auth.guard";
 import { DatasourceService } from "../datasource.service";
 import { Analyzy } from "../entities/analyzy.entity";
 import { TypyAnalyz } from "../entities/typy-analyz";
@@ -11,6 +12,7 @@ export class AnalyzaController {
 
     constructor(private datasourceService: DatasourceService) { }
 
+    @UseGuards(JwtAuthGuard)
     @Get('typ')
     @ApiResponse({
         type: TypyAnalyz,
@@ -20,6 +22,7 @@ export class AnalyzaController {
         return this.datasourceService.getRepository(TypyAnalyz).find()
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get(':idVzorek')
     @ApiResponse({
         type: Analyzy,
@@ -29,6 +32,7 @@ export class AnalyzaController {
         return this.datasourceService.getRepository(Analyzy).find({ where: { id_vzorek: idVzorek } })
     }
 
+    @UseGuards(JwtAuthGuard)
     @Put(':idVzorek')
     @ApiBody({
         type: Analyzy,
@@ -43,6 +47,7 @@ export class AnalyzaController {
         return this.datasourceService.getRepository(Analyzy).upsert(analyzy, ['id_vzorek'])
     }
 
+    @UseGuards(JwtAuthGuard)
     @Delete()
     @ApiBody({
         type: Number,
