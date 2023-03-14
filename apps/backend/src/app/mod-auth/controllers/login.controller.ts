@@ -1,32 +1,19 @@
-import { Body, Controller, HttpCode, Post, UnauthorizedException } from "@nestjs/common";
+import { Body, Controller, Post, UseGuards } from "@nestjs/common";
 import { CredentialsDto } from "../models/credentials.dto";
-import SimpleLDAP from 'simple-ldap-search';
+import { LocalAuthGuard } from "../services/guards/local-auth.guard";
+import { LdapAuthService } from "../services/ldap-auth.service";
 
 @Controller('login')
 export class LoginController {
 
-    @HttpCode(200)
+    constructor(
+        private ldapAuthService: LdapAuthService
+    ) { }
+
+    @UseGuards(LocalAuthGuard)
     @Post()
     async login(@Body() credentials: CredentialsDto) {
-        const config = {
-            url: 'ldap://localhost:10389',
-            base: 'ou=users',
-            dn: `cn=${credentials.username},ou=users`,
-            password: credentials.password
-        }
-        const ldap = new SimpleLDAP(config)
-        const filter = `(cn=${credentials.username})`
-        const attributes = ['cn', 'sn']
-
-        return await ldap.search(filter, attributes)
-            .then(
-                () => "Login success"
-            )
-            .catch(
-                (err) => {
-                    throw new UnauthorizedException()
-                }
-            )
+        return this.ldapAuthService.login(credentials);
     }
 
 }
