@@ -13,6 +13,8 @@ import { IconsModule } from './modules/icons/icons.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers } from './store';
+import { LoginComponent } from './components/login/login.component';
+import { LayoutComponent } from './components/layout/layout.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { reducers } from './store';
     VzorekModalComponent,
     ConfirmModalComponent,
     AnalyzyFormComponent,
+    LoginComponent,
+    LayoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,4 +39,4 @@ import { reducers } from './store';
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
