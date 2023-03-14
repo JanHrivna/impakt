@@ -2,19 +2,21 @@
     <div class="card-body">
         <h5 class="card-title text-center">Přihlášení do aplikace Impakt</h5>
 
-        <div class="mt-3 mb-2">
-            <label for="{{FormName.USER}}">Uživatelské jméno</label>
-            <input class="form-control" [formControlName]="FormName.USER" id="{{FormName.USER}}">
-        </div>
+        <form [formGroup]="form" (ngSubmit)="onLogin()">
+            <div class="mt-3 mb-2">
+                <label for="{{FormName.USER}}">Uživatelské jméno</label>
+                <input class="form-control" [formControlName]="FormName.USER" id="{{FormName.USER}}">
+            </div>
 
-        <div>
-            <label for="{{FormName.PASS}}">Heslo</label>
-            <input class="form-control" [formControlName]="FormName.PASS" id="{{FormName.PASS}}">
-        </div>
+            <div>
+                <label for="{{FormName.PASS}}">Heslo</label>
+                <input class="form-control" [formControlName]="FormName.PASS" id="{{FormName.PASS}}" type="password">
+            </div>
 
-        <div class="text-center mt-5">
-            <button (click)="login()" class="btn btn-primary">Přihlásit</button>
-        </div>
+            <div class="text-center mt-5">
+                <button class="btn btn-primary">Přihlásit</button>
+            </div>
+        </form>
 
     </div>
 </div>

@@ -11,6 +11,7 @@ import { map, filter } from 'rxjs/operators';
 
 import { Analyzy } from '../models/analyzy';
 import { ApiResponseDto } from '../models/api-response-dto';
+import { CredentialsDto } from '../models/credentials-dto';
 import { MistoUlozeni } from '../models/misto-ulozeni';
 import { TypyAnalyz } from '../models/typy-analyz';
 import { VzorekDto } from '../models/vzorek-dto';
@@ -385,6 +386,52 @@ export class BackendApiApiService extends BaseService {
 
     return this.analyzaControllerDeleteAnalyzy$Response(params).pipe(
       map((r: StrictHttpResponse<ApiResponseDto>) => r.body as ApiResponseDto)
+    );
+  }
+
+  /**
+   * Path part for operation loginControllerLogin
+   */
+  static readonly LoginControllerLoginPath = '/api/login';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `loginControllerLogin()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  loginControllerLogin$Response(params: {
+    body: CredentialsDto
+  }): Observable<StrictHttpResponse<void>> {
+
+    const rb = new RequestBuilder(this.rootUrl, BackendApiApiService.LoginControllerLoginPath, 'post');
+    if (params) {
+      rb.body(params.body, 'application/json');
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'text',
+      accept: '*/*'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `loginControllerLogin$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  loginControllerLogin(params: {
+    body: CredentialsDto
+  }): Observable<void> {
+
+    return this.loginControllerLogin$Response(params).pipe(
+      map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }
 

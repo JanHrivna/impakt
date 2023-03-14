@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { take } from 'rxjs';
+import { BackendApiApiService } from '../../api/backend-api/services';
 
 enum FormName {
   USER = "username",
@@ -13,13 +16,22 @@ enum FormName {
 export class LoginComponent implements OnInit {
 
   readonly FormName = FormName
+  readonly form = new FormGroup({
+    [FormName.USER]: new FormControl(),
+    [FormName.PASS]: new FormControl()
+  })
 
-  constructor() { }
+  constructor(private api: BackendApiApiService) { }
 
   ngOnInit(): void { }
 
-  login() {
-
+  onLogin() {
+    this.api.loginControllerLogin({
+      body: {
+        username: this.form.get(FormName.USER)?.value,
+        password: this.form.get(FormName.PASS)?.value
+      }
+    }).pipe(take(1)).subscribe()
   }
 
 }
