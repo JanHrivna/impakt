@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
     [FormName.USER]: new FormControl(),
     [FormName.PASS]: new FormControl()
   })
+  passHidden = true
 
   constructor(private api: BackendApiApiService) { }
 

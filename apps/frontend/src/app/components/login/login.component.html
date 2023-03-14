@@ -10,12 +10,22 @@
 
             <div>
                 <label for="{{FormName.PASS}}">Heslo</label>
-                <input class="form-control" [formControlName]="FormName.PASS" id="{{FormName.PASS}}" type="password">
+                <div class="input-group">
+                    <input class="form-control" [formControlName]="FormName.PASS" id="{{FormName.PASS}}"
+                        [type]="passHidden ? 'password' : 'text'">
+                    <button class="btn btn-outline-secondary btn-pass" (click)="passHidden = !passHidden">
+                        <bi *ngIf="passHidden; else hidePassIcon" name="eye-fill"></bi>
+                        <ng-template #hidePassIcon>
+                            <bi name="eye-slash-fill"></bi>
+                        </ng-template>
+                    </button>
+                </div>
             </div>
 
             <div class="text-center mt-5">
                 <button class="btn btn-primary">Přihlásit</button>
             </div>
+
         </form>
 
     </div>
