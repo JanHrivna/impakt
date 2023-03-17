@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void { }
 
   onLogin() {
-    this.api.loginControllerLogin({
+    this.api.authControllerLogin({
       body: {
         username: this.form.get(FormName.USER)?.value,
         password: this.form.get(FormName.PASS)?.value

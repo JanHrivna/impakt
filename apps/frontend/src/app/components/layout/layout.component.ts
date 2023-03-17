@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { map, Observable } from 'rxjs';
+import { catchError, EMPTY, map, Observable, take, tap } from 'rxjs';
 import { BackendApiApiService } from '../../api/backend-api/services';
 import { AuthService } from '../../services/auth.service';
 import * as fromVzorky from '../../store/vzorky';
@@ -26,6 +26,11 @@ export class LayoutComponent {
     )
   )
 
+  constructor(
+    private be: BackendApiApiService,
+    private store: Store,
+    private router: Router) { }
+
   onSearch() {
     this.store.dispatch(fromVzorky.setFilterValues({ druh: this.searchCtrl.value }))
     this.filterUsed = true
@@ -40,13 +45,23 @@ export class LayoutComponent {
   }
 
   onLogout() {
+    this.be.authControllerLogout().pipe(
+      take(1),
+      tap(
+        () => this.logoutUser()
+      ),
+      catchError(
+        () => {
+          this.logoutUser()
+          return EMPTY
+        }
+      )
+    ).subscribe()
+  }
+
+  private logoutUser() {
     AuthService.logoutUser()
     this.router.navigate([''])
   }
-
-  constructor(
-    private be: BackendApiApiService,
-    private store: Store,
-    private router: Router) { }
 
 }

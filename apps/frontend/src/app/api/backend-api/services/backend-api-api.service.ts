@@ -391,21 +391,21 @@ export class BackendApiApiService extends BaseService {
   }
 
   /**
-   * Path part for operation loginControllerLogin
+   * Path part for operation authControllerLogin
    */
-  static readonly LoginControllerLoginPath = '/api/login';
+  static readonly AuthControllerLoginPath = '/api/auth/login';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `loginControllerLogin()` instead.
+   * To access only the response body, use `authControllerLogin()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  loginControllerLogin$Response(params: {
+  authControllerLogin$Response(params: {
     body: CredentialsDto
   }): Observable<StrictHttpResponse<UsernameDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, BackendApiApiService.LoginControllerLoginPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, BackendApiApiService.AuthControllerLoginPath, 'post');
     if (params) {
       rb.body(params.body, 'application/json');
     }
@@ -423,16 +423,59 @@ export class BackendApiApiService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `loginControllerLogin$Response()` instead.
+   * To access the full response (for headers, for example), `authControllerLogin$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  loginControllerLogin(params: {
+  authControllerLogin(params: {
     body: CredentialsDto
   }): Observable<UsernameDto> {
 
-    return this.loginControllerLogin$Response(params).pipe(
+    return this.authControllerLogin$Response(params).pipe(
       map((r: StrictHttpResponse<UsernameDto>) => r.body as UsernameDto)
+    );
+  }
+
+  /**
+   * Path part for operation authControllerLogout
+   */
+  static readonly AuthControllerLogoutPath = '/api/auth/logout';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `authControllerLogout()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  authControllerLogout$Response(params?: {
+  }): Observable<StrictHttpResponse<void>> {
+
+    const rb = new RequestBuilder(this.rootUrl, BackendApiApiService.AuthControllerLogoutPath, 'post');
+    if (params) {
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'text',
+      accept: '*/*'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `authControllerLogout$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  authControllerLogout(params?: {
+  }): Observable<void> {
+
+    return this.authControllerLogout$Response(params).pipe(
+      map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }
 
