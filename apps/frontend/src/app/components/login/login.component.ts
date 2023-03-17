@@ -1,7 +1,11 @@
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { take } from 'rxjs';
+import { Router } from '@angular/router';
+import { catchError, EMPTY, take, tap } from 'rxjs';
 import { BackendApiApiService } from '../../api/backend-api/services';
+import { RoutingPathName } from '../../app-routing.module';
+import { AuthService } from '../../services/auth.service';
 
 enum FormName {
   USER = "username",
@@ -21,8 +25,12 @@ export class LoginComponent implements OnInit {
     [FormName.PASS]: new FormControl()
   })
   passHidden = true
+  readonly LOGIN_ERR = "Špatné jméno nebo heslo!"
+  loginErrVisible = false
 
-  constructor(private api: BackendApiApiService) { }
+  constructor(
+    private api: BackendApiApiService,
+    private router: Router) { }
 
   ngOnInit(): void { }
 
@@ -32,7 +40,24 @@ export class LoginComponent implements OnInit {
         username: this.form.get(FormName.USER)?.value,
         password: this.form.get(FormName.PASS)?.value
       }
-    }).pipe(take(1)).subscribe()
+    }).pipe(
+      take(1),
+      tap(
+        () => {
+          AuthService.loginUser()
+          this.router.navigate(['', RoutingPathName.OVERVIEW])
+          this.loginErrVisible = false
+        }
+      ),
+      catchError(
+        (err: HttpErrorResponse) => {
+          if (err.status === HttpStatusCode.Unauthorized) {
+            this.loginErrVisible = true
+          }
+          return EMPTY
+        }
+      )
+    ).subscribe()
   }
 
 }

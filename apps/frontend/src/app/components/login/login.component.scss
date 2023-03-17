@@ -2,11 +2,15 @@
     position: relative;
     top: 50px;
     width: 500px;
-    height: 290px;
+    height: 330px;
     margin: 0 auto;
     border-radius: 10px;
 }
 
 .btn-pass {
     border-color: rgba(0, 0, 0, 0.125);
+}
+
+.loggin-err {
+    color: red;
 }
