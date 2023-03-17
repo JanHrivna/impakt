@@ -24,10 +24,8 @@ export class LdapAuthService {
             .catch(() => null)
     }
 
-    async login(credentials: CredentialsDto) {
+    async signJwt(credentials: CredentialsDto): Promise<string> {
         const payload = { username: credentials.username }
-        return {
-            access_token: this.jwtService.sign(payload),
-        }
+        return this.jwtService.sign(payload)
     }
 }
