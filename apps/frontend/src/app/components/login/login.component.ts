@@ -43,8 +43,8 @@ export class LoginComponent implements OnInit {
     }).pipe(
       take(1),
       tap(
-        () => {
-          AuthService.loginUser()
+        (res) => {
+          AuthService.loginUser(res.username)
           this.router.navigate(['', RoutingPathName.OVERVIEW])
           this.loginErrVisible = false
         }

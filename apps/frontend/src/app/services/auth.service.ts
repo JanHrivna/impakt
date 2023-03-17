@@ -1,19 +1,23 @@
-const AUTH_FLAG = "impakt_user_authenticated"
+const KEY = "impakt_username"
 
 export class AuthService {
 
     private constructor() { }
 
-    static loginUser() {
-        localStorage.setItem(AUTH_FLAG, 'true')
+    static loginUser(username: string) {
+        localStorage.setItem(KEY, username)
     }
 
     static isUserLogged() {
-        return !!localStorage.getItem(AUTH_FLAG)
+        return !!localStorage.getItem(KEY)
+    }
+
+    static getUser() {
+        return localStorage.getItem(KEY)
     }
 
     static logoutUser() {
-        localStorage.removeItem(AUTH_FLAG)
+        localStorage.removeItem(KEY)
     }
 
 }

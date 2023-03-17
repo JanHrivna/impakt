@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
 import { BackendApiApiService } from '../../api/backend-api/services';
+import { AuthService } from '../../services/auth.service';
 import * as fromVzorky from '../../store/vzorky';
 
 @Component({
@@ -13,6 +15,7 @@ import * as fromVzorky from '../../store/vzorky';
 export class LayoutComponent {
   filterUsed = false
   readonly searchCtrl = new FormControl()
+  readonly username = AuthService.getUser()
 
   readonly druhy$: Observable<string[]> = this.be.vzorekControllerGetVzorky().pipe(
     map(
@@ -36,8 +39,14 @@ export class LayoutComponent {
     this.store.dispatch(fromVzorky.setFilterValues({ druh: this.searchCtrl.value }))
   }
 
+  onLogout() {
+    AuthService.logoutUser()
+    this.router.navigate([''])
+  }
+
   constructor(
     private be: BackendApiApiService,
-    private store: Store) { }
+    private store: Store,
+    private router: Router) { }
 
 }
