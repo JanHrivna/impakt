@@ -14,6 +14,7 @@ import { ApiResponseDto } from '../models/api-response-dto';
 import { CredentialsDto } from '../models/credentials-dto';
 import { MistoUlozeni } from '../models/misto-ulozeni';
 import { TypyAnalyz } from '../models/typy-analyz';
+import { UsernameDto } from '../models/username-dto';
 import { VzorekDto } from '../models/vzorek-dto';
 
 @Injectable({
@@ -402,7 +403,7 @@ export class BackendApiApiService extends BaseService {
    */
   loginControllerLogin$Response(params: {
     body: CredentialsDto
-  }): Observable<StrictHttpResponse<void>> {
+  }): Observable<StrictHttpResponse<UsernameDto>> {
 
     const rb = new RequestBuilder(this.rootUrl, BackendApiApiService.LoginControllerLoginPath, 'post');
     if (params) {
@@ -410,12 +411,12 @@ export class BackendApiApiService extends BaseService {
     }
 
     return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*'
+      responseType: 'json',
+      accept: 'application/json'
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        return r as StrictHttpResponse<UsernameDto>;
       })
     );
   }
@@ -428,10 +429,10 @@ export class BackendApiApiService extends BaseService {
    */
   loginControllerLogin(params: {
     body: CredentialsDto
-  }): Observable<void> {
+  }): Observable<UsernameDto> {
 
     return this.loginControllerLogin$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
+      map((r: StrictHttpResponse<UsernameDto>) => r.body as UsernameDto)
     );
   }
 
