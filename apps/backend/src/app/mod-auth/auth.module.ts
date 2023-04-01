@@ -5,9 +5,11 @@ import { PassportModule } from '@nestjs/passport';
 import { LdapAuthService } from "./services/ldap-auth.service";
 import { JwtStrategy } from "./services/strategies/jwt.strategy";
 import { LocalStrategy } from "./services/strategies/local.strategy";
+import { DatasourceModule } from "../mod-datasource/datasource.module";
 
 @Module({
     imports: [
+        DatasourceModule,
         PassportModule,
         JwtModule.register({
             secret: process.env.JWT_SECRET,

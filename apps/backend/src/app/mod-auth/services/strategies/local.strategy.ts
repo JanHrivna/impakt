@@ -12,7 +12,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     async validate(username: string, password: string): Promise<any> {
         const res = await this.ldapAuthService.validateUser(username, password)
         if (!res) {
-            throw new UnauthorizedException();
+            throw new UnauthorizedException()
         }
         return res
     }

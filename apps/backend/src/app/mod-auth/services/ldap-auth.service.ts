@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import SimpleLDAP from 'simple-ldap-search';
+import { AppUsersService } from "../../mod-datasource/services/app-users.service";
 import { CredentialsDto } from "../models/credentials.dto";
 
 const USER_PLACEHOLDER = "{username}"
@@ -9,6 +10,7 @@ const USER_PLACEHOLDER = "{username}"
 export class LdapAuthService {
     constructor(
         private readonly jwtService: JwtService,
+        private appUserService: AppUsersService
     ) { }
 
     async validateUser(username: string, password: string): Promise<any> {
@@ -22,7 +24,14 @@ export class LdapAuthService {
         const filter = this.getFilter(username)
         const attributes = process.env.LDAP_ATTRIBUTES
 
-        return await ldap.search(filter, attributes)
+        return await this.appUserService.getUsers()
+            .then(
+                (users) => {
+                    const usernames = users.map(u => u.username)
+                    if (usernames.includes(username)) return ldap.search(filter, attributes)
+                    return null
+                }
+            )
             .catch(() => null)
     }
 

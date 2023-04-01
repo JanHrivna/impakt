@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     [FormName.PASS]: new FormControl()
   })
   passHidden = true
-  readonly LOGIN_ERR = "Špatné jméno nebo heslo!"
+  readonly LOGIN_ERR = "Autentizace selhala!"
   loginErrVisible = false
 
   constructor(
