@@ -3,6 +3,8 @@ import { JwtService } from "@nestjs/jwt";
 import SimpleLDAP from 'simple-ldap-search';
 import { CredentialsDto } from "../models/credentials.dto";
 
+const USER_PLACEHOLDER = "{username}"
+
 @Injectable()
 export class LdapAuthService {
     constructor(
@@ -11,14 +13,14 @@ export class LdapAuthService {
 
     async validateUser(username: string, password: string): Promise<any> {
         const config = {
-            url: 'ldap://localhost:10389',
-            base: 'ou=users',
-            dn: `cn=${username},ou=users`,
+            url: process.env.LDAP_URL,
+            base: process.env.LDAP_BASE,
+            dn: this.getDn(username),
             password
         }
         const ldap = new SimpleLDAP(config)
-        const filter = `(cn=${username})`
-        const attributes = ['cn']
+        const filter = this.getFilter(username)
+        const attributes = process.env.LDAP_ATTRIBUTES
 
         return await ldap.search(filter, attributes)
             .catch(() => null)
@@ -27,5 +29,13 @@ export class LdapAuthService {
     signJwt(credentials: CredentialsDto): string {
         const payload = { username: credentials.username }
         return this.jwtService.sign(payload)
+    }
+
+    private getDn(username: string) {
+        return process.env.LDAP_DN.replace(USER_PLACEHOLDER, username)
+    }
+
+    private getFilter(username: string) {
+        return process.env.LDAP_FILTER.replace(USER_PLACEHOLDER, username)
     }
 }

@@ -3,8 +3,10 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as cookieParser from 'cookie-parser';
 import { AppModule } from './app/app.module';
+import * as dotenv from 'dotenv'
 
 async function bootstrap() {
+  dotenv.config()
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
   const port = 3000;
