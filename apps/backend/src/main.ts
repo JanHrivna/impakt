@@ -4,10 +4,14 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as cookieParser from 'cookie-parser';
 import { AppModule } from './app/app.module';
 import * as dotenv from 'dotenv'
+import { AppLogger, LogLevel } from './app/shared/app-logger';
 
 async function bootstrap() {
   dotenv.config()
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger: new AppLogger([LogLevel.INFO, LogLevel.ERROR, LogLevel.WARN]),
+    abortOnError: false
+  });
   app.setGlobalPrefix('api');
   const port = 3000;
 
