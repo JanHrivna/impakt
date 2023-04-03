@@ -107,3 +107,23 @@ Visit [Nx Cloud](https://nx.app/) to learn more.
 ## Generating Backend API
 Install `npm install ng-openapi-gen --save-dev`
 From root directory run `NODE_TLS_REJECT_UNAUTHORIZED=0 ./node_modules/.bin/ng-openapi-gen -c apps/frontend/backend-api-gen-schema.json`
+
+## Environment variables and .env file
+Environment variables are set using .env file. This file is not part of the repo and must be created beforehand.
+
+All values that are used in the code are listed here in an example .env config:
+
+```
+LDAP_URL="ldap://localhost:10389"
+LDAP_BASE="ou=users"
+LDAP_DN="cn={username},ou=users"
+LDAP_FILTER="(cn={username})"
+LDAP_ATTRIBUTES=['cn']
+DB_TYPE="mysql"
+DB_HOST="localhost"
+DB_PORT=3306
+DB_USERNAME="root"
+DB_PASSWORD="12345"
+DB_NAME="impakt"
+JWT_SECRET="asdfopwe5fdser56sfdg-sdfger5sdfg+ws"
+```
