@@ -8,6 +8,7 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
+    "build-all": "nx run-many --target=build --projects=backend,frontend",
     "start-all": "nx run-many --target=serve --projects=backend,frontend"
   },
   "private": true,
