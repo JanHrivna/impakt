@@ -22,7 +22,7 @@ export class LdapAuthService {
         }
         const ldap = new SimpleLDAP(config)
         const filter = this.getFilter(username)
-        const attributes = process.env.LDAP_ATTRIBUTES
+        const attributes: string[] = process.env.LDAP_ATTRIBUTES?.split(',')
 
         return await this.appUserService.getUsers()
             .then(
