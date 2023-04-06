@@ -127,3 +127,15 @@ DB_PASSWORD="12345"
 DB_NAME="impakt"
 JWT_SECRET="asdfopwe5fdser56sfdg-sdfger5sdfg+ws"
 ```
+
+## Deployment
+
+### Frontend
+
+If frontend is deployed under subfolder use this command rather than nx command.
+```
+ng build --prod --base-href /app/ --deploy-url /app/
+```
+Copy the content to desired web folder.
+
+### Backend
