@@ -128,7 +128,7 @@ DB_NAME="impakt"
 JWT_SECRET="asdfopwe5fdser56sfdg-sdfger5sdfg+ws"
 ```
 
-## Deployment
+## Production deployment
 
 ### Frontend
 
@@ -136,6 +136,25 @@ If frontend is deployed under subfolder use this command rather than nx command.
 ```
 ng build --prod --base-href /app/ --deploy-url /app/
 ```
-Copy the content to desired web folder.
+Copy the content of /dist folder (for FE) to desired web folder.
+
+
 
 ### Backend
+Copy the content of /dist folder (for BE) to desired location. In case of installing node_modules on server, attach also package.json.
+Copy node_modules that are relevant for BE or run ```npm install --omit=dev``` on server.
+It is important to add ```--omit=dev```. This ensures that devDependencies will not be installed on the server which will save a lot of space.
+Copy env variables to .profile (to be permanent and not to dismiss after session logout).
+
+#### NPM and disk quota
+If you installed ```node_modules``` by ```npm install``` then npm will cache a lot of data into ```hrivnaj/.npm/_cacache```.
+In such a case it is good/necessary to ```rm -rf``` _cacache folder to clear the cache. Otherwise you can get into problems with unsufficient disk space.
+
+
+#### Running backend as a service
+For daemonizing application ```pm2``` is used. It should be distributed in ```node_modules```.
+Otherwise run ```npm install pm2```.
+
+To run app run ```./node_modules/pm2/bin/pm2 start main.js --name impakt```
+
+To see more, check: https://pm2.keymetrics.io/docs/usage/quick-start/
