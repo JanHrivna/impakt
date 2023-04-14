@@ -1,3 +1,5 @@
+#! /bin/bash
+
 export LDAP_URL=ldap://localhost:10389
 export LDAP_BASE=ou=users
 export LDAP_DN=cn={username},ou=users
