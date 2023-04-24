@@ -126,6 +126,7 @@ DB_USERNAME="root"
 DB_PASSWORD="12345"
 DB_NAME="impakt"
 JWT_SECRET="asdfopwe5fdser56sfdg-sdfger5sdfg+ws"
+ADMIN_PASS="12345"
 ```
 
 For local development .env file should be placed in ```apps/backend/.env```.

@@ -5,6 +5,7 @@ import { AppUsersService } from "../../mod-datasource/services/app-users.service
 import { CredentialsDto } from "../models/credentials.dto";
 
 const USER_PLACEHOLDER = "{username}"
+const ADMIN_USERNAME = "admin"
 
 @Injectable()
 export class LdapAuthService {
@@ -14,6 +15,9 @@ export class LdapAuthService {
     ) { }
 
     async validateUser(username: string, password: string): Promise<any> {
+        if (this.isAdmin(username)) {
+            return password === process.env.ADMIN_PASS
+        }
         const config = {
             url: process.env.LDAP_URL,
             base: process.env.LDAP_BASE,
@@ -38,6 +42,10 @@ export class LdapAuthService {
     signJwt(credentials: CredentialsDto): string {
         const payload = { username: credentials.username }
         return this.jwtService.sign(payload)
+    }
+
+    private isAdmin(username: string) {
+        return username === ADMIN_USERNAME
     }
 
     private getDn(username: string) {
