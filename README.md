@@ -129,8 +129,11 @@ JWT_SECRET="asdfopwe5fdser56sfdg-sdfger5sdfg+ws"
 ADMIN_PASS="12345"
 ```
 
-For local development .env file should be placed in ```apps/backend/.env```.
-For production .env file should be placed in the same dir as main.js.
+### Tips
+- for local development .env file should be placed in ```apps/backend/.env```
+- production .env file should be placed in the same dir as main.js
+- in jwt.strategy.ts process.env.JWT_SECRET returned empty value and error on api response - to resolve this, dotenv module was explicitly imported there 
+
 
 ## Production deployment
 
@@ -164,6 +167,6 @@ Otherwise run ```npm install pm2```.
 To run app run ```./node_modules/pm2/bin/pm2 start main.js --name impakt```
 To list all services ```./node_modules/pm2/bin/pm2 list all```
 To stop service ```./node_modules/pm2/bin/pm2 stop impakt```
-To remove service ```./node_modules/pm2/bin/pm2 remove impakt```
+To remove service ```./node_modules/pm2/bin/pm2 delete impakt```
 
 To see more, check: https://pm2.keymetrics.io/docs/usage/quick-start/

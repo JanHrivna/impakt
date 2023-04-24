@@ -3,6 +3,8 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Request } from "express";
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { JWT_COOKIE_NAME } from '../../constants';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
