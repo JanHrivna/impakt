@@ -42,6 +42,7 @@ Thumbs.db
 
 # env file
 apps/backend/.env
+.env
 
 # logs
 /logs/*

@@ -128,6 +128,9 @@ DB_NAME="impakt"
 JWT_SECRET="asdfopwe5fdser56sfdg-sdfger5sdfg+ws"
 ```
 
+For local development .env file should be placed in ```apps/backend/.env```.
+For production .env file should be placed in the same dir as main.js.
+
 ## Production deployment
 
 ### Frontend
@@ -146,6 +149,8 @@ Copy node_modules that are relevant for BE or run ```npm install --omit=dev``` o
 It is important to add ```--omit=dev```. This ensures that devDependencies will not be installed on the server which will save a lot of space.
 Copy env variables to .profile (to be permanent and not to dismiss after session logout).
 
+```.env``` file with production values shold be copied into the folder with ```main.js``` file.
+
 #### NPM and disk quota
 If you installed ```node_modules``` by ```npm install``` then npm will cache a lot of data into ```hrivnaj/.npm/_cacache```.
 In such a case it is good/necessary to ```rm -rf``` _cacache folder to clear the cache. Otherwise you can get into problems with unsufficient disk space.
@@ -156,5 +161,8 @@ For daemonizing application ```pm2``` is used. It should be distributed in ```no
 Otherwise run ```npm install pm2```.
 
 To run app run ```./node_modules/pm2/bin/pm2 start main.js --name impakt```
+To list all services ```./node_modules/pm2/bin/pm2 list all```
+To stop service ```./node_modules/pm2/bin/pm2 stop impakt```
+To remove service ```./node_modules/pm2/bin/pm2 remove impakt```
 
 To see more, check: https://pm2.keymetrics.io/docs/usage/quick-start/
